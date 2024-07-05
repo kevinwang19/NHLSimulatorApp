@@ -10,5 +10,5 @@ import Foundation
 public struct UserData: Codable {
     public let userID: Int
     public let username: String
-    public let favTeamID: Int
+    public let favTeamID: Int?
 }

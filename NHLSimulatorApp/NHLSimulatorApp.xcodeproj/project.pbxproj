@@ -15,6 +15,16 @@
 		48DCF3542C37810A0079AB67 /* SimulationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3532C37810A0079AB67 /* SimulationData.swift */; };
 		48DCF3592C3787D10079AB67 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3582C3787D10079AB67 /* UsersService.swift */; };
 		48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF35A2C3787E40079AB67 /* UserData.swift */; };
+		48DCF35D2C378E840079AB67 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF35C2C378E840079AB67 /* ScheduleData.swift */; };
+		48DCF35F2C378E930079AB67 /* SchedulesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF35E2C378E930079AB67 /* SchedulesService.swift */; };
+		48DCF3612C3790550079AB67 /* TeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3602C3790550079AB67 /* TeamData.swift */; };
+		48DCF3632C3790710079AB67 /* TeamsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3622C3790710079AB67 /* TeamsService.swift */; };
+		48DCF3652C3791AC0079AB67 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3642C3791AC0079AB67 /* PlayerData.swift */; };
+		48DCF3672C3791C30079AB67 /* SkaterStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3662C3791C30079AB67 /* SkaterStatsData.swift */; };
+		48DCF36B2C3791F20079AB67 /* PlayersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF36A2C3791F20079AB67 /* PlayersService.swift */; };
+		48DCF36D2C3791FF0079AB67 /* SkaterStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF36C2C3791FF0079AB67 /* SkaterStatsService.swift */; };
+		48DCF3712C3799E30079AB67 /* GoalieStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3702C3799E30079AB67 /* GoalieStatsData.swift */; };
+		48DCF3752C379A1E0079AB67 /* GoalieStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3742C379A1E0079AB67 /* GoalieStatsService.swift */; };
 		48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */; };
 		48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5395B2C06D6A1008DAECE /* ContentView.swift */; };
 		48F5395E2C06D6A5008DAECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F5395D2C06D6A5008DAECE /* Assets.xcassets */; };
@@ -50,6 +60,16 @@
 		48DCF3532C37810A0079AB67 /* SimulationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationData.swift; sourceTree = "<group>"; };
 		48DCF3582C3787D10079AB67 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
 		48DCF35A2C3787E40079AB67 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		48DCF35C2C378E840079AB67 /* ScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
+		48DCF35E2C378E930079AB67 /* SchedulesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulesService.swift; sourceTree = "<group>"; };
+		48DCF3602C3790550079AB67 /* TeamData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamData.swift; sourceTree = "<group>"; };
+		48DCF3622C3790710079AB67 /* TeamsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsService.swift; sourceTree = "<group>"; };
+		48DCF3642C3791AC0079AB67 /* PlayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		48DCF3662C3791C30079AB67 /* SkaterStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkaterStatsData.swift; sourceTree = "<group>"; };
+		48DCF36A2C3791F20079AB67 /* PlayersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersService.swift; sourceTree = "<group>"; };
+		48DCF36C2C3791FF0079AB67 /* SkaterStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkaterStatsService.swift; sourceTree = "<group>"; };
+		48DCF3702C3799E30079AB67 /* GoalieStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalieStatsData.swift; sourceTree = "<group>"; };
+		48DCF3742C379A1E0079AB67 /* GoalieStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalieStatsService.swift; sourceTree = "<group>"; };
 		48F539562C06D6A1008DAECE /* NHLSimulatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHLSimulatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorApp.swift; sourceTree = "<group>"; };
 		48F5395B2C06D6A1008DAECE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +128,11 @@
 		48DCF3522C3780F70079AB67 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				48DCF35C2C378E840079AB67 /* ScheduleData.swift */,
+				48DCF3602C3790550079AB67 /* TeamData.swift */,
+				48DCF3642C3791AC0079AB67 /* PlayerData.swift */,
+				48DCF3662C3791C30079AB67 /* SkaterStatsData.swift */,
+				48DCF3702C3799E30079AB67 /* GoalieStatsData.swift */,
 				48DCF3532C37810A0079AB67 /* SimulationData.swift */,
 				48DCF35A2C3787E40079AB67 /* UserData.swift */,
 			);
@@ -134,6 +159,11 @@
 		48DCF3572C3787270079AB67 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				48DCF35E2C378E930079AB67 /* SchedulesService.swift */,
+				48DCF3622C3790710079AB67 /* TeamsService.swift */,
+				48DCF36A2C3791F20079AB67 /* PlayersService.swift */,
+				48DCF36C2C3791FF0079AB67 /* SkaterStatsService.swift */,
+				48DCF3742C379A1E0079AB67 /* GoalieStatsService.swift */,
 				48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */,
 				48DCF3582C3787D10079AB67 /* UsersService.swift */,
 			);
@@ -417,14 +447,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DCF3752C379A1E0079AB67 /* GoalieStatsService.swift in Sources */,
 				48DCF3592C3787D10079AB67 /* UsersService.swift in Sources */,
+				48DCF3712C3799E30079AB67 /* GoalieStatsData.swift in Sources */,
 				48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */,
+				48DCF35D2C378E840079AB67 /* ScheduleData.swift in Sources */,
 				48DCF34F2C373E5F0079AB67 /* SimulationsService.swift in Sources */,
+				48DCF3632C3790710079AB67 /* TeamsService.swift in Sources */,
 				48DCF3542C37810A0079AB67 /* SimulationData.swift in Sources */,
 				48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */,
 				48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */,
+				48DCF3672C3791C30079AB67 /* SkaterStatsData.swift in Sources */,
+				48DCF36D2C3791FF0079AB67 /* SkaterStatsService.swift in Sources */,
+				48DCF3652C3791AC0079AB67 /* PlayerData.swift in Sources */,
+				48DCF36B2C3791F20079AB67 /* PlayersService.swift in Sources */,
+				48DCF35F2C378E930079AB67 /* SchedulesService.swift in Sources */,
 				48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */,
 				48DCF34A2C3632DA0079AB67 /* Endpoint.swift in Sources */,
+				48DCF3612C3790550079AB67 /* TeamData.swift in Sources */,
 				48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

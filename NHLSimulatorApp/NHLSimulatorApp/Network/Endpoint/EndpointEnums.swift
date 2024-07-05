@@ -15,11 +15,12 @@ public enum NetworkEndpoint: EndpointInfo {
     case teams
     case players
     case teamPlayers
-    case playerStats
-    case playerSeasonStats
-    case playerCareerStats
-    case playerStatsPredictions
-    case playerPredictedStats
+    case skaterSeasonStats
+    case skaterCareerStats
+    case goalieSeasonStats
+    case goalieCareerStats
+    case skaterStatsPredictions
+    case goalieStatsPredictions
     case lineups
     case playerLineups
     case teamLineups
@@ -27,9 +28,10 @@ public enum NetworkEndpoint: EndpointInfo {
     case simulations
     case simulate
     case finishSimulation
-    case simulationPlayerStats
-    case playerSimulatedStats
-    case allPlayersSimulatedStats
+    case simulationSkaterStats
+    case simulationAllSkaterStats
+    case simulationGoalieStats
+    case simulationAllGoalieStats
     case simulationTeamStats
     case teamSimulatedStats
     case allTeamsSimulatedStats
@@ -53,16 +55,18 @@ public enum NetworkEndpoint: EndpointInfo {
             return "players"
         case .teamPlayers:
             return "players/team_players"
-        case .playerStats:
-            return "player_stats"
-        case .playerSeasonStats:
-            return "player_stats/player_season_stats"
-        case .playerCareerStats:
-            return "player_stats/player_career_stats"
-        case .playerStatsPredictions:
-            return "player_stats_predictions"
-        case .playerPredictedStats:
-            return "player_stats_predictions/player_predicted_stats"
+        case .skaterSeasonStats:
+            return "skater_stats/skater_season_stats"
+        case .skaterCareerStats:
+            return "skater_stats/skater_career_stats"
+        case .goalieSeasonStats:
+            return "goalie_stats/goalie_season_stats"
+        case .goalieCareerStats:
+            return "goalie_stats/goalie_career_stats"
+        case .skaterStatsPredictions:
+            return "skater_stats_predictions"
+        case .goalieStatsPredictions:
+            return "goalie_stats_predictions"
         case .lineups:
             return "lineups"
         case .playerLineups:
@@ -77,12 +81,14 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulations/simulate_to_date"
         case .finishSimulation:
             return "simulations/finish"
-        case .simulationPlayerStats:
-            return "simulation_player_stats"
-        case .playerSimulatedStats:
-            return "simulation_player_stats/player_simulated_stats"
-        case .allPlayersSimulatedStats:
-            return "simulation_player_stats/simulation_stats"
+        case .simulationSkaterStats:
+            return "simulation_skater_stats"
+        case .simulationAllSkaterStats:
+            return "simulation_skater_stats/simulation_stats"
+        case .simulationGoalieStats:
+            return "simulation_goalie_stats"
+        case .simulationAllGoalieStats:
+            return "simulation_goalie_stats/simulation_stats"
         case .simulationTeamStats:
             return "simulation_team_stats"
         case .teamSimulatedStats:
