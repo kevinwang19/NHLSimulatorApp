@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48F5395A2C06D6A1008DAECE /* NHLSimulatorAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539592C06D6A1008DAECE /* NHLSimulatorAppApp.swift */; };
+		431B81CDF2FE5435A3B307F6 /* Pods_NHLSimulatorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E22CBCBB5260D4F63C09B8A /* Pods_NHLSimulatorApp.framework */; };
+		48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3472C36230E0079AB67 /* NetworkManager.swift */; };
+		48DCF34A2C3632DA0079AB67 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3492C3632DA0079AB67 /* Endpoint.swift */; };
+		48DCF34F2C373E5F0079AB67 /* SimulationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */; };
+		48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3502C373EAD0079AB67 /* EndpointEnums.swift */; };
+		48DCF3542C37810A0079AB67 /* SimulationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3532C37810A0079AB67 /* SimulationData.swift */; };
+		48DCF3592C3787D10079AB67 /* UsersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3582C3787D10079AB67 /* UsersService.swift */; };
+		48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF35A2C3787E40079AB67 /* UserData.swift */; };
+		48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */; };
 		48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5395B2C06D6A1008DAECE /* ContentView.swift */; };
 		48F5395E2C06D6A5008DAECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F5395D2C06D6A5008DAECE /* Assets.xcassets */; };
 		48F539612C06D6A5008DAECE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F539602C06D6A5008DAECE /* Preview Assets.xcassets */; };
 		48F5396B2C06D6A6008DAECE /* NHLSimulatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5396A2C06D6A6008DAECE /* NHLSimulatorAppTests.swift */; };
 		48F539752C06D6A6008DAECE /* NHLSimulatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539742C06D6A6008DAECE /* NHLSimulatorAppUITests.swift */; };
 		48F539772C06D6A6008DAECE /* NHLSimulatorAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539762C06D6A6008DAECE /* NHLSimulatorAppUITestsLaunchTests.swift */; };
+		96BF9E8A1F8AD010B47D9E47 /* Pods_NHLSimulatorAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E040B321F13CFD59C954923 /* Pods_NHLSimulatorAppTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48DCF3472C36230E0079AB67 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		48DCF3492C3632DA0079AB67 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationsService.swift; sourceTree = "<group>"; };
+		48DCF3502C373EAD0079AB67 /* EndpointEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointEnums.swift; sourceTree = "<group>"; };
+		48DCF3532C37810A0079AB67 /* SimulationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationData.swift; sourceTree = "<group>"; };
+		48DCF3582C3787D10079AB67 /* UsersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersService.swift; sourceTree = "<group>"; };
+		48DCF35A2C3787E40079AB67 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		48F539562C06D6A1008DAECE /* NHLSimulatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHLSimulatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		48F539592C06D6A1008DAECE /* NHLSimulatorAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorAppApp.swift; sourceTree = "<group>"; };
+		48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorApp.swift; sourceTree = "<group>"; };
 		48F5395B2C06D6A1008DAECE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48F5395D2C06D6A5008DAECE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48F539602C06D6A5008DAECE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,6 +60,12 @@
 		48F539702C06D6A6008DAECE /* NHLSimulatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHLSimulatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F539742C06D6A6008DAECE /* NHLSimulatorAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorAppUITests.swift; sourceTree = "<group>"; };
 		48F539762C06D6A6008DAECE /* NHLSimulatorAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5E040B321F13CFD59C954923 /* Pods_NHLSimulatorAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NHLSimulatorAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67573A80799E4E329031C137 /* Pods-NHLSimulatorAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHLSimulatorAppTests.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6BFD4334678354D28991C365 /* Pods-NHLSimulatorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHLSimulatorApp.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp.release.xcconfig"; sourceTree = "<group>"; };
+		8E22CBCBB5260D4F63C09B8A /* Pods_NHLSimulatorApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NHLSimulatorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBCDE8AE453D5AC66B0881FE /* Pods-NHLSimulatorAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHLSimulatorAppTests.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		F3FF1C88140954CDD8311868 /* Pods-NHLSimulatorApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NHLSimulatorApp.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431B81CDF2FE5435A3B307F6 /* Pods_NHLSimulatorApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96BF9E8A1F8AD010B47D9E47 /* Pods_NHLSimulatorAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +95,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48DCF34B2C36402A0079AB67 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				48DCF3572C3787270079AB67 /* Service */,
+				48DCF3562C37871B0079AB67 /* Endpoint */,
+				48DCF3552C3787140079AB67 /* Request */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		48DCF3522C3780F70079AB67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48DCF3532C37810A0079AB67 /* SimulationData.swift */,
+				48DCF35A2C3787E40079AB67 /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		48DCF3552C3787140079AB67 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				48DCF3472C36230E0079AB67 /* NetworkManager.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		48DCF3562C37871B0079AB67 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				48DCF3492C3632DA0079AB67 /* Endpoint.swift */,
+				48DCF3502C373EAD0079AB67 /* EndpointEnums.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		48DCF3572C3787270079AB67 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */,
+				48DCF3582C3787D10079AB67 /* UsersService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		48F5394D2C06D6A1008DAECE = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +147,8 @@
 				48F539692C06D6A6008DAECE /* NHLSimulatorAppTests */,
 				48F539732C06D6A6008DAECE /* NHLSimulatorAppUITests */,
 				48F539572C06D6A1008DAECE /* Products */,
+				D294140068EB957061F278D1 /* Pods */,
+				BCAB52668012879E11B0681A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,7 +165,9 @@
 		48F539582C06D6A1008DAECE /* NHLSimulatorApp */ = {
 			isa = PBXGroup;
 			children = (
-				48F539592C06D6A1008DAECE /* NHLSimulatorAppApp.swift */,
+				48DCF3522C3780F70079AB67 /* Models */,
+				48DCF34B2C36402A0079AB67 /* Network */,
+				48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */,
 				48F5395B2C06D6A1008DAECE /* ContentView.swift */,
 				48F5395D2C06D6A5008DAECE /* Assets.xcassets */,
 				48F5395F2C06D6A5008DAECE /* Preview Content */,
@@ -127,6 +200,26 @@
 			path = NHLSimulatorAppUITests;
 			sourceTree = "<group>";
 		};
+		BCAB52668012879E11B0681A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E22CBCBB5260D4F63C09B8A /* Pods_NHLSimulatorApp.framework */,
+				5E040B321F13CFD59C954923 /* Pods_NHLSimulatorAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D294140068EB957061F278D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F3FF1C88140954CDD8311868 /* Pods-NHLSimulatorApp.debug.xcconfig */,
+				6BFD4334678354D28991C365 /* Pods-NHLSimulatorApp.release.xcconfig */,
+				67573A80799E4E329031C137 /* Pods-NHLSimulatorAppTests.debug.xcconfig */,
+				EBCDE8AE453D5AC66B0881FE /* Pods-NHLSimulatorAppTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F5397A2C06D6A6008DAECE /* Build configuration list for PBXNativeTarget "NHLSimulatorApp" */;
 			buildPhases = (
+				9B18C3E2EB1D563C4DB4CBC1 /* [CP] Check Pods Manifest.lock */,
 				48F539522C06D6A1008DAECE /* Sources */,
 				48F539532C06D6A1008DAECE /* Frameworks */,
 				48F539542C06D6A1008DAECE /* Resources */,
+				1C86DCE5AAC41D6BE3F9C0A4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48F5397D2C06D6A6008DAECE /* Build configuration list for PBXNativeTarget "NHLSimulatorAppTests" */;
 			buildPhases = (
+				97F075B00749B563FE839D72 /* [CP] Check Pods Manifest.lock */,
 				48F539622C06D6A6008DAECE /* Sources */,
 				48F539632C06D6A6008DAECE /* Frameworks */,
 				48F539642C06D6A6008DAECE /* Resources */,
@@ -252,13 +348,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C86DCE5AAC41D6BE3F9C0A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97F075B00749B563FE839D72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NHLSimulatorAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B18C3E2EB1D563C4DB4CBC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NHLSimulatorApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		48F539522C06D6A1008DAECE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48DCF3592C3787D10079AB67 /* UsersService.swift in Sources */,
+				48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */,
+				48DCF34F2C373E5F0079AB67 /* SimulationsService.swift in Sources */,
+				48DCF3542C37810A0079AB67 /* SimulationData.swift in Sources */,
+				48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */,
+				48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */,
 				48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */,
-				48F5395A2C06D6A1008DAECE /* NHLSimulatorAppApp.swift in Sources */,
+				48DCF34A2C3632DA0079AB67 /* Endpoint.swift in Sources */,
+				48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +578,7 @@
 		};
 		48F5397B2C06D6A6008DAECE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FF1C88140954CDD8311868 /* Pods-NHLSimulatorApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -439,6 +607,7 @@
 		};
 		48F5397C2C06D6A6008DAECE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BFD4334678354D28991C365 /* Pods-NHLSimulatorApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -467,6 +636,7 @@
 		};
 		48F5397E2C06D6A6008DAECE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67573A80799E4E329031C137 /* Pods-NHLSimulatorAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -486,6 +656,7 @@
 		};
 		48F5397F2C06D6A6008DAECE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBCDE8AE453D5AC66B0881FE /* Pods-NHLSimulatorAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

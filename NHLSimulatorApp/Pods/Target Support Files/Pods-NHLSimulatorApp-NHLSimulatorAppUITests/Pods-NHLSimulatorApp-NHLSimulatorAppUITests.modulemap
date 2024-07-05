@@ -1,0 +1,6 @@
+framework module Pods_NHLSimulatorApp_NHLSimulatorAppUITests {
+  umbrella header "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

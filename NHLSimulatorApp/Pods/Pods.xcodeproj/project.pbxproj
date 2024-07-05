@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B68250E4E31C3D8A8F9574311FE6DB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		68AA6DD548B2D481E288187000267A86 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B284162D0774E9E73334610DB76CB211 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74507305A99F20639B9CD2454EC0F470 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8498DFF15D677D4570A5FB1936059241 /* Pods-NHLSimulatorApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD42E6D07CF62D02B8B6B05A8E9E1B7 /* Pods-NHLSimulatorApp-dummy.m */; };
+		92797341FEF15AFFDF930B10117ACD08 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A607196D487335E98691DCEE063E206 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m */; };
+		B934DF34CDB7FBC712F69643C3C6326F /* Pods-NHLSimulatorApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CF53BD11451869C807B84F0BDCE140BC /* Pods-NHLSimulatorApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4B08D503128F1AC229CAF8DC60071B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		E540E9ACA65A245442D8C2538220B3DB /* Pods-NHLSimulatorAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0248A790C2036767B4C667F10E4014A9 /* Pods-NHLSimulatorAppTests-dummy.m */; };
+		F048779122C8D0E1294B44B7A6ED61A9 /* Pods-NHLSimulatorAppTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BE8CA6042EF39CA09F72C803E1CD591 /* Pods-NHLSimulatorAppTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C6ADF0B3AA643B8515BC4143B0A1AB08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6651FC95A29A41A268F336747F433EB3;
+			remoteInfo = "Pods-NHLSimulatorApp";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0248A790C2036767B4C667F10E4014A9 /* Pods-NHLSimulatorAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NHLSimulatorAppTests-dummy.m"; sourceTree = "<group>"; };
+		05CB4262CD210EA708BD118E24CA87D6 /* Pods-NHLSimulatorAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		186898EDE80222A7EC760383A95ADB5E /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests.modulemap"; sourceTree = "<group>"; };
+		1BD42E6D07CF62D02B8B6B05A8E9E1B7 /* Pods-NHLSimulatorApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NHLSimulatorApp-dummy.m"; sourceTree = "<group>"; };
+		347C4DB03C46C17E6C2BBDC2BDDE954D /* Pods-NHLSimulatorApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorApp.release.xcconfig"; sourceTree = "<group>"; };
+		3A607196D487335E98691DCEE063E206 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m"; sourceTree = "<group>"; };
+		3BE8CA6042EF39CA09F72C803E1CD591 /* Pods-NHLSimulatorAppTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NHLSimulatorAppTests-umbrella.h"; sourceTree = "<group>"; };
+		60E4DE43FAA0A446ABEEB3AB35CB71A4 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		682E84AC02540123FEFDEAE183D4CE41 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		7025742C807A8AE3B847B098121DEDF4 /* Pods-NHLSimulatorApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NHLSimulatorApp.modulemap"; sourceTree = "<group>"; };
+		72F23F15CDF56E63F576A32ACBAD6E22 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-Info.plist"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		73E223E816E88D8CBD969A475FB83E40 /* Pods-NHLSimulatorAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		8DFF634A2C2EE6E5D436215FCEEBA28A /* Pods-NHLSimulatorApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A90D472CF5B31F13D8B6AC57FF9A2E49 /* Pods-NHLSimulatorApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NHLSimulatorApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AB83910E21CE0E0EC631239B96582D9C /* Pods-NHLSimulatorApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		B151F053ED6644AB58E6029905631EFB /* Pods-NHLSimulatorAppTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorAppTests-Info.plist"; sourceTree = "<group>"; };
+		B284162D0774E9E73334610DB76CB211 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h"; sourceTree = "<group>"; };
+		B2908DC731A95A7968E5D3C201A62D15 /* Pods-NHLSimulatorAppTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NHLSimulatorAppTests"; path = Pods_NHLSimulatorAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBE3795B3D6A1138E445E8F4A3F671B6 /* Pods-NHLSimulatorApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NHLSimulatorApp"; path = Pods_NHLSimulatorApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF53BD11451869C807B84F0BDCE140BC /* Pods-NHLSimulatorApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NHLSimulatorApp-umbrella.h"; sourceTree = "<group>"; };
+		DEAF30237DB7B35E3FDDD1D71F900ACF /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E275A90EF3DCEBB9E6F3BCD63C275818 /* Pods-NHLSimulatorAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E608D873B598B95062413CE5B1E74087 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests"; path = Pods_NHLSimulatorApp_NHLSimulatorAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69CA343B50E8EB0D125DF4A30A21554 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		EC7042BB515CF7450CFEC1B44E78F396 /* Pods-NHLSimulatorAppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-NHLSimulatorAppTests.modulemap"; sourceTree = "<group>"; };
+		F2FCBF53823B4E00DEE062C3F2850EF6 /* Pods-NHLSimulatorApp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NHLSimulatorApp-Info.plist"; sourceTree = "<group>"; };
+		F77FCD678DA563CB3231F2822F5F263C /* Pods-NHLSimulatorAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NHLSimulatorAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4566CA5FB44B88BF0D95DBA9E6F15B47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74507305A99F20639B9CD2454EC0F470 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D90E050386132B989E777B0E2881941 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4B08D503128F1AC229CAF8DC60071B3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81895FB9D9A4E19E07E00FCF5038DDC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B68250E4E31C3D8A8F9574311FE6DB0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		789150132FC6DFA30181C74A2C0A1D56 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				186898EDE80222A7EC760383A95ADB5E /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.modulemap */,
+				682E84AC02540123FEFDEAE183D4CE41 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.markdown */,
+				E69CA343B50E8EB0D125DF4A30A21554 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-acknowledgements.plist */,
+				3A607196D487335E98691DCEE063E206 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m */,
+				72F23F15CDF56E63F576A32ACBAD6E22 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-Info.plist */,
+				B284162D0774E9E73334610DB76CB211 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h */,
+				DEAF30237DB7B35E3FDDD1D71F900ACF /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.debug.xcconfig */,
+				60E4DE43FAA0A446ABEEB3AB35CB71A4 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.release.xcconfig */,
+			);
+			name = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests";
+			path = "Target Support Files/Pods-NHLSimulatorApp-NHLSimulatorAppUITests";
+			sourceTree = "<group>";
+		};
+		ADD7479EAFAE6E0A3278F2A2364CCABB /* Pods-NHLSimulatorApp */ = {
+			isa = PBXGroup;
+			children = (
+				7025742C807A8AE3B847B098121DEDF4 /* Pods-NHLSimulatorApp.modulemap */,
+				A90D472CF5B31F13D8B6AC57FF9A2E49 /* Pods-NHLSimulatorApp-acknowledgements.markdown */,
+				AB83910E21CE0E0EC631239B96582D9C /* Pods-NHLSimulatorApp-acknowledgements.plist */,
+				1BD42E6D07CF62D02B8B6B05A8E9E1B7 /* Pods-NHLSimulatorApp-dummy.m */,
+				F2FCBF53823B4E00DEE062C3F2850EF6 /* Pods-NHLSimulatorApp-Info.plist */,
+				CF53BD11451869C807B84F0BDCE140BC /* Pods-NHLSimulatorApp-umbrella.h */,
+				8DFF634A2C2EE6E5D436215FCEEBA28A /* Pods-NHLSimulatorApp.debug.xcconfig */,
+				347C4DB03C46C17E6C2BBDC2BDDE954D /* Pods-NHLSimulatorApp.release.xcconfig */,
+			);
+			name = "Pods-NHLSimulatorApp";
+			path = "Target Support Files/Pods-NHLSimulatorApp";
+			sourceTree = "<group>";
+		};
+		AFF79C5BA4B824DA0074228000AC5176 /* Pods-NHLSimulatorAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC7042BB515CF7450CFEC1B44E78F396 /* Pods-NHLSimulatorAppTests.modulemap */,
+				F77FCD678DA563CB3231F2822F5F263C /* Pods-NHLSimulatorAppTests-acknowledgements.markdown */,
+				E275A90EF3DCEBB9E6F3BCD63C275818 /* Pods-NHLSimulatorAppTests-acknowledgements.plist */,
+				0248A790C2036767B4C667F10E4014A9 /* Pods-NHLSimulatorAppTests-dummy.m */,
+				B151F053ED6644AB58E6029905631EFB /* Pods-NHLSimulatorAppTests-Info.plist */,
+				3BE8CA6042EF39CA09F72C803E1CD591 /* Pods-NHLSimulatorAppTests-umbrella.h */,
+				05CB4262CD210EA708BD118E24CA87D6 /* Pods-NHLSimulatorAppTests.debug.xcconfig */,
+				73E223E816E88D8CBD969A475FB83E40 /* Pods-NHLSimulatorAppTests.release.xcconfig */,
+			);
+			name = "Pods-NHLSimulatorAppTests";
+			path = "Target Support Files/Pods-NHLSimulatorAppTests";
+			sourceTree = "<group>";
+		};
+		CAA6F2AC6A0FEAD165AC9A6CB910EDF6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBE3795B3D6A1138E445E8F4A3F671B6 /* Pods-NHLSimulatorApp */,
+				E608D873B598B95062413CE5B1E74087 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */,
+				B2908DC731A95A7968E5D3C201A62D15 /* Pods-NHLSimulatorAppTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				CAA6F2AC6A0FEAD165AC9A6CB910EDF6 /* Products */,
+				EF04963D0CC09E2A813B358C590E3198 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF04963D0CC09E2A813B358C590E3198 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADD7479EAFAE6E0A3278F2A2364CCABB /* Pods-NHLSimulatorApp */,
+				789150132FC6DFA30181C74A2C0A1D56 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */,
+				AFF79C5BA4B824DA0074228000AC5176 /* Pods-NHLSimulatorAppTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		091466A75F1E66D6BB6A91FB1B562A0F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B934DF34CDB7FBC712F69643C3C6326F /* Pods-NHLSimulatorApp-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48F478F298164CBB860A983CD66052B0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F048779122C8D0E1294B44B7A6ED61A9 /* Pods-NHLSimulatorAppTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61BBBDBB6BC8C01AF5E36E4791318AFF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68AA6DD548B2D481E288187000267A86 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6651FC95A29A41A268F336747F433EB3 /* Pods-NHLSimulatorApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C09B28C8676F8DEA9164FF8414F42679 /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorApp" */;
+			buildPhases = (
+				091466A75F1E66D6BB6A91FB1B562A0F /* Headers */,
+				9C6C6142D44B4C5757C9DD158FD5D31F /* Sources */,
+				81895FB9D9A4E19E07E00FCF5038DDC2 /* Frameworks */,
+				F4BD08B2DE775C0F7F9461375247072D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-NHLSimulatorApp";
+			productName = Pods_NHLSimulatorApp;
+			productReference = BBE3795B3D6A1138E445E8F4A3F671B6 /* Pods-NHLSimulatorApp */;
+			productType = "com.apple.product-type.framework";
+		};
+		B807637A51C23AD466ADA9EE775BD795 /* Pods-NHLSimulatorAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6173F1E0A172D982C4890839EB806094 /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorAppTests" */;
+			buildPhases = (
+				48F478F298164CBB860A983CD66052B0 /* Headers */,
+				3904209179CBBAA22BEBD1250D46815F /* Sources */,
+				4D90E050386132B989E777B0E2881941 /* Frameworks */,
+				F673C50457E978B721B0E753C656D96B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D45030B9592CC4DAE21D464EABA72492 /* PBXTargetDependency */,
+			);
+			name = "Pods-NHLSimulatorAppTests";
+			productName = Pods_NHLSimulatorAppTests;
+			productReference = B2908DC731A95A7968E5D3C201A62D15 /* Pods-NHLSimulatorAppTests */;
+			productType = "com.apple.product-type.framework";
+		};
+		CF9472C9F4543BB788823F56C55267EE /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B77DD9207DA3479B2F7688C6FA4D3EC /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorApp-NHLSimulatorAppUITests" */;
+			buildPhases = (
+				61BBBDBB6BC8C01AF5E36E4791318AFF /* Headers */,
+				0F93154163B3B58B712FCF060EA7B212 /* Sources */,
+				4566CA5FB44B88BF0D95DBA9E6F15B47 /* Frameworks */,
+				168BD0F4F593AB51E1925521F1E3A58C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-NHLSimulatorApp-NHLSimulatorAppUITests";
+			productName = Pods_NHLSimulatorApp_NHLSimulatorAppUITests;
+			productReference = E608D873B598B95062413CE5B1E74087 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = CAA6F2AC6A0FEAD165AC9A6CB910EDF6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6651FC95A29A41A268F336747F433EB3 /* Pods-NHLSimulatorApp */,
+				CF9472C9F4543BB788823F56C55267EE /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests */,
+				B807637A51C23AD466ADA9EE775BD795 /* Pods-NHLSimulatorAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		168BD0F4F593AB51E1925521F1E3A58C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4BD08B2DE775C0F7F9461375247072D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F673C50457E978B721B0E753C656D96B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F93154163B3B58B712FCF060EA7B212 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92797341FEF15AFFDF930B10117ACD08 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3904209179CBBAA22BEBD1250D46815F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E540E9ACA65A245442D8C2538220B3DB /* Pods-NHLSimulatorAppTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C6C6142D44B4C5757C9DD158FD5D31F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8498DFF15D677D4570A5FB1936059241 /* Pods-NHLSimulatorApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D45030B9592CC4DAE21D464EABA72492 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-NHLSimulatorApp";
+			target = 6651FC95A29A41A268F336747F433EB3 /* Pods-NHLSimulatorApp */;
+			targetProxy = C6ADF0B3AA643B8515BC4143B0A1AB08 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03747562F3AE96A228CB4DC1E3706EAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05CB4262CD210EA708BD118E24CA87D6 /* Pods-NHLSimulatorAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		39172EA023B541C9E0A810FA6AAAF43B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEAF30237DB7B35E3FDDD1D71F900ACF /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorApp-NHLSimulatorAppUITests/Pods-NHLSimulatorApp-NHLSimulatorAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorApp-NHLSimulatorAppUITests/Pods-NHLSimulatorApp-NHLSimulatorAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3DF2362C408B8C5002291BEF24540DC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60E4DE43FAA0A446ABEEB3AB35CB71A4 /* Pods-NHLSimulatorApp-NHLSimulatorAppUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorApp-NHLSimulatorAppUITests/Pods-NHLSimulatorApp-NHLSimulatorAppUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorApp-NHLSimulatorAppUITests/Pods-NHLSimulatorApp-NHLSimulatorAppUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		47B0A4F0B52D42D3A9337F82E0C8A17A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73E223E816E88D8CBD969A475FB83E40 /* Pods-NHLSimulatorAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorAppTests/Pods-NHLSimulatorAppTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5704FE4229B999F8CAF822536A8E7A71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8DFF634A2C2EE6E5D436215FCEEBA28A /* Pods-NHLSimulatorApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7C3FBC45C4966EFE20583918767EFBE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		87E16EDF6C8EF5A130B5EFD4D48E3FC8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 347C4DB03C46C17E6C2BBDC2BDDE954D /* Pods-NHLSimulatorApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-NHLSimulatorApp/Pods-NHLSimulatorApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FF0A36149038A192FFD678E1D4A40D3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B77DD9207DA3479B2F7688C6FA4D3EC /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorApp-NHLSimulatorAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39172EA023B541C9E0A810FA6AAAF43B /* Debug */,
+				3DF2362C408B8C5002291BEF24540DC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C3FBC45C4966EFE20583918767EFBE2 /* Debug */,
+				FF0A36149038A192FFD678E1D4A40D3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6173F1E0A172D982C4890839EB806094 /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03747562F3AE96A228CB4DC1E3706EAD /* Debug */,
+				47B0A4F0B52D42D3A9337F82E0C8A17A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C09B28C8676F8DEA9164FF8414F42679 /* Build configuration list for PBXNativeTarget "Pods-NHLSimulatorApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5704FE4229B999F8CAF822536A8E7A71 /* Debug */,
+				87E16EDF6C8EF5A130B5EFD4D48E3FC8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
