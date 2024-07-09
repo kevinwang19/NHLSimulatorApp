@@ -9,14 +9,14 @@ import Foundation
 import RxSwift
 
 public protocol PlayersService {
-    func getPlayerData(playerID: Int) -> Single<PlayerData>
+    func getPlayerData(playerID: Int) -> Single<Player>
     func getTeamRoster(teamID: Int) -> Single<PlayerData>
 }
 
 extension NetworkManager: PlayersService {
-    public func getPlayerData(playerID: Int) -> Single<PlayerData> {
+    public func getPlayerData(playerID: Int) -> Single<Player> {
         let parameter: ParameterType = .object(["player_id": playerID])
-        let endpoint = Endpoint(method: .get, info: NetworkEndpoint.players, parameters: parameter, resultType: PlayerData.self)
+        let endpoint = Endpoint(method: .get, info: NetworkEndpoint.players, parameters: parameter, resultType: Player.self)
         return networkTask(endpoint: endpoint)
     }
     

@@ -8,6 +8,10 @@
 import Foundation
 
 public struct TeamData: Codable {
+    public let teams: [Team]
+}
+
+public struct Team: Codable {
     public let teamID: Int
     public let fullName: String
     public let abbrev: String

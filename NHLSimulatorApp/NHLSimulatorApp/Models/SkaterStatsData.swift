@@ -8,7 +8,10 @@
 import Foundation
 
 public struct SkaterStatsData: Codable {
-    public let playerID: Int
+    public let skaterStats: [SkaterStat]
+}
+
+public struct SkaterStat: Codable {
     public let season: Int?
     public let gamesPlayed: Int
     public let goals: Int

@@ -8,6 +8,10 @@
 import Foundation
 
 public struct PlayerData: Codable {
+    public let players: [Player]
+}
+
+public struct Player: Codable {
     public let playerID: Int
     public let headshot: String?
     public let firstName: String

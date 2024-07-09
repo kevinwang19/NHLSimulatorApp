@@ -8,7 +8,10 @@
 import Foundation
 
 public struct GoalieStatsData: Codable {
-    public let playerID: Int
+    public let goalieStats: [GoalieStat]
+}
+
+public struct GoalieStat: Codable {
     public let season: Int?
     public let gamesPlayed: Int
     public let gamesStarted: Int
@@ -21,3 +24,4 @@ public struct GoalieStatsData: Codable {
     public let shotsAgainst: Int
     public let shutouts: Int
 }
+

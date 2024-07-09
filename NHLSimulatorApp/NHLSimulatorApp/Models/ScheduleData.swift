@@ -8,6 +8,10 @@
 import Foundation
 
 public struct ScheduleData: Codable {
+    public let schedules: [Schedule]
+}
+
+public struct Schedule: Codable {
     public let scheduleID: Int
     public let date: String
     public let dayAbbrev: String

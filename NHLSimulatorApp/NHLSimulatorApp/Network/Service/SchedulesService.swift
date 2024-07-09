@@ -9,16 +9,16 @@ import Foundation
 import RxSwift
 
 public protocol SchedulesService {
-    func getScheduleData(scheduleID: Int) -> Single<ScheduleData>
+    func getScheduleData(scheduleID: Int) -> Single<Schedule>
     func getDateSchedule(date: String) -> Single<ScheduleData>
     func getTeamSeasonSchedule(teamID: Int, season: Int) -> Single<ScheduleData>
     func getTeamMonthSchedule(teamID: Int, season: Int, month: Int) -> Single<ScheduleData>
 }
 
 extension NetworkManager: SchedulesService {
-    public func getScheduleData(scheduleID: Int) -> Single<ScheduleData> {
+    public func getScheduleData(scheduleID: Int) -> Single<Schedule> {
         let parameter: ParameterType = .object(["schedule_id": scheduleID])
-        let endpoint = Endpoint(method: .get, info: NetworkEndpoint.schedules, parameters: parameter, resultType: ScheduleData.self)
+        let endpoint = Endpoint(method: .get, info: NetworkEndpoint.schedules, parameters: parameter, resultType: Schedule.self)
         return networkTask(endpoint: endpoint)
     }
     
