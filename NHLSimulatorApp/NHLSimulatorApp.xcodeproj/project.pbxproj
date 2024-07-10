@@ -12,6 +12,11 @@
 		48DCAC0C2C3CF28B000CEBB3 /* SimulationGameStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC0B2C3CF28B000CEBB3 /* SimulationGameStatsData.swift */; };
 		48DCAC0E2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC0D2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift */; };
 		48DCAC102C3CF2AC000CEBB3 /* SimulationGameStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC0F2C3CF2AC000CEBB3 /* SimulationGameStatsService.swift */; };
+		48DCAC122C3DECB9000CEBB3 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC112C3DECB9000CEBB3 /* UserDefaultsManager.swift */; };
+		48DCAC152C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC132C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld */; };
+		48DCAC172C3DFC16000CEBB3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC162C3DFC16000CEBB3 /* CoreDataManager.swift */; };
+		48DCAC192C3E08F8000CEBB3 /* CorePlayersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC182C3E08F8000CEBB3 /* CorePlayersService.swift */; };
+		48DCAC1B2C3E0904000CEBB3 /* CoreLineupsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC1A2C3E0904000CEBB3 /* CoreLineupsService.swift */; };
 		48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3472C36230E0079AB67 /* NetworkManager.swift */; };
 		48DCF34A2C3632DA0079AB67 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF3492C3632DA0079AB67 /* Endpoint.swift */; };
 		48DCF34F2C373E5F0079AB67 /* SimulationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */; };
@@ -38,7 +43,6 @@
 		48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */; };
 		48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5395B2C06D6A1008DAECE /* ContentView.swift */; };
 		48F5395E2C06D6A5008DAECE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F5395D2C06D6A5008DAECE /* Assets.xcassets */; };
-		48F539612C06D6A5008DAECE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48F539602C06D6A5008DAECE /* Preview Assets.xcassets */; };
 		48F5396B2C06D6A6008DAECE /* NHLSimulatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F5396A2C06D6A6008DAECE /* NHLSimulatorAppTests.swift */; };
 		48F539752C06D6A6008DAECE /* NHLSimulatorAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539742C06D6A6008DAECE /* NHLSimulatorAppUITests.swift */; };
 		48F539772C06D6A6008DAECE /* NHLSimulatorAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F539762C06D6A6008DAECE /* NHLSimulatorAppUITestsLaunchTests.swift */; };
@@ -67,6 +71,11 @@
 		48DCAC0B2C3CF28B000CEBB3 /* SimulationGameStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationGameStatsData.swift; sourceTree = "<group>"; };
 		48DCAC0D2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTeamStatsService.swift; sourceTree = "<group>"; };
 		48DCAC0F2C3CF2AC000CEBB3 /* SimulationGameStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationGameStatsService.swift; sourceTree = "<group>"; };
+		48DCAC112C3DECB9000CEBB3 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		48DCAC142C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NHLSimulatorAppModel.xcdatamodel; sourceTree = "<group>"; };
+		48DCAC162C3DFC16000CEBB3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		48DCAC182C3E08F8000CEBB3 /* CorePlayersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorePlayersService.swift; sourceTree = "<group>"; };
+		48DCAC1A2C3E0904000CEBB3 /* CoreLineupsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLineupsService.swift; sourceTree = "<group>"; };
 		48DCF3472C36230E0079AB67 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		48DCF3492C3632DA0079AB67 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		48DCF34E2C373E5F0079AB67 /* SimulationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationsService.swift; sourceTree = "<group>"; };
@@ -94,7 +103,6 @@
 		48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorApp.swift; sourceTree = "<group>"; };
 		48F5395B2C06D6A1008DAECE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		48F5395D2C06D6A5008DAECE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		48F539602C06D6A5008DAECE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		48F539662C06D6A6008DAECE /* NHLSimulatorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHLSimulatorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48F5396A2C06D6A6008DAECE /* NHLSimulatorAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLSimulatorAppTests.swift; sourceTree = "<group>"; };
 		48F539702C06D6A6008DAECE /* NHLSimulatorAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHLSimulatorAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +143,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48DCAC1C2C3E2190000CEBB3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				48DCAC162C3DFC16000CEBB3 /* CoreDataManager.swift */,
+				48DCAC182C3E08F8000CEBB3 /* CorePlayersService.swift */,
+				48DCAC1A2C3E0904000CEBB3 /* CoreLineupsService.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		48DCF34B2C36402A0079AB67 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +221,7 @@
 		48F5394D2C06D6A1008DAECE = {
 			isa = PBXGroup;
 			children = (
+				48DCAC132C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld */,
 				48F539582C06D6A1008DAECE /* NHLSimulatorApp */,
 				48F539692C06D6A6008DAECE /* NHLSimulatorAppTests */,
 				48F539732C06D6A6008DAECE /* NHLSimulatorAppUITests */,
@@ -225,22 +244,15 @@
 		48F539582C06D6A1008DAECE /* NHLSimulatorApp */ = {
 			isa = PBXGroup;
 			children = (
+				48DCAC1C2C3E2190000CEBB3 /* CoreData */,
 				48DCF3522C3780F70079AB67 /* Models */,
 				48DCF34B2C36402A0079AB67 /* Network */,
 				48F539592C06D6A1008DAECE /* NHLSimulatorApp.swift */,
 				48F5395B2C06D6A1008DAECE /* ContentView.swift */,
+				48DCAC112C3DECB9000CEBB3 /* UserDefaultsManager.swift */,
 				48F5395D2C06D6A5008DAECE /* Assets.xcassets */,
-				48F5395F2C06D6A5008DAECE /* Preview Content */,
 			);
 			path = NHLSimulatorApp;
-			sourceTree = "<group>";
-		};
-		48F5395F2C06D6A5008DAECE /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				48F539602C06D6A5008DAECE /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		48F539692C06D6A6008DAECE /* NHLSimulatorAppTests */ = {
@@ -387,7 +399,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48F539612C06D6A5008DAECE /* Preview Assets.xcassets in Resources */,
 				48F5395E2C06D6A5008DAECE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +490,8 @@
 			files = (
 				48DCF3752C379A1E0079AB67 /* GoalieStatsService.swift in Sources */,
 				48DCF3832C38566E0079AB67 /* SimulationGoalieStatsService.swift in Sources */,
+				48DCAC192C3E08F8000CEBB3 /* CorePlayersService.swift in Sources */,
+				48DCAC1B2C3E0904000CEBB3 /* CoreLineupsService.swift in Sources */,
 				48DCF3592C3787D10079AB67 /* UsersService.swift in Sources */,
 				48DCF3712C3799E30079AB67 /* GoalieStatsData.swift in Sources */,
 				48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */,
@@ -491,18 +504,21 @@
 				48DCAC102C3CF2AC000CEBB3 /* SimulationGameStatsService.swift in Sources */,
 				48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */,
 				48DCAC0A2C3CF27A000CEBB3 /* SimulationTeamStatsData.swift in Sources */,
+				48DCAC172C3DFC16000CEBB3 /* CoreDataManager.swift in Sources */,
 				48DCF37B2C384A0A0079AB67 /* LineupsService.swift in Sources */,
 				48DCAC0E2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift in Sources */,
 				48DCF37F2C3854090079AB67 /* SimulationGoalieStatsData.swift in Sources */,
 				48DCF37D2C3853FA0079AB67 /* SimulationSkaterStatsData.swift in Sources */,
 				48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */,
 				48DCF3792C3849600079AB67 /* LineupData.swift in Sources */,
+				48DCAC152C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld in Sources */,
 				48DCF3672C3791C30079AB67 /* SkaterStatsData.swift in Sources */,
 				48DCF36D2C3791FF0079AB67 /* SkaterStatsService.swift in Sources */,
 				48DCF3652C3791AC0079AB67 /* PlayerData.swift in Sources */,
 				48DCF36B2C3791F20079AB67 /* PlayersService.swift in Sources */,
 				48DCF35F2C378E930079AB67 /* SchedulesService.swift in Sources */,
 				48F5395C2C06D6A1008DAECE /* ContentView.swift in Sources */,
+				48DCAC122C3DECB9000CEBB3 /* UserDefaultsManager.swift in Sources */,
 				48DCF34A2C3632DA0079AB67 /* Endpoint.swift in Sources */,
 				48DCF3612C3790550079AB67 /* TeamData.swift in Sources */,
 				48F5395A2C06D6A1008DAECE /* NHLSimulatorApp.swift in Sources */,
@@ -828,6 +844,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		48DCAC132C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				48DCAC142C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodel */,
+			);
+			currentVersion = 48DCAC142C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodel */;
+			path = NHLSimulatorAppModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 48F5394E2C06D6A1008DAECE /* Project object */;
 }

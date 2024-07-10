@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoreLineup" representedClassName="CoreLineup" syncable="YES" codeGenerationType="class">
+        <attribute name="lineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lineupID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="otLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="penaltyKillLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="position" attributeType="String"/>
+        <attribute name="powerPlayLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="belongsToPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CorePlayer"/>
+    </entity>
+    <entity name="CorePlayer" representedClassName="CorePlayer" syncable="YES" codeGenerationType="class">
+        <attribute name="birthCountry" attributeType="String"/>
+        <attribute name="birthDate" attributeType="String"/>
+        <attribute name="defensiveRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="firstName" attributeType="String"/>
+        <attribute name="headshot" optional="YES" attributeType="String"/>
+        <attribute name="heightInInches" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastName" attributeType="String"/>
+        <attribute name="offensiveRating" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playerID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="positionCode" attributeType="String"/>
+        <attribute name="shootsCatches" attributeType="String"/>
+        <attribute name="sweaterNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="weightInPounds" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+</model>

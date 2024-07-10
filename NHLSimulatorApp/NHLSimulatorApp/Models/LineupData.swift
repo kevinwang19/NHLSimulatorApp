@@ -12,8 +12,9 @@ public struct LineupData: Codable {
 }
 
 public struct Lineup: Codable {
+    public let lineupID: Int
     public let playerID: Int
-    public let teamID: Int?
+    public let teamID: Int
     public let position: String
     public let lineNumber: Int?
     public let powerPlayLineNumber: Int?

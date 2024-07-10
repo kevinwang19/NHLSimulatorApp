@@ -24,4 +24,6 @@ public struct Player: Codable {
     public let birthDate: String
     public let birthCountry: String
     public let teamID: Int
+    public let offensiveRating: Int
+    public let defensiveRating: Int
 }
