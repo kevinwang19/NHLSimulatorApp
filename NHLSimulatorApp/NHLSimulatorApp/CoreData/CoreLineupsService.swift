@@ -9,15 +9,20 @@ import CoreData
 import Foundation
 
 extension CoreDataManager {
+    // Save lineup data to Core Data
     func saveLineupCoreData(lineupData: LineupData) {
         for lineup in lineupData.lineups {
-            guard let lineupEntity = NSEntityDescription.entity(forEntityName: "CoreLineup", in: context) else {
+            // Create entity description for CoreLineup entity
+            guard let lineupEntity = NSEntityDescription.entity(forEntityName: AppInfo.coreLineup.rawValue, in: context) else {
                 return
             }
+            
+            // Create managed object for CoreLineup
             guard let lineupManagedObject = NSManagedObject(entity: lineupEntity, insertInto: context) as? CoreLineup else {
                 return
             }
             
+            // Assign lineup data to the managed object
             lineupManagedObject.lineupID = Int64(lineup.lineupID)
             lineupManagedObject.teamID = Int64(lineup.teamID)
             lineupManagedObject.position = lineup.position
@@ -40,6 +45,7 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch all lineups from Core Data
     func fetchLineupsCoreData() -> [CoreLineup] {
         let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
         do {
@@ -50,6 +56,7 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch all lineups belonging to a specific team from Core Data
     func fetchTeamLineupsCoreData(teamID: Int) -> [CoreLineup] {
         let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "teamID == %d", teamID)
@@ -61,8 +68,9 @@ extension CoreDataManager {
         }
     }
     
+    // Reset all lineups in Core Data
     func resetLineupsCoreData() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "CoreLineup")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: AppInfo.coreLineup.rawValue)
 
         do {
             let entities = try context.fetch(fetchRequest)

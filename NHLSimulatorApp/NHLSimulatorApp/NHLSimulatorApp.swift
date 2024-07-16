@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import SDWebImageSVGCoder
 
 @main
 struct NHLSimulatorApp: App {
+    init() {
+        setUpDependencies()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                LaunchView()
+                    .navigationBarHidden(true)
+            }
         }
+    }
+}
+
+private extension NHLSimulatorApp {
+    func setUpDependencies() {
+        SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
     }
 }

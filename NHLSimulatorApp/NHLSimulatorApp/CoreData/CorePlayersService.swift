@@ -9,15 +9,20 @@ import CoreData
 import Foundation
 
 extension CoreDataManager {
+    // Save player data to Core Data
     func savePlayersCoreData(playerData: PlayerData) {
         for player in playerData.players {
-            guard let playerEntity = NSEntityDescription.entity(forEntityName: "CorePlayer", in: context) else {
+            // Create entity description for CorePlayer entity
+            guard let playerEntity = NSEntityDescription.entity(forEntityName: AppInfo.corePlayer.rawValue, in: context) else {
                 return
             }
+            
+            // Create managed object for CorePlayer
             guard let playerManagedObject = NSManagedObject(entity: playerEntity, insertInto: context) as? CorePlayer else {
                 return
             }
             
+            // Assign player data to the managed object
             playerManagedObject.playerID = Int64(player.playerID)
             playerManagedObject.headshot = player.headshot
             playerManagedObject.firstName = player.firstName
@@ -35,6 +40,7 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch all players from Core Data
     func fetchPlayersCoreData() -> [CorePlayer] {
         let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()
         do {
@@ -45,6 +51,7 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch a player by playerID from Core Data
     func fetchPlayerCoreData(playerID: Int) -> CorePlayer? {
         let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "playerID == %d", playerID)
@@ -57,6 +64,7 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch all players belonging to a specific team from Core Data
     func fetchTeamPlayersCoreData(teamID: Int) -> [CorePlayer] {
         let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "teamID == %d", teamID)
@@ -68,8 +76,9 @@ extension CoreDataManager {
         }
     }
     
+    // Reset all players in Core Data
     func resetPlayersCoreData() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "CorePlayer")
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: AppInfo.corePlayer.rawValue)
 
         do {
             let entities = try context.fetch(fetchRequest)

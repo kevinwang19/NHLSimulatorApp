@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  NHLSimulatorApp
+
+  Created by Kevin Wang on 2024-07-15.
+  
+*/
+
+"nhl_simulator" = "NHL SIMULATOR";
+"new_sim" = "NEW SIM";
+"last_sim" = "LAST SIM";
+"username" = "USERNAME";
+"favorite_team" = "FAVORITE TEAM";
+"start" = "START";
+"username_character_error" = "Only letters and numbers are allowed";
+"username_length_error" = "Max characters reached for username";
+
