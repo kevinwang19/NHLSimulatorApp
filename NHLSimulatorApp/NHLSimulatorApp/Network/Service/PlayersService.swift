@@ -15,13 +15,13 @@ public protocol PlayersService {
 
 extension NetworkManager: PlayersService {
     public func getPlayerData(playerID: Int) -> Single<Player> {
-        let parameter: ParameterType = .object(["player_id": playerID])
+        let parameter: ParameterType = .object(["playerID": playerID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.players, parameters: parameter, resultType: Player.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getTeamRoster(teamID: Int) -> Single<PlayerData> {
-        let parameter: ParameterType = .object(["team_id": teamID])
+        let parameter: ParameterType = .object(["teamID": teamID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.teamPlayers, parameters: parameter, resultType: PlayerData.self)
         return networkTask(endpoint: endpoint)
     }

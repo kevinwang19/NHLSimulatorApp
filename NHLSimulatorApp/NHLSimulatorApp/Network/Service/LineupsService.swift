@@ -16,19 +16,19 @@ public protocol LineupsService {
 
 extension NetworkManager: LineupsService {
     public func getLineupData(lineupID: Int) -> Single<Lineup> {
-        let parameter: ParameterType = .object(["lineup_id": lineupID])
+        let parameter: ParameterType = .object(["lineupID": lineupID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.lineups, parameters: parameter, resultType: Lineup.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getPlayerLineup(playerID: Int) -> Single<Lineup> {
-        let parameter: ParameterType = .object(["player_id": playerID])
+        let parameter: ParameterType = .object(["playerID": playerID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.playerLineups, parameters: parameter, resultType: Lineup.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getTeamLineup(teamID: Int) -> Single<LineupData> {
-        let parameter: ParameterType = .object(["team_id": teamID])
+        let parameter: ParameterType = .object(["teamID": teamID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.teamLineups, parameters: parameter, resultType: LineupData.self)
         return networkTask(endpoint: endpoint)
     }

@@ -20,7 +20,7 @@ extension NetworkManager: TeamsService {
     }
     
     public func getTeamData(teamID: Int) -> Single<Team> {
-        let parameter: ParameterType = .object(["team_id": teamID])
+        let parameter: ParameterType = .object(["teamID": teamID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.teams, parameters: parameter, resultType: Team.self)
         return networkTask(endpoint: endpoint)
     }

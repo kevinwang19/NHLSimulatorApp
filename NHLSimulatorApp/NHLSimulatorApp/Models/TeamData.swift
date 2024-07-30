@@ -12,7 +12,7 @@ public struct TeamData: Codable {
 }
 
 public struct Team: Codable {
-    public let teamID: Int
+    public var teamID: Int
     public let fullName: String
     public let abbrev: String
     public let logo: String

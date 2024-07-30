@@ -14,4 +14,11 @@
 "start" = "START";
 "username_character_error" = "Only letters and numbers are allowed";
 "username_length_error" = "Max characters reached for username";
+"username_empty_error" = "Please enter a username";
+"simulation_setup_message" = "SETTING UP THE SIMULATION...";
+"simulate_to" = "SIMULATE TO ";
+"team_standings" = "Team Standings";
+"player_stats" = "Player Stats";
+"edit_rosters" = "Edit Rosters";
+"edit_lineups" = "Edit Lineups";
 

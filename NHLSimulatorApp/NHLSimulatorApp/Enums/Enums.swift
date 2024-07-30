@@ -15,13 +15,41 @@ enum AppInfo: String {
 
 enum UserDefaultName: String {
     case isFirstLaunch
-    case username
-    case favTeamID
+    case userID
+    case favTeamIndex
+    case simulationID
+    case season
 }
 
-enum Spacing: CGFloat {
-    case spacingSmall = 20.0
-    case spacingMedium = 40.0
-    case spacingLarge = 60.0
-    case spacingExtraLarge = 80.0
+enum ElementLabel: String {
+    case teams = "Teams"
+    case scroll = "Scroll"
+    case previous = "Previous"
+    case next = "Next"
+}
+
+enum Symbols: String {
+    case atSymbol = "@"
+    case versus = "vs"
+    case calendarPlaceholder = "00"
+    case leftArrow = "chevron.left"
+    case rightArrow = "chevron.right"
+}
+
+enum LocalizedText: String {
+    case nhlSimulator = "nhl_simulator"
+    case newSim = "new_sim"
+    case lastSim = "last_sim"
+    case username
+    case favoriteTeam = "favorite_team"
+    case start
+    case usernameCharacterError = "username_character_error"
+    case usernameLengthError = "username_length_error"
+    case usernameEmptyError = "username_empty_error"
+    case simulationSetupMessage = "simulation_setup_message"
+    case simulateTo = "simulate_to"
+    case teamStandings = "team_standings"
+    case playerStats = "player_stats"
+    case editRosters = "edit_rosters"
+    case editLineups = "edit_lineups"
 }

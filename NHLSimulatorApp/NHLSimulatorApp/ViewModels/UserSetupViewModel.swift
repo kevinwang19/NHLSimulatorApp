@@ -24,6 +24,8 @@ class UserSetupViewModel: ObservableObject {
     private var isUpdatingText = false
     private let disposeBag = DisposeBag()
     
+    var userID: Int?
+    
     // Fetch all teams
     func fetchTeams() {
         NetworkManager.shared.getAllTeams().subscribe(onSuccess: { [weak self] teamData in
@@ -45,7 +47,7 @@ class UserSetupViewModel: ObservableObject {
         // If filtered string does not match original input, show invalid character error message
         if input != filtered {
             usernameText = filtered
-            usernameErrorMessage = NSLocalizedString("username_character_error", comment: "")
+            usernameErrorMessage = NSLocalizedString(LocalizedText.usernameCharacterError.rawValue, comment: "")
             isUpdatingText = false
             return
         }
@@ -53,7 +55,7 @@ class UserSetupViewModel: ObservableObject {
         // If filtered string exceeds maximum length, show invalid length error message
         if filtered.count > usernameMaxLength {
             usernameText = String(filtered.prefix(usernameMaxLength))
-            usernameErrorMessage = NSLocalizedString("username_length_error", comment: "")
+            usernameErrorMessage = NSLocalizedString(LocalizedText.usernameLengthError.rawValue, comment: "")
             isUpdatingText = false
             return
         }
@@ -65,5 +67,28 @@ class UserSetupViewModel: ObservableObject {
         }
         
         isUpdatingText = false
+    }
+    
+    // When the username field is empty
+    func emptyUsername() {
+        usernameErrorMessage = NSLocalizedString(LocalizedText.usernameEmptyError.rawValue, comment: "")
+    }
+    
+    // Create the user and fetch the userID
+    func generateUser(userInfo: UserInfo, username: String, favTeamID: Int, favTeamIndex: Int, completion: @escaping (Bool) -> Void) {
+        NetworkManager.shared.createUser(username: username, favTeamID: favTeamID).subscribe(onSuccess: { [weak self] userData in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+                
+            self.userID = userData.userID
+            userInfo.setUserStartInfo(userID: userData.userID, favTeamIndex: favTeamIndex)
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to generate user: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
     }
 }

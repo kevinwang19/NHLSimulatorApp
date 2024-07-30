@@ -16,19 +16,19 @@ public protocol SimulationSkaterStatsService {
 
 extension NetworkManager: SimulationSkaterStatsService {
     public func initializeSimSkaterStats(simulationID: Int) -> Single<SimulationSkaterStatsData> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID])
+        let parameter: ParameterType = .object(["simulationID": simulationID])
         let endpoint = Endpoint(method: .post, info: NetworkEndpoint.simulationSkaterStats, parameters: parameter, resultType: SimulationSkaterStatsData.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getSimSkaterStats(simulationID: Int, playerID: Int) -> Single<SimulationSkaterStat> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID, "player_id": playerID])
+        let parameter: ParameterType = .object(["simulationID": simulationID, "playerID": playerID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.simulationSkaterStats, parameters: parameter, resultType: SimulationSkaterStat.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getSimAllSkaterStats(simulationID: Int) -> Single<SimulationSkaterStatsData> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID])
+        let parameter: ParameterType = .object(["simulationID": simulationID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.simulationAllSkaterStats, parameters: parameter, resultType: SimulationSkaterStatsData.self)
         return networkTask(endpoint: endpoint)
     }

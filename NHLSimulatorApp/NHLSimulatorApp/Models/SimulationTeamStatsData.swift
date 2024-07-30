@@ -12,19 +12,21 @@ public struct SimulationTeamStatsData: Codable {
 }
 
 public struct SimulationTeamStat: Codable {
+    public let simulationID: Int
+    public let teamID: Int
     public let gamesPlayed: Int
     public let wins: Int
     public let losses: Int
     public let otLosses: Int
     public let points: Int
     public let goalsFor: Int
-    public let goalsForPerGame: Decimal
+    public let goalsForPerGame: Float
     public let goalsAgainst: Int
-    public let goalsAgainstPerGame: Decimal
+    public let goalsAgainstPerGame: Float
     public let totalPowerPlays: Int
-    public let powerPlayPctg: Decimal
+    public let powerPlayPctg: Float
     public let totalPenaltyKills: Int
-    public let penaltyKillPctg: Decimal
+    public let penaltyKillPctg: Float
     public let divisionRank: Int
     public let conferenceRank: Int
     public let leagueRank: Int

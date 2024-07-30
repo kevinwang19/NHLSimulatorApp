@@ -44,8 +44,7 @@ struct Endpoint<ResultType> where ResultType: Decodable {
     public init(method: HTTPMethod, info: EndpointInfo?, parameters: ParameterType?, resultType: ResultType.Type) {
         if let info = info {
             self.requestInfo = info
-        }
-        else {
+        } else {
             requestInfo = nil
         }
         

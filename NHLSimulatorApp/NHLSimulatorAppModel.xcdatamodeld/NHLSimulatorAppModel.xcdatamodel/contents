@@ -8,7 +8,7 @@
         <attribute name="position" attributeType="String"/>
         <attribute name="powerPlayLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="belongsToPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CorePlayer"/>
+        <relationship name="belongsToPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CorePlayer" inverseName="hasLineup" inverseEntity="CorePlayer"/>
     </entity>
     <entity name="CorePlayer" representedClassName="CorePlayer" syncable="YES" codeGenerationType="class">
         <attribute name="birthCountry" attributeType="String"/>
@@ -25,5 +25,6 @@
         <attribute name="sweaterNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="weightInPounds" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="hasLineup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreLineup" inverseName="belongsToPlayer" inverseEntity="CoreLineup"/>
     </entity>
 </model>

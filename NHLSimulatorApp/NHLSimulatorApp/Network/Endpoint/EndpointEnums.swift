@@ -8,9 +8,7 @@
 import Foundation
 
 public enum NetworkEndpoint: EndpointInfo {
-    case schedules
-    case dateSchedules
-    case teamSeasonSchedules
+    case teamDaySchedule
     case teamMonthSchedules
     case teams
     case players
@@ -28,6 +26,7 @@ public enum NetworkEndpoint: EndpointInfo {
     case simulations
     case simulate
     case finishSimulation
+    case userRecentSimulation
     case simulationSkaterStats
     case simulationAllSkaterStats
     case simulationGoalieStats
@@ -41,12 +40,8 @@ public enum NetworkEndpoint: EndpointInfo {
     
     public var route: String {
         switch self {
-        case .schedules:
-            return "schedules"
-        case .dateSchedules:
-            return "schedules/date_schedules"
-        case .teamSeasonSchedules:
-            return "schedules/team_season_schedules"
+        case .teamDaySchedule:
+            return "schedules/team_date_schedule"
         case .teamMonthSchedules:
             return "schedules/team_month_schedules"
         case .teams:
@@ -81,6 +76,8 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulations/simulate_to_date"
         case .finishSimulation:
             return "simulations/finish"
+        case .userRecentSimulation:
+            return "simulations/user_simulation"
         case .simulationSkaterStats:
             return "simulation_skater_stats"
         case .simulationAllSkaterStats:

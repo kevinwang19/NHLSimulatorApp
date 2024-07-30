@@ -16,19 +16,19 @@ public protocol SimulationGoalieStatsService {
 
 extension NetworkManager: SimulationGoalieStatsService {
     public func initializeSimGoalieStats(simulationID: Int) -> Single<SimulationGoalieStatsData> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID])
+        let parameter: ParameterType = .object(["simulationID": simulationID])
         let endpoint = Endpoint(method: .post, info: NetworkEndpoint.simulationGoalieStats, parameters: parameter, resultType: SimulationGoalieStatsData.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getSimGoalieStats(simulationID: Int, playerID: Int) -> Single<SimulationGoalieStat> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID, "player_id": playerID])
+        let parameter: ParameterType = .object(["simulationID": simulationID, "playerID": playerID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.simulationGoalieStats, parameters: parameter, resultType: SimulationGoalieStat.self)
         return networkTask(endpoint: endpoint)
     }
     
     public func getSimAllGoalieStats(simulationID: Int) -> Single<SimulationGoalieStatsData> {
-        let parameter: ParameterType = .object(["simulation_id": simulationID])
+        let parameter: ParameterType = .object(["simulationID": simulationID])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.simulationAllGoalieStats, parameters: parameter, resultType: SimulationGoalieStatsData.self)
         return networkTask(endpoint: endpoint)
     }

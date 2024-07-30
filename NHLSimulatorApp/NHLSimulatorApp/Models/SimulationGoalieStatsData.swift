@@ -16,6 +16,6 @@ public struct SimulationGoalieStat: Codable {
     public let wins: Int
     public let losses: Int
     public let otLosses: Int
-    public let goalsAgainstPerGame: Decimal
+    public let goalsAgainstPerGame: Float
     public let shutouts: Int
 }

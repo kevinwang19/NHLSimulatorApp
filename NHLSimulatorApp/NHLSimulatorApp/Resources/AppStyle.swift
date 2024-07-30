@@ -26,7 +26,7 @@ struct TextStyle: ViewModifier {
         content
             .bold()
             .fontDesign(.rounded)
-            .foregroundColor(.white)
+            .foregroundColor(Color.white)
     }
 }
 
