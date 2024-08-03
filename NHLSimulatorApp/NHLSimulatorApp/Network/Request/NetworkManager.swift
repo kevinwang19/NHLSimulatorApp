@@ -23,7 +23,14 @@ class NetworkManager {
     static let shared = NetworkManager()
     private let baseURL = "http://localhost:3000"
     
-    private init() {}
+    private let session: Session = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 300
+        
+        return Session(configuration: configuration)
+    }()
+        
+        private init() {}
     
     func networkTask<ResultType>(endpoint: Endpoint<ResultType>) -> Single<ResultType> {
         return Single.create { [weak self] single in
@@ -61,7 +68,7 @@ class NetworkManager {
             }
         }
         
-        return Session.default.request(request)
+        return session.request(request)
     }
     
     func dataRequest(request: DataRequest) -> Single<Data> {

@@ -10,11 +10,6 @@ import RxSwift
 import SwiftUI
 
 class MainSimViewModel: ObservableObject {
-    @Published var selectedTeamIndex: Int = 0
-    @Published var showDropdown: Bool = false
-    @Published var selectedDate: Date = Date()
-    @Published var isSimulationLoaded: Bool = false
-    
     @Published var teams: [Team] = []
     @Published var simulationCurrentDate: String?
     @Published var season: Int?
@@ -22,6 +17,7 @@ class MainSimViewModel: ObservableObject {
     @Published var matchupGame: Schedule?
     @Published var simTeamStat: SimulationTeamStat?
     @Published var simOpponentStat: SimulationTeamStat?
+    @Published var simScores: [SimulationGameStat] = []
     private let disposeBag = DisposeBag()
     
     let calendar = Calendar(identifier: .gregorian)
@@ -111,31 +107,76 @@ class MainSimViewModel: ObservableObject {
     }
     
     // Fetch the team's simulation record
-    func fetchTeamStats(simulationID: Int, teamID: Int, opponentID: Int?) -> Void {
+    func fetchTeamStats(simulationID: Int, teamID: Int, opponentID: Int?, completion: @escaping (Bool) -> Void) {
         NetworkManager.shared.getSimTeamStats(simulationID: simulationID, teamID: teamID).subscribe(onSuccess: { [weak self] simTeamData in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(false)
+                return
+            }
                 
             self.simTeamStat = simTeamData
         }, onFailure: { error in
             print("Failed to fetch simulation team stats: \(error)")
+            completion(false)
         })
         .disposed(by: disposeBag)
         
         if let opponentID = opponentID {
             NetworkManager.shared.getSimTeamStats(simulationID: simulationID, teamID: opponentID).subscribe(onSuccess: { [weak self] simOpponentData in
-                guard let self = self else { return }
+                guard let self = self else {
+                    completion(false)
+                    return
+                }
                     
                 self.simOpponentStat = simOpponentData
+                completion(true)
             }, onFailure: { error in
                 print("Failed to fetch simulation team stats: \(error)")
+                completion(false)
             })
             .disposed(by: disposeBag)
+        } else {
+            completion(true)
         }
     }
     
+    // Simulate up to a certain date
+    func simulate(simulationID: Int, simulateDate: String, completion: @escaping (Bool) -> Void) {
+        NetworkManager.shared.updateSimulation(simulationID: simulationID, simulateDate: simulateDate).subscribe(onSuccess: { [weak self] simulationData in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            self.simulationCurrentDate = simulationData.simulationCurrentDate
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to simulate: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    // Fetch the scores that have been simmed
+    func fetchTeamMatchupScores(simulationID: Int, currentDate: String, teamID: Int, season: Int, completion: @escaping (Bool) -> Void) {
+        NetworkManager.shared.getTeamGameStats(simulationID: simulationID, currentDate: currentDate, teamID: teamID, season: season).subscribe(onSuccess: { [weak self] simGameData in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            self.simScores = simGameData.gameStats
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to fetch simulation game stats: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
+    }
+    
     // Text of opponent matchups on the calendar
-    func opponentText(date: Date, formatter: DateFormatter, teamID: Int) -> String? {
-        let dateString = formatter.string(from: date)
+    func opponentText(date: Date, teamID: Int) -> String? {
+        let dateString = dateFormatter.string(from: date)
         
         guard let dateGame = scheduleGames.first(where: { $0.date == dateString }) else {
             return nil
@@ -144,6 +185,34 @@ class MainSimViewModel: ObservableObject {
         return dateGame.awayTeamID == teamID ? (Symbols.atSymbol.rawValue + " " + dateGame.homeTeamAbbrev) : (Symbols.versus.rawValue + " " + dateGame.awayTeamAbbrev)
     }
     
+    // Text of matchup scores on the calendar
+    func scoreText(date: Date, teamID: Int) -> String? {
+        let dateString = dateFormatter.string(from: date)
+        
+        guard let dateGame = scheduleGames.first(where: { $0.date == dateString }) else {
+            return nil
+        }
+        
+        guard let dateScore = simScores.first(where: { $0.scheduleID == dateGame.scheduleID }) else {
+            return nil
+        }
+        
+        if dateScore.awayTeamID == teamID {
+            if dateScore.awayTeamScore > dateScore.homeTeamScore {
+                return Symbols.win.rawValue + " " + String(dateScore.awayTeamScore) + Symbols.dashSymbol.rawValue + String(dateScore.homeTeamScore)
+            } else {
+                return Symbols.loss.rawValue + " " + String(dateScore.awayTeamScore) + Symbols.dashSymbol.rawValue + String(dateScore.homeTeamScore)
+            }
+        } else {
+            if dateScore.awayTeamScore > dateScore.homeTeamScore {
+                return Symbols.loss.rawValue + " " + String(dateScore.homeTeamScore) + Symbols.dashSymbol.rawValue + String(dateScore.awayTeamScore)
+            } else {
+                return Symbols.win.rawValue + " " + String(dateScore.homeTeamScore) + Symbols.dashSymbol.rawValue + String(dateScore.awayTeamScore)
+            }
+        }
+    }
+    
+    // Wins losses and otlosses of a team
     func teamRecord(teamStat: SimulationTeamStat?) -> String {
         guard let stat = teamStat else {
             return ""

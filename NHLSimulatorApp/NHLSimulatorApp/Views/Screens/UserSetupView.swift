@@ -78,12 +78,12 @@ struct UserSetupView: View {
                             WebImage(url: url)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 100, height: 100)
+                                .frame(height: 100)
                         } else {
                             Rectangle()
                                 .fill(.clear)
                                 .scaledToFit()
-                                .frame(width: 100, height: 100)
+                                .frame(height: 100)
                         }
                     }
                 }
@@ -106,8 +106,8 @@ struct UserSetupView: View {
                         userInfo.setFirstLaunchToFalse()
                         
                         viewModel.generateUser(userInfo: userInfo, username: viewModel.usernameText, favTeamID: viewModel.teams[selectedTeamIndex].teamID, favTeamIndex: selectedTeamIndex) {
-                            success in
-                            showMainView = success
+                            userGenerated in
+                            showMainView = userGenerated
                         }
                     }, label: {
                         Text(LocalizedStringKey(LocalizedText.start.rawValue))

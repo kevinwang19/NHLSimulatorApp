@@ -12,6 +12,8 @@ public struct SimulationGameStatsData: Codable {
 }
 
 public struct SimulationGameStat: Codable {
+    public let simulationID: Int
+    public let scheduleID: Int
     public let awayTeamID: Int
     public let awayTeamScore: Int
     public let homeTeamID: Int

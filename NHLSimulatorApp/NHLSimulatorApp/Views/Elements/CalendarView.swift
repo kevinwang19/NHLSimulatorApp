@@ -10,9 +10,10 @@ import SwiftUI
 struct CalendarView: View {
     @EnvironmentObject var userInfo: UserInfo
     @ObservedObject var viewModel: MainSimViewModel
+    @Binding var currentDate: Date
     @Binding var selectedDate: Date
     @Binding var teamID: Int
-    @State private var currentDate: Date = Date()
+    @Binding var isDisabled: Bool
     @State private var season: Int = 0
     @State private var isCalendarLoaded: Bool = false
     
@@ -28,8 +29,9 @@ struct CalendarView: View {
                     title: titleBlock
                 )
                 .equatable()
-                .padding()
+                .padding(Spacing.spacingExtraSmall)
                 .appButtonStyle()
+                .disabled(isDisabled)
             } else {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
@@ -38,26 +40,37 @@ struct CalendarView: View {
         }
         .onAppear {
             // Fetch the recent simulated date and season for the calendar
-            viewModel.fetchSimulationDateDetails(userInfo: userInfo) { success in
-                if let dateString = viewModel.simulationCurrentDate, let date = viewModel.dateFormatter.date(from: dateString) {
-                    currentDate = date
-                    selectedDate = date
-                }
-                if let simulationSeason = viewModel.season {
-                    season = simulationSeason
+            viewModel.fetchSimulationDateDetails(userInfo: userInfo) { detailsFetched in
+                if detailsFetched {
+                    if let dateString = viewModel.simulationCurrentDate, let date = viewModel.dateFormatter.date(from: dateString) {
+                        currentDate = date
+                        selectedDate = date
+                    }
+                    if let simulationSeason = viewModel.season {
+                        season = simulationSeason
+                    }
                 }
             }
         }
         .onChange(of: selectedDate) { newSelectedDate in
+            let newSelectedMonth = viewModel.calendar.component(.month, from: newSelectedDate)
+            let stringCurrentDate = viewModel.dateFormatter.string(from: currentDate)
             // Fetch the new monthly matchups on change of the date
-            let newMonth = viewModel.calendar.component(.month, from: newSelectedDate)
-            viewModel.fetchTeamMonthSchedule(teamID: teamID, season: season, month: newMonth) { success in
-                isCalendarLoaded = success
+            viewModel.fetchTeamMonthSchedule(teamID: teamID, season: season, month: newSelectedMonth) { scheduledFetched in
+                if scheduledFetched {
+                    // Fetch the scores of simulated games
+                    viewModel.fetchTeamMatchupScores(simulationID: userInfo.simulationID, currentDate: stringCurrentDate, teamID: teamID, season: season) { scoresFetched in
+                        isCalendarLoaded = scoresFetched
+                    }
+                }
             }
         }
         .onChange(of: teamID) { newTeamID in
             // Trigger date change and schedule refresh when the selected team changes
             isCalendarLoaded = false
+            selectedDate = selectedDate.addingTimeInterval(1)
+        }
+        .onChange(of: viewModel.simScores.count) { _ in
             selectedDate = selectedDate.addingTimeInterval(1)
         }
     }
@@ -67,9 +80,9 @@ struct CalendarView: View {
     private func dateBlock(date: Date) -> some View {
         Button(action: { selectedDate = date }) {
             Text(Symbols.calendarPlaceholder.rawValue)
-                .frame(height: 40)
-                .padding([.top, .bottom], 8)
-                .padding([.leading, .trailing], 20)
+                .frame(height: 48)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 20)
                 .foregroundColor(.clear)
                 .background(
                     viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.white : Color.black
@@ -81,17 +94,29 @@ struct CalendarView: View {
                 )
                 .overlay(
                     VStack {
-                        Text(" ")
+                        if let scoreText = viewModel.scoreText(date: date, teamID: teamID) {
+                            Text(scoreText)
+                                .font(.caption2)
+                                .foregroundColor(String(scoreText.first ?? " ") == Symbols.win.rawValue ? Color.green.opacity(0.8) : Color.red.opacity(0.8))
+                                .appTextStyle()
+                                .frame(alignment: .center)
+                                .padding(.bottom, 0.1)
+                        } else {
+                            Text(" ")
+                        }
+                        
                         Text(viewModel.dayFormatter.string(from: date))
                             .font(.caption)
                             .foregroundColor(viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.black : Color.white)
                             .appTextStyle()
-                        if let opponentText = viewModel.opponentText(date: date, formatter: viewModel.dateFormatter, teamID: teamID) {
+                        
+                        if let opponentText = viewModel.opponentText(date: date, teamID: teamID) {
                             Text(opponentText)
                                 .font(.caption2)
                                 .foregroundColor(viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.black : Color.white)
                                 .appTextStyle()
                                 .frame(alignment: .center)
+                                .padding(.top, 0.1)
                         } else {
                             Text(" ")
                         }
@@ -126,9 +151,10 @@ struct CalendarView: View {
             }
             
             Text(viewModel.monthFormatter.string(from: date).uppercased())
+                .font(.footnote)
                 .appTextStyle()
                 .frame(width: 100)
-                .padding([.top, .bottom], Spacing.spacingExtraSmall)
+                .padding(.vertical, Spacing.spacingExtraSmall)
                 
             Button {
                 isCalendarLoaded = false

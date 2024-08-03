@@ -17,6 +17,7 @@
 "username_empty_error" = "Please enter a username";
 "simulation_setup_message" = "SETTING UP THE SIMULATION...";
 "simulate_to" = "SIMULATE TO ";
+"simulating" = "SIMULATING...";
 "team_standings" = "Team Standings";
 "player_stats" = "Player Stats";
 "edit_rosters" = "Edit Rosters";

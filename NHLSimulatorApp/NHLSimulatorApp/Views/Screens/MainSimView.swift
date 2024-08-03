@@ -14,8 +14,11 @@ struct MainSimView: View {
     @ObservedObject var viewModel: MainSimViewModel = MainSimViewModel()
     @State private var selectedTeamIndex: Int = 0
     @State private var showDropdown: Bool = false
+    @State private var currentDate: Date = Date()
     @State private var selectedDate: Date = Date()
     @State private var isSimulationLoaded: Bool = false
+    @State private var isMatchupLoaded: Bool = false
+    @State private var isInteractionDisabled = false
     
     var body: some View {
         if isSimulationLoaded {
@@ -25,10 +28,11 @@ struct MainSimView: View {
                     Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
                         .appTextStyle()
                         .font(.headline)
+                        .padding(.top, Spacing.spacingExtraSmall)
                     
                     HStack {
                         // Drop down menu of all teams
-                        TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams)
+                        TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, isDisabled: $isInteractionDisabled)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         // Selected team logo
@@ -37,13 +41,13 @@ struct MainSimView: View {
                             WebImage(url: url)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 75, height: 75)
+                                .frame(height: 50)
                                 .padding(.trailing, Spacing.spacingSmall)
                         } else {
                             Rectangle()
                                 .fill(.clear)
                                 .scaledToFit()
-                                .frame(width: 75, height: 75)
+                                .frame(height: 50)
                                 .padding(.trailing, Spacing.spacingSmall)
                         }
                     }
@@ -51,7 +55,7 @@ struct MainSimView: View {
                     
                     // Calendar of the selected team's matchups
                     if viewModel.teams.indices.contains(selectedTeamIndex) {
-                        CalendarView(viewModel: viewModel, selectedDate: $selectedDate, teamID: $viewModel.teams[selectedTeamIndex].teamID)
+                        CalendarView(viewModel: viewModel, currentDate: $currentDate, selectedDate: $selectedDate, teamID: $viewModel.teams[selectedTeamIndex].teamID, isDisabled: $isInteractionDisabled)
                             .environmentObject(userInfo)
                             .zIndex(0)
                             .overlay(
@@ -74,101 +78,172 @@ struct MainSimView: View {
                                 }
                             }
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(maxWidth: .infinity, minHeight: 75, maxHeight: .infinity)
                         .appButtonStyle()
                         
                         simulateButton()
+                            .disabled(isInteractionDisabled)
                     }
-                    .padding(.top, Spacing.spacingExtraSmall)
-                    
-                    Spacer()
                     
                     footerButtons()
+                    
+                    Spacer()
                 }
-                .padding(Spacing.spacingExtraSmall)
+                .padding(.horizontal, Spacing.spacingExtraSmall)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .appBackgroundStyle()
-                .onAppear {
-                    //selectedDate = selectedDate.addingTimeInterval(1)
-                }
                 .onChange(of: selectedDate) { newSelectedDate in
+                    isMatchupLoaded = false
                     let stringDate = viewModel.dateFormatter.string(from: newSelectedDate)
-                    viewModel.fetchTeamDaySchedule(teamID: viewModel.teams[selectedTeamIndex].teamID, date: stringDate) { success in
+                    
+                    // Fetch the matchup of the selected date
+                    viewModel.fetchTeamDaySchedule(teamID: viewModel.teams[selectedTeamIndex].teamID, date: stringDate) { scheduleFetched in
                         var opponentID: Int? = nil
-                        if success, let matchupGame = viewModel.matchupGame {
+                        if scheduleFetched, let matchupGame = viewModel.matchupGame {
                             opponentID = (viewModel.teams[selectedTeamIndex].teamID == matchupGame.awayTeamID ? matchupGame.homeTeamID : matchupGame.awayTeamID)
                         }
-                        viewModel.fetchTeamStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, opponentID: opponentID)
+                        
+                        // Fetch the record of the team
+                        viewModel.fetchTeamStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, opponentID: opponentID) { statsFetched in
+                            isMatchupLoaded = statsFetched
+                        }
                     }
                 }
             }
         } else {
             // Show loading screen while the simulation is being created or loaded, set the team picker as the user's selected team
-            ProgressView(LocalizedStringKey(LocalizedText.simulationSetupMessage.rawValue))
-                .appTextStyle()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .appBackgroundStyle()
-                .task {
-                    selectedTeamIndex = userInfo.favTeamIndex
-                    
-                    if simulationState.isNewSim {
-                        viewModel.generateSimulation(userInfo: userInfo) { success in
-                            isSimulationLoaded = success
+            VStack {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                
+                ProgressView(LocalizedStringKey(LocalizedText.simulationSetupMessage.rawValue))
+                    .appTextStyle()
+                    .task {
+                        selectedTeamIndex = userInfo.favTeamIndex
+                        
+                        if simulationState.isNewSim {
+                            viewModel.generateSimulation(userInfo: userInfo) { simulationGenerated in
+                                isSimulationLoaded = simulationGenerated
+                            }
+                        } else {
+                            isSimulationLoaded = true
                         }
-                    } else {
-                        isSimulationLoaded = true
                     }
-                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .appBackgroundStyle()
         }
     }
     
     @ViewBuilder
     private func matchupView(matchupGame: Schedule) -> some View {
-        HStack {
-            teamBlockView(teamAbbrev: matchupGame.awayTeamAbbrev, teamLogo: matchupGame.awayTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.awayTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
-            
-            Text(Symbols.atSymbol.rawValue)
-                .appTextStyle()
-                .font(.caption)
-                .padding(.top, Spacing.spacingExtraSmall)
-            
-            teamBlockView(teamAbbrev: matchupGame.homeTeamAbbrev, teamLogo: matchupGame.homeTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.homeTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
+        if isMatchupLoaded {
+            HStack {
+                teamBlockView(teamAbbrev: matchupGame.awayTeamAbbrev, teamLogo: matchupGame.awayTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.awayTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
+                    .padding(.leading, Spacing.spacingExtraSmall)
+                
+                Text(Symbols.atSymbol.rawValue)
+                    .appTextStyle()
+                    .font(.caption)
+                    .padding(.top, Spacing.spacingExtraSmall)
+                
+                teamBlockView(teamAbbrev: matchupGame.homeTeamAbbrev, teamLogo: matchupGame.homeTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.homeTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
+                    .padding(.trailing, Spacing.spacingExtraSmall)
+            }
+        } else {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 
     @ViewBuilder
     private func teamBlockView(teamAbbrev: String, teamLogo: String, teamRecord: String) -> some View {
-        VStack {
-            Text(teamAbbrev)
-                .appTextStyle()
-                .font(.caption)
-                .padding(.top, Spacing.spacingExtraSmall)
-            
-            let url = URL(string: teamLogo)
-            WebImage(url: url)
-                .resizable()
-                .scaledToFit()
-            
-            Text(teamRecord)
-                .appTextStyle()
-                .font(.footnote)
-                .padding(.bottom, Spacing.spacingExtraSmall)
+        if isMatchupLoaded {
+            VStack {
+                Text(teamAbbrev)
+                    .appTextStyle()
+                    .font(.caption)
+                    .padding(.top, Spacing.spacingExtraSmall)
+                
+                let url = URL(string: teamLogo)
+                WebImage(url: url)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(minHeight: 15, maxHeight: 75)
+                
+                Text(teamRecord)
+                    .appTextStyle()
+                    .font(.footnote)
+                    .padding(.bottom, Spacing.spacingExtraSmall)
+            }
+        } else {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
     @ViewBuilder
     private func simulateButton() -> some View {
         Button {
-            // Simulation action
+            isInteractionDisabled = true
+            let stringSimulateDate = viewModel.dateFormatter.string(from: selectedDate)
+            
+            if selectedDate <= currentDate {
+                isInteractionDisabled = false
+                return
+            }
+
+            viewModel.simulate(simulationID: userInfo.simulationID, simulateDate: stringSimulateDate) { simulated in
+                guard let daysToSimulate = viewModel.calendar.dateComponents([.day], from: currentDate, to: selectedDate).day else {
+                    isInteractionDisabled = false
+                    return
+                }
+                
+                if daysToSimulate <= 0 {
+                    isInteractionDisabled = false
+                    return
+                }
+                
+                if simulated {
+                    for _ in 1...daysToSimulate {
+                        guard let nextDay = viewModel.calendar.date(byAdding: .day, value: 1, to: currentDate) else {
+                            isInteractionDisabled = false
+                            return
+                        }
+                        
+                        currentDate = nextDay
+                        selectedDate = selectedDate.addingTimeInterval(1)
+                    }
+                    
+                    isInteractionDisabled = false
+                }
+            }
         } label: {
-            let selectedDateString = viewModel.dateFormatter.string(from: selectedDate)
-            Text(String(format: NSLocalizedString(LocalizedText.simulateTo.rawValue, comment: "")) + selectedDateString)
-                .appTextStyle()
-                .font(.headline)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+            if isInteractionDisabled {
+                VStack {
+                    Text(LocalizedStringKey(LocalizedText.simulating.rawValue))
+                        .appTextStyle()
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                }
                 .padding(Spacing.spacingExtraSmall)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                let selectedDateString = viewModel.dateFormatter.string(from: selectedDate)
+                Text(String(format: NSLocalizedString(LocalizedText.simulateTo.rawValue, comment: "")) + selectedDateString)
+                    .appTextStyle()
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(Spacing.spacingExtraSmall)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
         .appButtonStyle()
     }
@@ -232,7 +307,6 @@ struct MainSimView: View {
             }
             .appButtonStyle()
         }
-        .padding(.top, Spacing.spacingExtraSmall)
     }
 }
 

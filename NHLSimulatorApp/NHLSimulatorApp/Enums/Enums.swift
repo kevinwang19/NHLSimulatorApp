@@ -30,6 +30,9 @@ enum ElementLabel: String {
 
 enum Symbols: String {
     case atSymbol = "@"
+    case dashSymbol = "-"
+    case win = "W"
+    case loss = "L"
     case versus = "vs"
     case calendarPlaceholder = "00"
     case leftArrow = "chevron.left"
@@ -48,6 +51,7 @@ enum LocalizedText: String {
     case usernameEmptyError = "username_empty_error"
     case simulationSetupMessage = "simulation_setup_message"
     case simulateTo = "simulate_to"
+    case simulating
     case teamStandings = "team_standings"
     case playerStats = "player_stats"
     case editRosters = "edit_rosters"

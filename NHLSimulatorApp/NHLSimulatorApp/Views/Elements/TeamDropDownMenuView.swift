@@ -14,9 +14,10 @@ struct TeamDropDownMenuView: View {
     @State private var isAtTop: Bool = true
     @State private var isAtBottom: Bool = false
     var teams: [Team]
+    @Binding var isDisabled: Bool
     private let menuWidth: CGFloat = 250
     private let buttonHeight: CGFloat = 50
-    private let maxTeamsDisplayed: Int = 6
+    private let maxTeamsDisplayed: Int = 9
 
     var body: some View {
         VStack {
@@ -27,8 +28,11 @@ struct TeamDropDownMenuView: View {
                 }, label: {
                     if teams.indices.contains(selectedTeamIndex) {
                         HStack(spacing: 0) {
-                            Text(teams[selectedTeamIndex].fullName)
+                            Text(teams[selectedTeamIndex].fullName.uppercased())
+                                .font(.footnote)
+                            
                             Spacer()
+                            
                             Image(systemName: Icon.chevronDown)
                                 .rotationEffect(.degrees((showDropdown ?  -180 : 0)))
                         }
@@ -52,9 +56,11 @@ struct TeamDropDownMenuView: View {
                                         showDropdown.toggle()
                                     }, label: {
                                         HStack {
-                                            Text(teams[index].fullName)
-                                                .appTextStyle()
+                                            Text(teams[index].fullName.uppercased())
+                                                .font(.footnote)
+                                            
                                             Spacer()
+                                            
                                             if (index == selectedTeamIndex) {
                                                 Image(systemName: Icon.checkmarkCircleFill)
                                                 
@@ -104,6 +110,7 @@ struct TeamDropDownMenuView: View {
         }
         .frame(width: menuWidth, height: buttonHeight, alignment: .top)
         .zIndex(100)
+        .disabled(isDisabled)
     }
 }
 
