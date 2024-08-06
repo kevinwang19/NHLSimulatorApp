@@ -10,7 +10,7 @@ import RxSwift
 
 public protocol SimulationsService {
     func createSimulation(userID: Int) -> Single<SimulationData>
-    func updateSimulation(simulationID: Int, simulateDate: String) -> Single<SimulationData>
+    func updateSimulation(simulateData: Data) -> Single<SimulationData>
     func finishSimulation(simulationID: Int) -> Single<SimulationData>
     func getRecentSimulation(userID: Int) -> Single<SimulationData>
 }
@@ -22,8 +22,8 @@ extension NetworkManager: SimulationsService {
         return networkTask(endpoint: endpoint)
     }
     
-    public func updateSimulation(simulationID: Int, simulateDate: String) -> Single<SimulationData> {
-        let parameter: ParameterType = .object(["simulationID": simulationID, "simulateDate": simulateDate])
+    public func updateSimulation(simulateData: Data) -> Single<SimulationData> {
+        let parameter: ParameterType = .data(simulateData)
         let endpoint = Endpoint(method: .put, info: NetworkEndpoint.simulate, parameters: parameter, resultType: SimulationData.self)
         return networkTask(endpoint: endpoint)
     }

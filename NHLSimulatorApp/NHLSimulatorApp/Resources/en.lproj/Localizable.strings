@@ -22,4 +22,25 @@
 "player_stats" = "Player Stats";
 "edit_rosters" = "Edit Rosters";
 "edit_lineups" = "Edit Lineups";
+"back" = "BACK";
+"skaters" = "SKATERS";
+"goalies" = "GOALIES";
+"all" = "ALL";
+"forwards" = "F";
+"centers" = "C";
+"left_wingers" = "LW";
+"right_wingers" = "RW";
+"defensemen" = "D";
+"name" = "NAME";
+"games_played" = "GP";
+"goals" = "G";
+"assists" = "A";
+"points" = "PTS";
+"powerplay_goals" = "PPG";
+"powerplay_points" = "PPP";
+"wins" = "W";
+"losses" = "L";
+"ot_losses" = "OTL";
+"goals_against_per_game" = "GA/GP";
+"shutouts" = "SO";
 

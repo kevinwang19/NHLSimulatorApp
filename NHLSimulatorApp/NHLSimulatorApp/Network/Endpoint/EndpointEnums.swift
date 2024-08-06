@@ -12,7 +12,6 @@ public enum NetworkEndpoint: EndpointInfo {
     case teamMonthSchedules
     case teams
     case players
-    case teamPlayers
     case skaterSeasonStats
     case skaterCareerStats
     case goalieSeasonStats
@@ -20,17 +19,16 @@ public enum NetworkEndpoint: EndpointInfo {
     case skaterStatsPredictions
     case goalieStatsPredictions
     case lineups
-    case playerLineups
-    case teamLineups
     case users
     case simulations
     case simulate
     case finishSimulation
     case userRecentSimulation
-    case simulationSkaterStats
-    case simulationAllSkaterStats
-    case simulationGoalieStats
-    case simulationAllGoalieStats
+    case simulationIndividualSkaterStats
+    case simulationTeamSkaterStats
+    case simulationTeamPositionSkaterStats
+    case simulationIndividualGoalieStats
+    case simulationTeamGoalieStats
     case simulationTeamStats
     case teamSimulatedStats
     case allTeamsSimulatedStats
@@ -46,8 +44,6 @@ public enum NetworkEndpoint: EndpointInfo {
             return "teams"
         case .players:
             return "players"
-        case .teamPlayers:
-            return "players/team_players"
         case .skaterSeasonStats:
             return "skater_stats/skater_season_stats"
         case .skaterCareerStats:
@@ -62,10 +58,6 @@ public enum NetworkEndpoint: EndpointInfo {
             return "goalie_stats_predictions"
         case .lineups:
             return "lineups"
-        case .playerLineups:
-            return "lineups/player_lineup"
-        case .teamLineups:
-            return "lineups/team_lineup"
         case .users:
             return "users"
         case .simulations:
@@ -76,14 +68,16 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulations/finish"
         case .userRecentSimulation:
             return "simulations/user_simulation"
-        case .simulationSkaterStats:
-            return "simulation_skater_stats"
-        case .simulationAllSkaterStats:
-            return "simulation_skater_stats/simulation_stats"
-        case .simulationGoalieStats:
-            return "simulation_goalie_stats"
-        case .simulationAllGoalieStats:
-            return "simulation_goalie_stats/simulation_stats"
+        case .simulationIndividualSkaterStats:
+            return "simulation_skater_stats/simulation_individual_stat"
+        case .simulationTeamSkaterStats:
+            return "simulation_skater_stats/simulation_team_stats"
+        case .simulationTeamPositionSkaterStats:
+            return "simulation_skater_stats/simulation_team_position_stats"
+        case .simulationIndividualGoalieStats:
+            return "simulation_goalie_stats/simulation_individual_stat"
+        case .simulationTeamGoalieStats:
+            return "simulation_goalie_stats/simulation_team_stats"
         case .simulationTeamStats:
             return "simulation_team_stats"
         case .teamSimulatedStats:

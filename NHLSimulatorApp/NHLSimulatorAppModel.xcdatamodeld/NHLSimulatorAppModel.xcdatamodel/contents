@@ -5,6 +5,7 @@
         <attribute name="lineupID" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="otLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="penaltyKillLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="playerID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="position" attributeType="String"/>
         <attribute name="powerPlayLineNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="teamID" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

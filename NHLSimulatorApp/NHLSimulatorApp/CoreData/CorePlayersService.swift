@@ -10,8 +10,8 @@ import Foundation
 
 extension CoreDataManager {
     // Save player data to Core Data
-    func savePlayersCoreData(playerData: PlayerData) {
-        for player in playerData.players {
+    func savePlayersCoreData(playerData: [Player]) {
+        for player in playerData {
             // Create entity description for CorePlayer entity
             guard let playerEntity = NSEntityDescription.entity(forEntityName: AppInfo.corePlayer.rawValue, in: context) else {
                 return
@@ -34,10 +34,18 @@ extension CoreDataManager {
             playerManagedObject.shootsCatches = player.shootsCatches
             playerManagedObject.heightInInches = Int16(player.heightInInches)
             playerManagedObject.weightInPounds = Int16(player.weightInPounds)
+            if let birthDate = player.birthDate {
+                playerManagedObject.birthDate = birthDate
+            }
+            if let birthCountry = player.birthCountry {
+                playerManagedObject.birthCountry = birthCountry
+            }
             playerManagedObject.teamID = Int64(player.teamID)
-            playerManagedObject.offensiveRating = Int16(player.offensiveRating)
-            playerManagedObject.defensiveRating = Int16(player.defensiveRating)
+            playerManagedObject.offensiveRating = Int16(player.offensiveRating ?? 0)
+            playerManagedObject.defensiveRating = Int16(player.defensiveRating ?? 0)
         }
+        
+        saveContext()
     }
     
     // Fetch all players from Core Data
@@ -85,7 +93,8 @@ extension CoreDataManager {
             for case let entity as NSManagedObject in entities {
                 context.delete(entity)
             }
-            try context.save()
+            
+            saveContext()
         } catch {
             print("Failed to reset players: \(error)")
         }

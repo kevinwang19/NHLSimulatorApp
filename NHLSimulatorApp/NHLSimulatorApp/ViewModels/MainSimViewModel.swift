@@ -19,6 +19,8 @@ class MainSimViewModel: ObservableObject {
     @Published var simOpponentStat: SimulationTeamStat?
     @Published var simScores: [SimulationGameStat] = []
     private let disposeBag = DisposeBag()
+    private var players: [Player] = []
+    private var lineups: [Lineup] = []
     
     let calendar = Calendar(identifier: .gregorian)
     let dateFormatter = DateFormatter(dateFormat: "yyyy-MM-dd", calendar: Calendar(identifier: .gregorian))
@@ -40,6 +42,55 @@ class MainSimViewModel: ObservableObject {
             print("Failed to fetch teams: \(error)")
         })
         .disposed(by: disposeBag)
+    }
+    
+    // Fetch and save all players and lineups data
+    func setupCoreData(completion: @escaping (Bool) -> Void) {
+        CoreDataManager.shared.resetPlayersCoreData()
+        CoreDataManager.shared.resetLineupsCoreData()
+            
+        let dispatchGroup = DispatchGroup()
+        var fetchedPlayers: [Player]?
+        var fetchedLineups: [Lineup]?
+        var fetchError: Error?
+            
+        dispatchGroup.enter()
+        NetworkManager.shared.getAllPlayers().subscribe(onSuccess: { playerData in
+            fetchedPlayers = playerData.players
+            dispatchGroup.leave()
+        }, onFailure: { error in
+            print("Failed to fetch players: \(error)")
+            fetchError = error
+            dispatchGroup.leave()
+        })
+        .disposed(by: disposeBag)
+            
+        dispatchGroup.enter()
+        NetworkManager.shared.getAllLineups().subscribe(onSuccess: { lineupData in
+            fetchedLineups = lineupData.lineups
+            dispatchGroup.leave()
+        }, onFailure: { error in
+            print("Failed to fetch lineups: \(error)")
+            fetchError = error
+            dispatchGroup.leave()
+        })
+        .disposed(by: disposeBag)
+            
+        dispatchGroup.notify(queue: .main) {
+            if let error = fetchError {
+                print("Error occurred during fetching: \(error)")
+                completion(false)
+                return
+            }
+            
+            if let players = fetchedPlayers, let lineups = fetchedLineups {
+                CoreDataManager.shared.savePlayersCoreData(playerData: players)
+                CoreDataManager.shared.saveLineupCoreData(lineupData: lineups)
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     // Create the simulation
@@ -142,19 +193,34 @@ class MainSimViewModel: ObservableObject {
     
     // Simulate up to a certain date
     func simulate(simulationID: Int, simulateDate: String, completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.updateSimulation(simulationID: simulationID, simulateDate: simulateDate).subscribe(onSuccess: { [weak self] simulationData in
-            guard let self = self else {
-                completion(false)
-                return
-            }
+        let playersAndLineups = CoreDataManager.shared.fetchPlayersAndLineupsCoreData()
+        
+        let jsonData: [String: Any] = [
+            "simulationID": simulationID,
+            "simulateDate": simulateDate,
+            "playersAndLineups": playersAndLineups
+        ]
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: jsonData, options: .prettyPrinted)
             
-            self.simulationCurrentDate = simulationData.simulationCurrentDate
-            completion(true)
-        }, onFailure: { error in
-            print("Failed to simulate: \(error)")
+            NetworkManager.shared.updateSimulation(simulateData: data).subscribe(onSuccess: { [weak self] simulationData in
+                guard let self = self else {
+                    completion(false)
+                    return
+                }
+                
+                self.simulationCurrentDate = simulationData.simulationCurrentDate
+                completion(true)
+            }, onFailure: { error in
+                print("Failed to simulate: \(error)")
+                completion(false)
+            })
+            .disposed(by: disposeBag)
+        } catch {
+            print("Failed to get data: \(error)")
             completion(false)
-        })
-        .disposed(by: disposeBag)
+        }
     }
     
     // Fetch the scores that have been simmed
@@ -210,6 +276,20 @@ class MainSimViewModel: ObservableObject {
                 return Symbols.win.rawValue + " " + String(dateScore.homeTeamScore) + Symbols.dashSymbol.rawValue + String(dateScore.awayTeamScore)
             }
         }
+    }
+    
+    func teamTitle(date: Date, teamID: Int, teamAbbrev: String) -> String {
+        let dateString = dateFormatter.string(from: date)
+            
+        guard let dateGame = scheduleGames.first(where: { $0.date == dateString }) else {
+            return teamAbbrev
+        }
+            
+        guard let dateScore = simScores.first(where: { $0.scheduleID == dateGame.scheduleID }) else {
+            return teamAbbrev
+        }
+        
+        return teamAbbrev + Symbols.colonSymbol.rawValue + " " + (dateScore.awayTeamID == teamID ? String(dateScore.awayTeamScore) : String(dateScore.homeTeamScore))
     }
     
     // Wins losses and otlosses of a team

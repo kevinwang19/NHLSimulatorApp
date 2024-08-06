@@ -18,6 +18,7 @@ struct NHLSimulatorApp: App {
         WindowGroup {
             NavigationStack {
                 LaunchView()
+                    .navigationBarHidden(true)
             }
         }
     }

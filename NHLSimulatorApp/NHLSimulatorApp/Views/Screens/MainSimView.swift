@@ -19,16 +19,38 @@ struct MainSimView: View {
     @State private var isSimulationLoaded: Bool = false
     @State private var isMatchupLoaded: Bool = false
     @State private var isInteractionDisabled = false
+    @State private var showStandingsView: Bool = false
+    @State private var showStatsView: Bool = false
+    @State private var showRostersView: Bool = false
+    @State private var showLineupsView: Bool = false
+    @State private var returnToLaunchView: Bool = false
     
     var body: some View {
         if isSimulationLoaded {
             NavigationStack {
                 VStack {
                     // Title
-                    Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
-                        .appTextStyle()
-                        .font(.headline)
-                        .padding(.top, Spacing.spacingExtraSmall)
+                    ZStack {
+                        Button {
+                            returnToLaunchView = true
+                        } label: {
+                            HStack {
+                                Image(systemName: Symbols.leftArrow.rawValue)
+                                    .labelStyle(IconOnlyLabelStyle())
+                                
+                                Text(LocalizedStringKey(LocalizedText.back.rawValue))
+                            }
+                            .font(.footnote)
+                            .appTextStyle()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
+                            .appTextStyle()
+                            .font(.headline)
+                            .padding(.top, Spacing.spacingExtraSmall)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
                     
                     HStack {
                         // Drop down menu of all teams
@@ -57,6 +79,7 @@ struct MainSimView: View {
                     if viewModel.teams.indices.contains(selectedTeamIndex) {
                         CalendarView(viewModel: viewModel, currentDate: $currentDate, selectedDate: $selectedDate, teamID: $viewModel.teams[selectedTeamIndex].teamID, isDisabled: $isInteractionDisabled)
                             .environmentObject(userInfo)
+                            .frame(maxHeight: .infinity)
                             .zIndex(0)
                             .overlay(
                                 Color.white.opacity(showDropdown ? 0.15 : 0.0)
@@ -74,7 +97,7 @@ struct MainSimView: View {
                                 matchupView(matchupGame: matchupGame)
                             } else {
                                 if viewModel.teams.indices.contains(selectedTeamIndex) {
-                                    teamBlockView(teamAbbrev: viewModel.teams[selectedTeamIndex].abbrev, teamLogo: viewModel.teams[selectedTeamIndex].logo, teamRecord: viewModel.teamRecord(teamStat: viewModel.simTeamStat))
+                                    teamBlockView(teamTitle: viewModel.teamTitle(date: selectedDate, teamID: viewModel.teams[selectedTeamIndex].teamID, teamAbbrev: viewModel.teams[selectedTeamIndex].abbrev), teamLogo: viewModel.teams[selectedTeamIndex].logo, teamRecord: viewModel.teamRecord(teamStat: viewModel.simTeamStat))
                                 }
                             }
                         }
@@ -109,6 +132,39 @@ struct MainSimView: View {
                         }
                     }
                 }
+                .navigationDestination(isPresented: $returnToLaunchView, destination: {
+                    // Navigate to Team Standings page when it's button is clicked
+                    LaunchView()
+                        .navigationBarHidden(true)
+                })
+                .navigationDestination(isPresented: $showStandingsView, destination: {
+                    // Navigate to Team Standings page when it's button is clicked
+                    TeamStandingsView()
+                        .environmentObject(userInfo)
+                        .environmentObject(simulationState)
+                        .navigationBarHidden(true)
+                })
+                .navigationDestination(isPresented: $showStatsView, destination: {
+                    // Navigate to Players Stats page when it's button is clicked
+                    PlayerStatsView()
+                        .environmentObject(userInfo)
+                        .environmentObject(simulationState)
+                        .navigationBarHidden(true)
+                })
+                .navigationDestination(isPresented: $showRostersView, destination: {
+                    // Navigate to Edit Rosters page when it's button is clicked
+                    EditRostersView()
+                        .environmentObject(userInfo)
+                        .environmentObject(simulationState)
+                        .navigationBarHidden(true)
+                })
+                .navigationDestination(isPresented: $showLineupsView, destination: {
+                    // Navigate to Edit Lineups page when it's button is clicked
+                    EditLineupsView()
+                        .environmentObject(userInfo)
+                        .environmentObject(simulationState)
+                        .navigationBarHidden(true)
+                })
             }
         } else {
             // Show loading screen while the simulation is being created or loaded, set the team picker as the user's selected team
@@ -122,8 +178,12 @@ struct MainSimView: View {
                         selectedTeamIndex = userInfo.favTeamIndex
                         
                         if simulationState.isNewSim {
-                            viewModel.generateSimulation(userInfo: userInfo) { simulationGenerated in
-                                isSimulationLoaded = simulationGenerated
+                            viewModel.setupCoreData() { dataSaved in
+                                if dataSaved {
+                                    viewModel.generateSimulation(userInfo: userInfo) { simulationGenerated in
+                                        isSimulationLoaded = simulationGenerated
+                                    }
+                                }
                             }
                         } else {
                             isSimulationLoaded = true
@@ -135,11 +195,12 @@ struct MainSimView: View {
         }
     }
     
+    // view of the selected team details and their opponent details
     @ViewBuilder
     private func matchupView(matchupGame: Schedule) -> some View {
         if isMatchupLoaded {
             HStack {
-                teamBlockView(teamAbbrev: matchupGame.awayTeamAbbrev, teamLogo: matchupGame.awayTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.awayTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
+                teamBlockView(teamTitle: viewModel.teamTitle(date: selectedDate, teamID: matchupGame.awayTeamID, teamAbbrev: matchupGame.awayTeamAbbrev), teamLogo: matchupGame.awayTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.awayTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
                     .padding(.leading, Spacing.spacingExtraSmall)
                 
                 Text(Symbols.atSymbol.rawValue)
@@ -147,7 +208,7 @@ struct MainSimView: View {
                     .font(.caption)
                     .padding(.top, Spacing.spacingExtraSmall)
                 
-                teamBlockView(teamAbbrev: matchupGame.homeTeamAbbrev, teamLogo: matchupGame.homeTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.homeTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
+                teamBlockView(teamTitle: viewModel.teamTitle(date: selectedDate, teamID: matchupGame.homeTeamID, teamAbbrev: matchupGame.homeTeamAbbrev), teamLogo: matchupGame.homeTeamLogo, teamRecord: (viewModel.simTeamStat?.teamID == matchupGame.homeTeamID) ? viewModel.teamRecord(teamStat: viewModel.simTeamStat) : viewModel.teamRecord(teamStat: viewModel.simOpponentStat))
                     .padding(.trailing, Spacing.spacingExtraSmall)
             }
         } else {
@@ -157,11 +218,12 @@ struct MainSimView: View {
         }
     }
 
+    // View of the team name, logo, and record
     @ViewBuilder
-    private func teamBlockView(teamAbbrev: String, teamLogo: String, teamRecord: String) -> some View {
+    private func teamBlockView(teamTitle: String, teamLogo: String, teamRecord: String) -> some View {
         if isMatchupLoaded {
             VStack {
-                Text(teamAbbrev)
+                Text(teamTitle)
                     .appTextStyle()
                     .font(.caption)
                     .padding(.top, Spacing.spacingExtraSmall)
@@ -184,42 +246,23 @@ struct MainSimView: View {
         }
     }
     
+    // View of the button used for simulating games
     @ViewBuilder
     private func simulateButton() -> some View {
         Button {
             isInteractionDisabled = true
-            let stringSimulateDate = viewModel.dateFormatter.string(from: selectedDate)
             
-            if selectedDate <= currentDate {
+            guard let daysToSimulate = viewModel.calendar.dateComponents([.day], from: currentDate, to: selectedDate).day else {
                 isInteractionDisabled = false
                 return
             }
-
-            viewModel.simulate(simulationID: userInfo.simulationID, simulateDate: stringSimulateDate) { simulated in
-                guard let daysToSimulate = viewModel.calendar.dateComponents([.day], from: currentDate, to: selectedDate).day else {
-                    isInteractionDisabled = false
-                    return
-                }
-                
-                if daysToSimulate <= 0 {
-                    isInteractionDisabled = false
-                    return
-                }
-                
-                if simulated {
-                    for _ in 1...daysToSimulate {
-                        guard let nextDay = viewModel.calendar.date(byAdding: .day, value: 1, to: currentDate) else {
-                            isInteractionDisabled = false
-                            return
-                        }
-                        
-                        currentDate = nextDay
-                        selectedDate = selectedDate.addingTimeInterval(1)
-                    }
-                    
-                    isInteractionDisabled = false
-                }
+            
+            if daysToSimulate <= 0 {
+                isInteractionDisabled = false
+                return
             }
+            
+            simulateDay(simulatedDays: 0, daysToSimulate: daysToSimulate)
         } label: {
             if isInteractionDisabled {
                 VStack {
@@ -248,12 +291,13 @@ struct MainSimView: View {
         .appButtonStyle()
     }
     
+    // View of the buttons at the bottom of the screen
     @ViewBuilder
     private func footerButtons() -> some View {
         HStack {
             // Button for showing the league standings
             Button {
-                
+                showStandingsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.teamStandings.rawValue))
                     .appTextStyle()
@@ -267,7 +311,7 @@ struct MainSimView: View {
             
             // Button for showing the player stats
             Button {
-                
+                showStatsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.playerStats.rawValue))
                     .appTextStyle()
@@ -281,7 +325,7 @@ struct MainSimView: View {
             
             // Button for showing and managing the team's roster
             Button {
-                
+                showRostersView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.editRosters.rawValue))
                     .appTextStyle()
@@ -295,7 +339,7 @@ struct MainSimView: View {
             
             // Button for showing and managing the team's lines
             Button {
-                
+                showLineupsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.editLineups.rawValue))
                     .appTextStyle()
@@ -306,6 +350,31 @@ struct MainSimView: View {
                     .padding(Spacing.spacingExtraSmall)
             }
             .appButtonStyle()
+        }
+    }
+    
+    // Simulate each day and show the results
+    private func simulateDay(simulatedDays: Int, daysToSimulate: Int) {
+        if simulatedDays >= daysToSimulate {
+            isInteractionDisabled = false
+            return
+        }
+            
+        guard let nextDay = viewModel.calendar.date(byAdding: .day, value: 1, to: currentDate) else {
+            isInteractionDisabled = false
+            return
+        }
+            
+        let stringSimulateDate = viewModel.dateFormatter.string(from: nextDay)
+            
+        viewModel.simulate(simulationID: userInfo.simulationID, simulateDate: stringSimulateDate) { simulated in
+            if simulated {
+                currentDate = nextDay
+                selectedDate = selectedDate.addingTimeInterval(1)
+                simulateDay(simulatedDays: simulatedDays + 1, daysToSimulate: daysToSimulate)
+            } else {
+                isInteractionDisabled = false
+            }
         }
     }
 }

@@ -21,9 +21,9 @@ public struct Player: Codable {
     public let shootsCatches: String
     public let heightInInches: Int
     public let weightInPounds: Int
-    public let birthDate: String
-    public let birthCountry: String
+    public let birthDate: String?
+    public let birthCountry: String?
     public let teamID: Int
-    public let offensiveRating: Int
-    public let defensiveRating: Int
+    public let offensiveRating: Int?
+    public let defensiveRating: Int?
 }

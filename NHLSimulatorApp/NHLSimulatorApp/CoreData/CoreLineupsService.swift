@@ -10,8 +10,8 @@ import Foundation
 
 extension CoreDataManager {
     // Save lineup data to Core Data
-    func saveLineupCoreData(lineupData: LineupData) {
-        for lineup in lineupData.lineups {
+    func saveLineupCoreData(lineupData: [Lineup]) {
+        for lineup in lineupData {
             // Create entity description for CoreLineup entity
             guard let lineupEntity = NSEntityDescription.entity(forEntityName: AppInfo.coreLineup.rawValue, in: context) else {
                 return
@@ -24,25 +24,24 @@ extension CoreDataManager {
             
             // Assign lineup data to the managed object
             lineupManagedObject.lineupID = Int64(lineup.lineupID)
+            lineupManagedObject.playerID = Int64(lineup.playerID)
             lineupManagedObject.teamID = Int64(lineup.teamID)
             lineupManagedObject.position = lineup.position
             if let lineNumber = lineup.lineNumber {
                 lineupManagedObject.lineNumber = Int16(lineNumber)
             }
             if let powerPlayLineNumber = lineup.powerPlayLineNumber {
-                lineupManagedObject.lineNumber = Int16(powerPlayLineNumber)
+                lineupManagedObject.powerPlayLineNumber = Int16(powerPlayLineNumber)
             }
             if let penaltyKillLineNumber = lineup.penaltyKillLineNumber {
-                lineupManagedObject.lineNumber = Int16(penaltyKillLineNumber)
+                lineupManagedObject.penaltyKillLineNumber = Int16(penaltyKillLineNumber)
             }
             if let otLineNumber = lineup.otLineNumber {
-                lineupManagedObject.lineNumber = Int16(otLineNumber)
-            }
-            
-            if let player = fetchPlayerCoreData(playerID: lineup.playerID) {
-                lineupManagedObject.belongsToPlayer = player
+                lineupManagedObject.otLineNumber = Int16(otLineNumber)
             }
         }
+        
+        saveContext()
     }
     
     // Fetch all lineups from Core Data
@@ -77,7 +76,8 @@ extension CoreDataManager {
             for case let entity as NSManagedObject in entities {
                 context.delete(entity)
             }
-            try context.save()
+            
+            saveContext()
         } catch {
             print("Failed to reset lineups: \(error)")
         }
