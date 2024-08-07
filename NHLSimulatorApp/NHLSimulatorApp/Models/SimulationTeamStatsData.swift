@@ -11,9 +11,10 @@ public struct SimulationTeamStatsData: Codable {
     public let teamStats: [SimulationTeamStat]
 }
 
-public struct SimulationTeamStat: Codable {
+public struct SimulationTeamStat: Codable, Hashable {
     public let simulationID: Int
     public let teamID: Int
+    public let fullName: String
     public let gamesPlayed: Int
     public let wins: Int
     public let losses: Int

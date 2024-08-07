@@ -12,7 +12,6 @@ import SwiftUI
 class PlayerStatsViewModel: ObservableObject {
     @Published var teams: [Team] = []
     @Published var simSkaterStats: [SimulationSkaterStat] = []
-    @Published var sortedSimSkaterStats: [SimulationSkaterStat] = []
     @Published var simGoalieStats: [SimulationGoalieStat] = []
     private let disposeBag = DisposeBag()
     
@@ -26,6 +25,7 @@ class PlayerStatsViewModel: ObservableObject {
             guard let self = self else { return }
                 
             self.teams = teamData.teams
+            self.teams.insert(Team(teamID: 0, fullName: NSLocalizedString(StatColumnHeader.top50.rawValue, comment: ""), abbrev: "", logo: "", conference: "", division: ""), at: 0)
         }, onFailure: { error in
             print("Failed to fetch teams: \(error)")
         })
@@ -46,7 +46,6 @@ class PlayerStatsViewModel: ObservableObject {
             completion(false)
         })
         .disposed(by: disposeBag)
-        
         
         NetworkManager.shared.getSimTeamGoalieStats(simulationID: simulationID, teamID: teamID).subscribe(onSuccess: { [weak self] simulationGoalieStats in
             guard let self = self else {
@@ -69,19 +68,33 @@ class PlayerStatsViewModel: ObservableObject {
         let includedPositions: [String] = {
             switch position {
             case PositionType.all.rawValue:
-                return ["C", "L", "R", "D"]
+                return [
+                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.defensemen.rawValue, comment: "")
+                ]
             case PositionType.forwards.rawValue:
-                return ["C", "L", "R"]
+                return [
+                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: "")
+                ]
             case PositionType.centers.rawValue:
-                return ["C"]
+                return [NSLocalizedString(PositionType.centers.rawValue, comment: "")]
             case PositionType.leftWingers.rawValue:
-                return ["L"]
+                return [NSLocalizedString(PositionType.leftWingers.rawValue, comment: "")]
             case PositionType.rightWingers.rawValue:
-                return ["R"]
+                return [NSLocalizedString(PositionType.rightWingers.rawValue, comment: "")]
             case PositionType.defensemen.rawValue:
-                return ["D"]
+                return [ NSLocalizedString(PositionType.defensemen.rawValue, comment: "")]
             default:
-                return ["C", "L", "R", "D"]
+                return [
+                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: ""),
+                    NSLocalizedString(PositionType.defensemen.rawValue, comment: "")
+                ]
             }
         }()
                 

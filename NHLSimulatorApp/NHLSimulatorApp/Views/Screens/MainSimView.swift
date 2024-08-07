@@ -29,7 +29,7 @@ struct MainSimView: View {
         if isSimulationLoaded {
             NavigationStack {
                 VStack {
-                    // Title
+                    // Title and back button
                     ZStack {
                         Button {
                             returnToLaunchView = true
@@ -195,7 +195,7 @@ struct MainSimView: View {
         }
     }
     
-    // view of the selected team details and their opponent details
+    // View of the selected team details and their opponent details
     @ViewBuilder
     private func matchupView(matchupGame: Schedule) -> some View {
         if isMatchupLoaded {
@@ -297,6 +297,7 @@ struct MainSimView: View {
         HStack {
             // Button for showing the league standings
             Button {
+                simulationState.isNewSim = false
                 showStandingsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.teamStandings.rawValue))
@@ -311,6 +312,7 @@ struct MainSimView: View {
             
             // Button for showing the player stats
             Button {
+                simulationState.isNewSim = false
                 showStatsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.playerStats.rawValue))
@@ -325,6 +327,7 @@ struct MainSimView: View {
             
             // Button for showing and managing the team's roster
             Button {
+                simulationState.isNewSim = false
                 showRostersView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.editRosters.rawValue))
@@ -339,6 +342,7 @@ struct MainSimView: View {
             
             // Button for showing and managing the team's lines
             Button {
+                simulationState.isNewSim = false
                 showLineupsView = true
             } label: {
                 Text(LocalizedStringKey(LocalizedText.editLineups.rawValue))

@@ -8,32 +8,6 @@
 import SDWebImageSwiftUI
 import SwiftUI
 
-enum PlayerType: String, CaseIterable, Identifiable {
-    case skaters
-    case goalies
-    
-    var id: String { self.rawValue }
-    
-    var localizedStringKey: LocalizedStringKey {
-        LocalizedStringKey(self.rawValue)
-    }
-}
-
-enum PositionType: String, CaseIterable, Identifiable {
-    case all
-    case forwards
-    case centers
-    case leftWingers = "left_wingers"
-    case rightWingers = "right_wingers"
-    case defensemen
-    
-    var id: String { self.rawValue }
-    
-    var localizedStringKey: LocalizedStringKey {
-        LocalizedStringKey(self.rawValue)
-    }
-}
-
 struct PlayerStatsView: View {
     @EnvironmentObject var userInfo: UserInfo
     @EnvironmentObject var simulationState: SimulationState
@@ -45,14 +19,12 @@ struct PlayerStatsView: View {
     @State private var isStatsLoaded: Bool = false
     @State private var selectedPlayerType: PlayerType = .skaters
     @State private var selectedPositionType: PositionType = .all
-    @State private var skaterSimStats: [SimulationSkaterStat] = []
-    @State private var goalieSimStats: [SimulationGoalieStat] = []
     
     var body: some View {
         NavigationStack {
             VStack {
                 if isStatsLoaded {
-                    // Title
+                    // Title and back button
                     ZStack {
                         Button {
                             returnToMainSimView = true
@@ -101,35 +73,48 @@ struct PlayerStatsView: View {
                     playerTypePicker()
                         .padding(.top, Spacing.spacingSmall)
                     
+                    // Skater position picker
                     if selectedPlayerType == .skaters {
                         positionTypePicker()
                             .padding(.top, Spacing.spacingSmall)
                     }
                     
-                    StatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType)
+                    // Player stats grid view if there are stats
+                    if viewModel.simSkaterStats.count == 0 {
+                        Text(LocalizedStringKey(LocalizedText.noStats.rawValue))
+                            .font(.footnote)
+                            .appTextStyle()
+                            .padding(.top, Spacing.spacingExtraLarge)
+                    } else {
+                        PlayerStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType)
+                    }
                     
                     Spacer()
                 } else {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .appBackgroundStyle()
                 }
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .appBackgroundStyle()
             .onAppear {
-                selectedTeamIndex = userInfo.favTeamIndex
+                // Set the initial team while considering the first index for top 50 players
+                selectedTeamIndex = userInfo.favTeamIndex + 1
             }
             .onChange(of: selectedTeamIndex) { newIndex in
+                isStatsLoaded = false
+                viewModel.simSkaterStats = []
+                viewModel.simGoalieStats = []
                 selectedPositionType = .all
                 
+                // Fetch the player stats of the selected team
                 viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[newIndex].teamID) { statsFetched in
                     isStatsLoaded = statsFetched
                 }
             }
             .onChange(of: selectedPositionType) { newPosition in
+                // Fetch the player stats of the filtered position
                 viewModel.fetchSkaterPositionSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue)
             }
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
@@ -142,6 +127,7 @@ struct PlayerStatsView: View {
         }
     }
     
+    // View of the picker of skater or goalie stats
     @ViewBuilder
     private func playerTypePicker() -> some View {
         HStack {
@@ -162,6 +148,7 @@ struct PlayerStatsView: View {
         }
     }
     
+    // View of the picker of the different skater positions
     @ViewBuilder
     private func positionTypePicker() -> some View {
         HStack {

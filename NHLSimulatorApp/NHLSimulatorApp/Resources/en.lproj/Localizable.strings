@@ -41,6 +41,21 @@
 "wins" = "W";
 "losses" = "L";
 "ot_losses" = "OTL";
-"goals_against_per_game" = "GA/GP";
 "shutouts" = "SO";
+"goals_for" = "GF";
+"goals_for_per_game" = "GF/GP";
+"goals_against" = "GA";
+"goals_against_per_game" = "GA/GP";
+"powerplay_pctg" = "PP%";
+"penalty_kill_pctg" = "PK%";
+"rank" = "RANK";
+"top_50" = "TOP 50";
+"eastern" = "EAST";
+"western" = "WEST";
+"atlantic" = "ATLANTIC";
+"metropolitan" = "METROPOLITAN";
+"central" = "CENTRAL";
+"pacific" = "PACIFIC";
+"no_stats" = "NO STATS TO DISPLAY";
+"standings_legend" = "( W ) = WILDCARD RANK     ( P ) = PRESIDENTS RANK";
 

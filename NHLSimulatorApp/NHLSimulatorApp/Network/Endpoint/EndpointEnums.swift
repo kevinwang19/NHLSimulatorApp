@@ -32,6 +32,8 @@ public enum NetworkEndpoint: EndpointInfo {
     case simulationTeamStats
     case teamSimulatedStats
     case allTeamsSimulatedStats
+    case conferenceTeamsSimulatedStats
+    case divisionTeamsSimulatedStats
     case teamSimulatedGameStats
     
     public var route: String {
@@ -83,7 +85,11 @@ public enum NetworkEndpoint: EndpointInfo {
         case .teamSimulatedStats:
             return "simulation_team_stats/team_simulated_stats"
         case .allTeamsSimulatedStats:
-            return "simulation_team_stats/simulation_stats"
+            return "simulation_team_stats/simulation_all_stats"
+        case .conferenceTeamsSimulatedStats:
+            return "simulation_team_stats/simulation_conference_stats"
+        case .divisionTeamsSimulatedStats:
+            return "simulation_team_stats/simulation_division_stats"
         case .teamSimulatedGameStats:
             return "simulation_game_stats/team_simulated_game_stats"
         }

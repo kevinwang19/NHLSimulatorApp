@@ -37,6 +37,8 @@ enum Symbols: String {
     case win = "W"
     case loss = "L"
     case versus = "vs"
+    case wildcard = "( W )"
+    case presidents = "( P )"
     case calendarPlaceholder = "00"
     case leftArrow = "chevron.left"
     case rightArrow = "chevron.right"
@@ -44,6 +46,8 @@ enum Symbols: String {
 
 enum SortOrder {
     case none
+    case rankAscending
+    case rankDescending
     case nameAscending
     case nameDescending
     case gamesPlayedAscending
@@ -64,13 +68,24 @@ enum SortOrder {
     case lossesDescending
     case otLossesAscending
     case otLossesDescending
-    case goalsAgainstPerGameAscending
-    case goalsAgainstPerGameDescending
     case shutoutsAscending
     case shutoutsDescending
+    case goalsForAscending
+    case goalsForDescending
+    case goalsForPerGameAscending
+    case goalsForPerGameDescending
+    case goalsAgainstAscending
+    case goalsAgainstDescending
+    case goalsAgainstPerGameAscending
+    case goalsAgainstPerGameDescending
+    case powerplayPctgAscending
+    case powerplayPctgDescending
+    case penaltyKillPctgAscending
+    case penaltyKillPctgDescending
 }
 
 enum StatColumnHeader: String {
+    case top50 = "top_50"
     case name
     case gamesPlayed = "games_played"
     case goals
@@ -81,8 +96,82 @@ enum StatColumnHeader: String {
     case wins
     case losses
     case otLosses = "ot_losses"
-    case goalsAgainstPerGame = "goals_against_per_game"
     case shutouts
+    case goalsFor = "goals_for"
+    case goalsForPerGame = "goals_for_per_game"
+    case goalsAgainst = "goals_against"
+    case goalsAgainstPerGame = "goals_against_per_game"
+    case powerplayPctg = "powerplay_pctg"
+    case penaltyKillPctg = "penalty_kill_pctg"
+    case rank = "rank"
+}
+
+enum PlayerType: String, CaseIterable, Identifiable {
+    case skaters
+    case goalies
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
+enum PositionType: String, CaseIterable, Identifiable {
+    case all
+    case forwards
+    case centers
+    case leftWingers = "left_wingers"
+    case rightWingers = "right_wingers"
+    case defensemen
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
+enum RankType: String {
+    case league
+    case conference
+    case division
+}
+
+enum ConferenceType: String, CaseIterable, Identifiable {
+    case all
+    case eastern
+    case western
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
+enum EastDivisionType: String, CaseIterable, Identifiable {
+    case all
+    case atlantic
+    case metropolitan
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
+enum WestDivisionType: String, CaseIterable, Identifiable {
+    case all
+    case central
+    case pacific
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
 }
 
 enum LocalizedText: String {
@@ -103,4 +192,6 @@ enum LocalizedText: String {
     case editRosters = "edit_rosters"
     case editLineups = "edit_lineups"
     case back = "back"
+    case noStats = "no_stats"
+    case standingsLegend = "standings_legend"
 }
