@@ -14,7 +14,7 @@ struct GridHeaderView<KeyPathType: Comparable>: View {
     let goalieKeyPath: KeyPath<SimulationGoalieStat, KeyPathType>?
     let teamKeyPath: KeyPath<SimulationTeamStat, KeyPathType>?
     private let nameColumnWidth: CGFloat = 180
-    private let statColumnWidth: CGFloat = 40
+    private let statColumnWidth: CGFloat = 50
     
     var body: some View {
         // Clicking the header toggles the sorting
@@ -26,7 +26,7 @@ struct GridHeaderView<KeyPathType: Comparable>: View {
             }
             .appTextStyle()
             .font(.footnote)
-            .frame(width: title == NSLocalizedString(StatColumnHeader.name.rawValue, comment: "") ? nameColumnWidth : statColumnWidth, alignment: .center)
+            .frame(width: title == NSLocalizedString(StatColumnHeader.name.rawValue, comment: "") ? nameColumnWidth : statColumnWidth, alignment: title == NSLocalizedString(StatColumnHeader.name.rawValue, comment: "") ? .leading : .center)
         }
     }
     

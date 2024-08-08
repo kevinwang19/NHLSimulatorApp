@@ -15,26 +15,31 @@ class PlayerStatsViewModel: ObservableObject {
     @Published var simGoalieStats: [SimulationGoalieStat] = []
     private let disposeBag = DisposeBag()
     
-    init() {
-        fetchTeams()
-    }
-    
     // Fetch all teams
-    func fetchTeams() {
+    func fetchTeams(completion: @escaping (Bool) -> Void) {
         NetworkManager.shared.getAllTeams().subscribe(onSuccess: { [weak self] teamData in
-            guard let self = self else { return }
+            guard let self = self else {
+                completion(false)
+                return
+            }
                 
             self.teams = teamData.teams
-            self.teams.insert(Team(teamID: 0, fullName: NSLocalizedString(StatColumnHeader.top50.rawValue, comment: ""), abbrev: "", logo: "", conference: "", division: ""), at: 0)
+            self.teams.append(Team(teamID: 0, fullName: NSLocalizedString(StatColumnHeader.top50.rawValue, comment: ""), abbrev: "", logo: "", conference: "", division: ""))
+            completion(true)
         }, onFailure: { error in
             print("Failed to fetch teams: \(error)")
+            completion(false)
         })
         .disposed(by: disposeBag)
     }
     
     // Fetch all skater and goalie simulation stats
     func fetchPlayerSimStats(simulationID: Int, teamID: Int, completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.getSimTeamSkaterStats(simulationID: simulationID, teamID: teamID).subscribe(onSuccess: { [weak self] simulationSkaterStats in
+        let players = CoreDataManager.shared.fetchTeamPlayersCoreData(teamID: teamID)
+        let skaterIDs = players.filter { $0.positionCode != "G" }.map { Int($0.playerID) }
+        let goalieIDs = players.filter { $0.positionCode == "G" }.map { Int($0.playerID) }
+        
+        NetworkManager.shared.getSimTeamSkaterStats(simulationID: simulationID, playerIDs: skaterIDs, teamID: teamID).subscribe(onSuccess: { [weak self] simulationSkaterStats in
             guard let self = self else {
                 completion(false)
                 return
@@ -47,58 +52,46 @@ class PlayerStatsViewModel: ObservableObject {
         })
         .disposed(by: disposeBag)
         
-        NetworkManager.shared.getSimTeamGoalieStats(simulationID: simulationID, teamID: teamID).subscribe(onSuccess: { [weak self] simulationGoalieStats in
+        NetworkManager.shared.getSimTeamGoalieStats(simulationID: simulationID, playerIDs: goalieIDs, teamID: teamID).subscribe(onSuccess: { [weak self] simulationGoalieStats in
             guard let self = self else {
                 completion(false)
                 return
             }
                     
             self.simGoalieStats = simulationGoalieStats.goalieStats
+            completion(true)
         }, onFailure: { error in
             print("Failed to fetch goalie simulation stats: \(error)")
             completion(false)
         })
         .disposed(by: disposeBag)
-        
-        completion(true)
     }
     
     // Fetch skater simulation stats for a selected position
     func fetchSkaterPositionSimStats(simulationID: Int, teamID: Int, position: String) -> Void {
+        let players = CoreDataManager.shared.fetchTeamPlayersCoreData(teamID: teamID)
+        let skaterIDs = players.filter { $0.positionCode != "G" }.map { Int($0.playerID) }
+        
         let includedPositions: [String] = {
             switch position {
             case PositionType.all.rawValue:
-                return [
-                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.defensemen.rawValue, comment: "")
-                ]
+                return [PositionType.centers.rawValue, PositionType.leftWingers.rawValue, PositionType.rightWingers.rawValue, PositionType.defensemen.rawValue]
             case PositionType.forwards.rawValue:
-                return [
-                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: "")
-                ]
+                return [PositionType.centers.rawValue, PositionType.leftWingers.rawValue, PositionType.rightWingers.rawValue]
             case PositionType.centers.rawValue:
-                return [NSLocalizedString(PositionType.centers.rawValue, comment: "")]
+                return [PositionType.centers.rawValue]
             case PositionType.leftWingers.rawValue:
-                return [NSLocalizedString(PositionType.leftWingers.rawValue, comment: "")]
+                return [PositionType.leftWingers.rawValue]
             case PositionType.rightWingers.rawValue:
-                return [NSLocalizedString(PositionType.rightWingers.rawValue, comment: "")]
+                return [PositionType.rightWingers.rawValue]
             case PositionType.defensemen.rawValue:
-                return [ NSLocalizedString(PositionType.defensemen.rawValue, comment: "")]
+                return [PositionType.defensemen.rawValue]
             default:
-                return [
-                    NSLocalizedString(PositionType.centers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.leftWingers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.rightWingers.rawValue, comment: ""),
-                    NSLocalizedString(PositionType.defensemen.rawValue, comment: "")
-                ]
+                return [PositionType.centers.rawValue, PositionType.leftWingers.rawValue, PositionType.rightWingers.rawValue, PositionType.defensemen.rawValue]
             }
         }()
                 
-        NetworkManager.shared.getSimTeamPositionSkaterStats(simulationID: simulationID, teamID: teamID, position: includedPositions).subscribe(onSuccess: { [weak self] simulationSkaterStats in
+        NetworkManager.shared.getSimTeamPositionSkaterStats(simulationID: simulationID, playerIDs: skaterIDs, teamID: teamID, position: includedPositions).subscribe(onSuccess: { [weak self] simulationSkaterStats in
             guard let self = self else {
                 return
             }

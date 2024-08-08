@@ -69,36 +69,24 @@ class TeamStandingsViewModel: ObservableObject {
             if conference == ConferenceType.eastern.rawValue {
                 switch division {
                 case EastDivisionType.all.rawValue:
-                    return [
-                        EastDivisionType.atlantic.rawValue,
-                        EastDivisionType.metropolitan.rawValue
-                    ]
+                    return [EastDivisionType.atlantic.rawValue, EastDivisionType.metropolitan.rawValue]
                 case EastDivisionType.atlantic.rawValue:
                     return [EastDivisionType.atlantic.rawValue]
                 case EastDivisionType.metropolitan.rawValue:
                     return [EastDivisionType.metropolitan.rawValue]
                 default:
-                    return [
-                        EastDivisionType.atlantic.rawValue,
-                        EastDivisionType.metropolitan.rawValue
-                    ]
+                    return [EastDivisionType.atlantic.rawValue, EastDivisionType.metropolitan.rawValue]
                 }
             } else {
                 switch division {
                 case WestDivisionType.all.rawValue:
-                    return [
-                        WestDivisionType.central.rawValue,
-                        WestDivisionType.pacific.rawValue
-                    ]
+                    return [WestDivisionType.central.rawValue, WestDivisionType.pacific.rawValue]
                 case WestDivisionType.central.rawValue:
                     return [WestDivisionType.central.rawValue]
                 case WestDivisionType.pacific.rawValue:
                     return [WestDivisionType.pacific.rawValue]
                 default:
-                    return [
-                        WestDivisionType.central.rawValue,
-                        WestDivisionType.pacific.rawValue
-                    ]
+                    return [WestDivisionType.central.rawValue, WestDivisionType.pacific.rawValue]
                 }
             }
         }()

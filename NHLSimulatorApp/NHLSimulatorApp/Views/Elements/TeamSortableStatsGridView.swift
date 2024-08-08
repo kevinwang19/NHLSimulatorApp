@@ -1,5 +1,5 @@
 //
-//  TeamStatsGridView.swift
+//  TeamSortableStatsGridView.swift
 //  NHLSimulatorApp
 //
 //  Created by Kevin Wang on 2024-08-06.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct TeamStatsGridView: View {
+struct TeamSortableStatsGridView: View {
     @ObservedObject var viewModel: TeamStandingsViewModel
     @Binding var rankType: RankType
     @State var sortOrder: SortOrder = .rankAscending
     private let nameColumnWidth: CGFloat = 180
-    private let statColumnWidth: CGFloat = 40
+    private let statColumnWidth: CGFloat = 50
     
     var body: some View {
         VStack {

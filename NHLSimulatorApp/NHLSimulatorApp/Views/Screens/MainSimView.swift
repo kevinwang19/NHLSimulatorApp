@@ -30,27 +30,7 @@ struct MainSimView: View {
             NavigationStack {
                 VStack {
                     // Title and back button
-                    ZStack {
-                        Button {
-                            returnToLaunchView = true
-                        } label: {
-                            HStack {
-                                Image(systemName: Symbols.leftArrow.rawValue)
-                                    .labelStyle(IconOnlyLabelStyle())
-                                
-                                Text(LocalizedStringKey(LocalizedText.back.rawValue))
-                            }
-                            .font(.footnote)
-                            .appTextStyle()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
-                            .appTextStyle()
-                            .font(.headline)
-                            .padding(.top, Spacing.spacingExtraSmall)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                    ScreenHeaderView(returnToPreviousView: $returnToLaunchView)
                     
                     HStack {
                         // Drop down menu of all teams
@@ -138,7 +118,7 @@ struct MainSimView: View {
                         .navigationBarHidden(true)
                 })
                 .navigationDestination(isPresented: $showStandingsView, destination: {
-                    // Navigate to Team Standings page when it's button is clicked
+                    // Navigate to Launch page when it's button is clicked
                     TeamStandingsView()
                         .environmentObject(userInfo)
                         .environmentObject(simulationState)
@@ -146,7 +126,7 @@ struct MainSimView: View {
                 })
                 .navigationDestination(isPresented: $showStatsView, destination: {
                     // Navigate to Players Stats page when it's button is clicked
-                    PlayerStatsView()
+                    PlayerStatsView(teamIndex: $selectedTeamIndex)
                         .environmentObject(userInfo)
                         .environmentObject(simulationState)
                         .navigationBarHidden(true)

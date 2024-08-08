@@ -12,6 +12,7 @@ public struct SimulationSkaterStatsData: Codable {
 }
 
 public struct SimulationSkaterStat: Codable, Hashable {
+    public let playerID: Int
     public let fullName: String
     public let gamesPlayed: Int
     public let goals: Int

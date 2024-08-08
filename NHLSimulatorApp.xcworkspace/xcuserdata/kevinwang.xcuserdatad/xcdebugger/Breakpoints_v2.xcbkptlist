@@ -269,8 +269,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -694,8 +694,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -774,8 +774,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -930,8 +930,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Elements/CalendarView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "dateBlock(date:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1025,8 +1025,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1198,8 +1198,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "simulateButton()"
             landmarkType = "7">
             <Locations>
@@ -1276,8 +1276,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "simulateDay(simulatedDays:daysToSimulate:)"
             landmarkType = "7">
             <Locations>
@@ -1339,8 +1339,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1355,8 +1355,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerStatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "fetchPlayerSimStats(simulationID:teamID:completion:)"
             landmarkType = "7">
             <Locations>
@@ -1403,8 +1403,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerStatsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "fetchPlayerSimStats(simulationID:teamID:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1419,10 +1419,297 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0FB4BA8-1567-497F-8270-05A1F2187E27"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "A0FB4BA8-1567-497F-8270-05A1F2187E27 - c7fee20c1a7058bf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in NHLSimulatorApp.PlayerStatsView.body.getter : some"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "2082">
+               </Location>
+               <Location
+                  uuid = "A0FB4BA8-1567-497F-8270-05A1F2187E27 - eb2fcae16879e5ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Int) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in NHLSimulatorApp.PlayerStatsView.body.getter : some"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "A0FB4BA8-1567-497F-8270-05A1F2187E27 - eb2fcae16879e509"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Swift.Int) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in NHLSimulatorApp.PlayerStatsView.body.getter : some"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerStatsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "54">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03AE7411-2849-4CC1-B23A-43BEBD2B8E1A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "fetchPlayerTeam(teamID:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "03AE7411-2849-4CC1-B23A-43BEBD2B8E1A - 7332a0a18615f749"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerTeam(teamID: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "111">
+               </Location>
+               <Location
+                  uuid = "03AE7411-2849-4CC1-B23A-43BEBD2B8E1A - 1f90df9363764863"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (NHLSimulatorApp.Team) -&gt; () in NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerTeam(teamID: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "400">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "474268CB-BC31-4037-9607-7B42D4BAAA7F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "fetchPlayerTeam(teamID:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "331A3A16-6936-4CE0-A77E-BA9D66D030B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/PlayerDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "126B12FE-A67C-4BE9-BF91-96EE43B4D5AC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "fetchPlayerStats(playerID:position:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "126B12FE-A67C-4BE9-BF91-96EE43B4D5AC - 100e96b0737b4894"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (NHLSimulatorApp.SkaterStatsData) -&gt; () in NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerPreviousStats(playerID: Swift.Int, position: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "243">
+               </Location>
+               <Location
+                  uuid = "126B12FE-A67C-4BE9-BF91-96EE43B4D5AC - 75afaffcd1348ed6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (NHLSimulatorApp.SkaterStatsData) -&gt; () in NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerStats(playerID: Swift.Int, position: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "243">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B745DFC4-D929-4BBC-A718-F0A1F9750EEE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "fetchPlayerStats(playerID:position:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D5C901C4-642D-4CE6-87EA-83ACC258CEBC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "fetchPlayerStats(playerID:position:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F15E6264-8A93-41B6-8E91-32C2E7A23C19"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "fetchPlayerStats(playerID:position:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3162F930-CE34-44A0-A290-11F9047D0618"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "fetchPlayerStats(playerID:position:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3162F930-CE34-44A0-A290-11F9047D0618 - c5ed5bd4a606b850"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerStats(playerID: Swift.Int, position: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "3162F930-CE34-44A0-A290-11F9047D0618 - 75afaffcd1348d08"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (NHLSimulatorApp.SkaterStatsData) -&gt; () in NHLSimulatorApp.PlayerDetailsViewModel.fetchPlayerStats(playerID: Swift.Int, position: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "NHLSimulatorApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/PlayerDetailsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "113">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

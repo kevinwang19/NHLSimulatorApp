@@ -104,6 +104,21 @@ enum StatColumnHeader: String {
     case powerplayPctg = "powerplay_pctg"
     case penaltyKillPctg = "penalty_kill_pctg"
     case rank = "rank"
+    case season
+    case avgToi = "avg_toi"
+    case faceoffWinningPctg = "faceoff_winning_pctg"
+    case gameWinningGoals = "game_winning_goals"
+    case otGoals = "ot_goals"
+    case pim
+    case plusMinus = "plus_minus"
+    case shootingPctg = "shooting_pctg"
+    case shorthandedGoals = "shorthanded_goals"
+    case shorthandedPoints = "shorthanded_points"
+    case shots
+    case gamesStarted = "games_started"
+    case goalsAgainstAvg = "goals_against_avg"
+    case savePctg = "save_pctg"
+    case shotsAgainst = "shots_against"
 }
 
 enum PlayerType: String, CaseIterable, Identifiable {
@@ -119,11 +134,12 @@ enum PlayerType: String, CaseIterable, Identifiable {
 
 enum PositionType: String, CaseIterable, Identifiable {
     case all
-    case forwards
-    case centers
-    case leftWingers = "left_wingers"
-    case rightWingers = "right_wingers"
-    case defensemen
+    case forwards = "F"
+    case centers = "C"
+    case leftWingers = "L"
+    case rightWingers = "R"
+    case defensemen = "D"
+    case goalies = "G"
     
     var id: String { self.rawValue }
     

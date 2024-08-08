@@ -23,27 +23,7 @@ struct TeamStandingsView: View {
             VStack {
                 if isStatsLoaded {
                     // Title and back button
-                    ZStack {
-                        Button {
-                            returnToMainSimView = true
-                        } label: {
-                            HStack {
-                                Image(systemName: Symbols.leftArrow.rawValue)
-                                    .labelStyle(IconOnlyLabelStyle())
-                                
-                                Text(LocalizedStringKey(LocalizedText.back.rawValue))
-                            }
-                            .font(.footnote)
-                            .appTextStyle()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
-                            .appTextStyle()
-                            .font(.headline)
-                            .padding(.top, Spacing.spacingExtraSmall)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                    ScreenHeaderView(returnToPreviousView: $returnToMainSimView)
                     
                     conferencePicker()
                         .padding(.top, Spacing.spacingSmall)
@@ -60,17 +40,17 @@ struct TeamStandingsView: View {
                     // Team stats grid view if there are stats
                     if viewModel.simTeamStats.count == 0 {
                         Text(LocalizedStringKey(LocalizedText.noStats.rawValue))
-                            .font(.footnote)
                             .appTextStyle()
+                            .font(.footnote)
                             .padding(.top, Spacing.spacingExtraLarge)
                     } else {
-                        TeamStatsGridView(viewModel: viewModel, rankType: $rankType)
+                        TeamSortableStatsGridView(viewModel: viewModel, rankType: $rankType)
                     }
                     
                     // Stats legend
                     Text(LocalizedStringKey(LocalizedText.standingsLegend.rawValue))
-                        .font(.footnote)
                         .appTextStyle()
+                        .font(.footnote)
                         .padding(.top, Spacing.spacingExtraLarge)
                     
                     Spacer()

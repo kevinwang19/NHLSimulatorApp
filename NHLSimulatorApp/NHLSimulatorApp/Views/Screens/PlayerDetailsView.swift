@@ -1,0 +1,132 @@
+//
+//  PlayerDetailsView.swift
+//  NHLSimulatorApp
+//
+//  Created by Kevin Wang on 2024-08-07.
+//
+
+import SDWebImageSwiftUI
+import SwiftUI
+
+struct PlayerDetailsView: View {
+    @EnvironmentObject var userInfo: UserInfo
+    @EnvironmentObject var simulationState: SimulationState
+    @ObservedObject var viewModel: PlayerDetailsViewModel = PlayerDetailsViewModel()
+    @Binding var selectedPlayerID: Int
+    @Binding var teamIndex: Int
+    @State private var returnToPlayerStatsView: Bool = false
+    @State private var isDetailsLoaded: Bool = false
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                if isDetailsLoaded {
+                    // Title and back button
+                    ScreenHeaderView(returnToPreviousView: $returnToPlayerStatsView)
+                        
+                    if let player = viewModel.playerDetails(playerID: selectedPlayerID) {
+                        HStack {
+                            playerInfoView(player: player)
+                            
+                            // Player headshot
+                            WebImage(url: URL(string: player.headshot ?? ""))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 100)
+                                .padding(.trailing, Spacing.spacingSmall)
+                        }
+                        .padding(.top, Spacing.spacingExtraSmall)
+                        
+                        Text("CAREER STATS")
+                            .appTextStyle()
+                            .font(.callout)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, Spacing.spacingSmall)
+                            .padding(.leading, Spacing.spacingExtraSmall)
+                        
+                        PlayerStatsGridView(skaterStats: $viewModel.skaterCareerStats, goalieStats: $viewModel.goalieCareerStats, position: player.positionCode ?? "")
+                        
+                        Text("PREDICTED STATS")
+                            .appTextStyle()
+                            .font(.callout)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, Spacing.spacingMedium)
+                            .padding(.leading, Spacing.spacingExtraSmall)
+                        
+                        PlayerStatsGridView(skaterStats: $viewModel.skaterPredictedStats, goalieStats: $viewModel.goaliePredictedStats, position: player.positionCode ?? "")
+                    } else {
+                        Text("PLAYER DETAILS NOT FOUND")
+                            .appTextStyle()
+                            .font(.footnote)
+                            .padding(.horizontal, Spacing.spacingExtraSmall)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                } else {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                }
+            }
+            .padding(.horizontal, Spacing.spacingExtraSmall)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .appBackgroundStyle()
+            .onAppear {
+                isDetailsLoaded = false
+                if let teamID = viewModel.playerDetails(playerID: selectedPlayerID)?.teamID, let position = viewModel.playerDetails(playerID: selectedPlayerID)?.positionCode {
+                    viewModel.fetchPlayerTeam(teamID: Int(teamID)) { teamFetched in
+                        if teamFetched {
+                            viewModel.fetchPlayerStats(playerID: selectedPlayerID, position: position) { statsFetched in
+                                isDetailsLoaded = statsFetched
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationDestination(isPresented: $returnToPlayerStatsView, destination: {
+                // Navigate to Player Stats page when back button is clicked
+                PlayerStatsView(teamIndex: $teamIndex)
+                    .environmentObject(userInfo)
+                    .environmentObject(simulationState)
+                    .navigationBarHidden(true)
+            })
+        }
+    }
+    
+    @ViewBuilder
+    private func playerInfoView(player: CorePlayer) -> some View {
+        VStack {
+            // Player's name
+            let fullName = ((player.firstName ?? "") + " " + (player.lastName ?? "")).uppercased()
+            Text(fullName)
+                .appTextStyle()
+                .font(.title2)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 1)
+               
+            // Player's team, position, and sweater number
+            let teamInfo = "\(viewModel.team?.fullName ?? "") • \(NSLocalizedString(player.positionCode ?? "", comment: "")) • #\(player.sweaterNumber)"
+            Text(teamInfo)
+                .appTextStyle()
+                .font(.footnote)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 1)
+            
+            // Player's birth date and country
+            let birthInfo = "Born \(player.birthDate ?? "") • \(player.birthCountry ?? "")"
+            Text(birthInfo)
+                .appTextStyle()
+                .font(.footnote)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom, 1)
+                   
+            // Player's height and weight
+            let heightFeet = player.heightInInches / 12
+            let heightInches = player.heightInInches % 12
+            let heightInfo = "Height \(heightFeet)'\(heightInches)\" • Weight \(player.weightInPounds) lb"
+            Text(heightInfo)
+                .appTextStyle()
+                .font(.footnote)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.all, Spacing.spacingExtraSmall)
+    }
+}

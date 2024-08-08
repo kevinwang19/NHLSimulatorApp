@@ -15,15 +15,13 @@ struct UserSetupView: View {
     @FocusState private var isTextFieldFocused: Bool
     @State private var selectedTeamIndex: Int = 0
     @State private var showMainView: Bool = false
+    @State private var returnToLaunchView: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                // Title
-                Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
-                    .appTextStyle()
-                    .font(.title)
-                    .padding(Spacing.spacingSmall)
+                // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToLaunchView)
                 
                 Spacer()
                 
@@ -127,6 +125,7 @@ struct UserSetupView: View {
                 isTextFieldFocused = true
                 viewModel.fetchTeams()
             }
+            .ignoresSafeArea(.keyboard)
             .navigationDestination(isPresented: $showMainView, destination: {
                 // Navigate to Main Sim page when Start is clicked
                 MainSimView()
@@ -134,7 +133,11 @@ struct UserSetupView: View {
                     .environmentObject(simulationState)
                     .navigationBarHidden(true)
             })
-            .ignoresSafeArea(.keyboard)
+            .navigationDestination(isPresented: $returnToLaunchView, destination: {
+                // Navigate to Launch page when it's button is clicked
+                LaunchView()
+                    .navigationBarHidden(true)
+            })
         }
     }
 }

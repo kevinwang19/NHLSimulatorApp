@@ -11,13 +11,12 @@ public enum NetworkEndpoint: EndpointInfo {
     case teamDaySchedule
     case teamMonthSchedules
     case teams
+    case team
     case players
-    case skaterSeasonStats
     case skaterCareerStats
-    case goalieSeasonStats
     case goalieCareerStats
-    case skaterStatsPredictions
-    case goalieStatsPredictions
+    case skaterPredictedStats
+    case goaliePredictedStats
     case lineups
     case users
     case simulations
@@ -44,20 +43,18 @@ public enum NetworkEndpoint: EndpointInfo {
             return "schedules/team_month_schedules"
         case .teams:
             return "teams"
+        case .team:
+            return "teams/team"
         case .players:
             return "players"
-        case .skaterSeasonStats:
-            return "skater_stats/skater_season_stats"
         case .skaterCareerStats:
             return "skater_stats/skater_career_stats"
-        case .goalieSeasonStats:
-            return "goalie_stats/goalie_season_stats"
         case .goalieCareerStats:
             return "goalie_stats/goalie_career_stats"
-        case .skaterStatsPredictions:
-            return "skater_stats_predictions"
-        case .goalieStatsPredictions:
-            return "goalie_stats_predictions"
+        case .skaterPredictedStats:
+            return "skater_stats_predictions/skater_predicted_stats"
+        case .goaliePredictedStats:
+            return "goalie_stats_predictions/goalie_predicted_stats"
         case .lineups:
             return "lineups"
         case .users:

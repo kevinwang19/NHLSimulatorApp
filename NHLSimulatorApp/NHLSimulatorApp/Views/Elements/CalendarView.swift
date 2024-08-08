@@ -96,9 +96,9 @@ struct CalendarView: View {
                     VStack {
                         if let scoreText = viewModel.scoreText(date: date, teamID: teamID) {
                             Text(scoreText)
-                                .font(.caption2)
                                 .foregroundColor(String(scoreText.first ?? " ") == Symbols.win.rawValue ? Color.green.opacity(0.8) : Color.red.opacity(0.8))
                                 .appTextStyle()
+                                .font(.caption2)
                                 .frame(alignment: .center)
                                 .padding(.bottom, 0.1)
                         } else {
@@ -106,15 +106,15 @@ struct CalendarView: View {
                         }
                         
                         Text(viewModel.dayFormatter.string(from: date))
-                            .font(.caption)
                             .foregroundColor(viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.black : Color.white)
                             .appTextStyle()
+                            .font(.caption)
                         
                         if let opponentText = viewModel.opponentText(date: date, teamID: teamID) {
                             Text(opponentText)
-                                .font(.caption2)
                                 .foregroundColor(viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.black : Color.white)
                                 .appTextStyle()
+                                .font(.caption2)
                                 .frame(alignment: .center)
                                 .padding(.top, 0.1)
                         } else {
@@ -134,8 +134,8 @@ struct CalendarView: View {
     // Header block for days of the week
     private func headerBlock(date: Date) -> some View {
         Text(viewModel.weekDayFormatter.string(from: date))
-            .font(.caption2)
             .appTextStyle()
+            .font(.caption2)
     }
 
     // Title block for month changer
@@ -151,8 +151,8 @@ struct CalendarView: View {
             }
             
             Text(viewModel.monthFormatter.string(from: date).uppercased())
-                .font(.footnote)
                 .appTextStyle()
+                .font(.footnote)
                 .frame(width: 100)
                 .padding(.vertical, Spacing.spacingExtraSmall)
                 

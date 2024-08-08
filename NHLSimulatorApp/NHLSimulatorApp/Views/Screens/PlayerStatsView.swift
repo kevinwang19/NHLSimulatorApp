@@ -12,6 +12,7 @@ struct PlayerStatsView: View {
     @EnvironmentObject var userInfo: UserInfo
     @EnvironmentObject var simulationState: SimulationState
     @ObservedObject var viewModel: PlayerStatsViewModel = PlayerStatsViewModel()
+    @Binding var teamIndex: Int
     @State private var selectedTeamIndex: Int = 0
     @State private var showDropdown: Bool = false
     @State private var isDisabled: Bool = false
@@ -19,33 +20,15 @@ struct PlayerStatsView: View {
     @State private var isStatsLoaded: Bool = false
     @State private var selectedPlayerType: PlayerType = .skaters
     @State private var selectedPositionType: PositionType = .all
+    @State private var showPlayerDetailsView: Bool = false
+    @State private var selectedPlayerID: Int = 0
     
     var body: some View {
         NavigationStack {
             VStack {
                 if isStatsLoaded {
                     // Title and back button
-                    ZStack {
-                        Button {
-                            returnToMainSimView = true
-                        } label: {
-                            HStack {
-                                Image(systemName: Symbols.leftArrow.rawValue)
-                                    .labelStyle(IconOnlyLabelStyle())
-                                
-                                Text(LocalizedStringKey(LocalizedText.back.rawValue))
-                            }
-                            .font(.footnote)
-                            .appTextStyle()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
-                            .appTextStyle()
-                            .font(.headline)
-                            .padding(.top, Spacing.spacingExtraSmall)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
+                    ScreenHeaderView(returnToPreviousView: $returnToMainSimView)
                     
                     HStack {
                         // Drop down menu of all teams
@@ -82,11 +65,11 @@ struct PlayerStatsView: View {
                     // Player stats grid view if there are stats
                     if viewModel.simSkaterStats.count == 0 {
                         Text(LocalizedStringKey(LocalizedText.noStats.rawValue))
-                            .font(.footnote)
                             .appTextStyle()
+                            .font(.footnote)
                             .padding(.top, Spacing.spacingExtraLarge)
                     } else {
-                        PlayerStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType)
+                        PlayerSortableStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType, showPlayerDetailsView: $showPlayerDetailsView, selectedPlayerID: $selectedPlayerID)
                     }
                     
                     Spacer()
@@ -99,8 +82,8 @@ struct PlayerStatsView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .appBackgroundStyle()
             .onAppear {
-                // Set the initial team while considering the first index for top 50 players
-                selectedTeamIndex = userInfo.favTeamIndex + 1
+                // Set the initial team
+                selectedTeamIndex = teamIndex
             }
             .onChange(of: selectedTeamIndex) { newIndex in
                 isStatsLoaded = false
@@ -108,9 +91,16 @@ struct PlayerStatsView: View {
                 viewModel.simGoalieStats = []
                 selectedPositionType = .all
                 
-                // Fetch the player stats of the selected team
-                viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[newIndex].teamID) { statsFetched in
-                    isStatsLoaded = statsFetched
+                // Fetch the teams
+                viewModel.fetchTeams() { teamsFetched in
+                    // Fetch the player stats of the selected team
+                    if teamsFetched, viewModel.teams.indices.contains(newIndex) {
+                        teamIndex = newIndex
+                        
+                        viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
+                            isStatsLoaded = statsFetched
+                        }
+                    }
                 }
             }
             .onChange(of: selectedPositionType) { newPosition in
@@ -120,6 +110,13 @@ struct PlayerStatsView: View {
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
                 // Navigate to Main Sim page when back button is clicked
                 MainSimView()
+                    .environmentObject(userInfo)
+                    .environmentObject(simulationState)
+                    .navigationBarHidden(true)
+            })
+            .navigationDestination(isPresented: $showPlayerDetailsView, destination: {
+                // Navigate to Main Sim page when back button is clicked
+                PlayerDetailsView(selectedPlayerID: $selectedPlayerID, teamIndex: $teamIndex)
                     .environmentObject(userInfo)
                     .environmentObject(simulationState)
                     .navigationBarHidden(true)
@@ -152,7 +149,7 @@ struct PlayerStatsView: View {
     @ViewBuilder
     private func positionTypePicker() -> some View {
         HStack {
-            ForEach(PositionType.allCases) { type in
+            ForEach(PositionType.allCases.filter { $0 != .goalies }) { type in
                 Button(action: {
                     selectedPositionType = type
                 }) {
