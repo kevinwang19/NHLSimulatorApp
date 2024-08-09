@@ -47,7 +47,7 @@ class UserSetupViewModel: ObservableObject {
         // If filtered string does not match original input, show invalid character error message
         if input != filtered {
             usernameText = filtered
-            usernameErrorMessage = NSLocalizedString(LocalizedText.usernameCharacterError.rawValue, comment: "")
+            usernameErrorMessage = LocalizedText.usernameCharacterError.localizedString
             isUpdatingText = false
             return
         }
@@ -55,7 +55,7 @@ class UserSetupViewModel: ObservableObject {
         // If filtered string exceeds maximum length, show invalid length error message
         if filtered.count > usernameMaxLength {
             usernameText = String(filtered.prefix(usernameMaxLength))
-            usernameErrorMessage = NSLocalizedString(LocalizedText.usernameLengthError.rawValue, comment: "")
+            usernameErrorMessage = LocalizedText.usernameLengthError.localizedString
             isUpdatingText = false
             return
         }
@@ -71,7 +71,7 @@ class UserSetupViewModel: ObservableObject {
     
     // When the username field is empty
     func emptyUsername() {
-        usernameErrorMessage = NSLocalizedString(LocalizedText.usernameEmptyError.rawValue, comment: "")
+        usernameErrorMessage = LocalizedText.usernameEmptyError.localizedString
     }
     
     // Create the user and fetch the userID

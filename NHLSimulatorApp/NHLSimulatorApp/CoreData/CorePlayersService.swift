@@ -72,6 +72,18 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch certain players by playerIDs from Core Data
+    func fetchCertainPlayersCoreData(playerIDs: [Int64]) -> [CorePlayer] {
+        let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "playerID IN %@", playerIDs)
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch players: \(error)")
+            return []
+        }
+    }
+    
     // Fetch all players belonging to a specific team from Core Data
     func fetchTeamPlayersCoreData(teamID: Int) -> [CorePlayer] {
         let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()

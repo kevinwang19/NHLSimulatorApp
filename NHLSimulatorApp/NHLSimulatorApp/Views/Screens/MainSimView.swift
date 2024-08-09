@@ -18,6 +18,7 @@ struct MainSimView: View {
     @State private var selectedDate: Date = Date()
     @State private var isSimulationLoaded: Bool = false
     @State private var isMatchupLoaded: Bool = false
+    @State private var isRecordLoaded: Bool = false
     @State private var isInteractionDisabled = false
     @State private var showStandingsView: Bool = false
     @State private var showStatsView: Bool = false
@@ -96,8 +97,28 @@ struct MainSimView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .appBackgroundStyle()
                 .onChange(of: selectedDate) { newSelectedDate in
+                    
+                    if !isInteractionDisabled {
                     isMatchupLoaded = false
-                    let stringDate = viewModel.dateFormatter.string(from: newSelectedDate)
+                        let stringDate = viewModel.dateFormatter.string(from: newSelectedDate)
+                        
+                        // Fetch the matchup of the selected date
+                        viewModel.fetchTeamDaySchedule(teamID: viewModel.teams[selectedTeamIndex].teamID, date: stringDate) { scheduleFetched in
+                            var opponentID: Int? = nil
+                            if scheduleFetched, let matchupGame = viewModel.matchupGame {
+                                opponentID = (viewModel.teams[selectedTeamIndex].teamID == matchupGame.awayTeamID ? matchupGame.homeTeamID : matchupGame.awayTeamID)
+                            }
+                            
+                            // Fetch the record of the team
+                            viewModel.fetchTeamStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, opponentID: opponentID) { statsFetched in
+                                isMatchupLoaded = statsFetched
+                            }
+                        }
+                    }
+                }
+                .onChange(of: currentDate) { newCurrentDate in
+                    isMatchupLoaded = false
+                    let stringDate = viewModel.dateFormatter.string(from: newCurrentDate)
                     
                     // Fetch the matchup of the selected date
                     viewModel.fetchTeamDaySchedule(teamID: viewModel.teams[selectedTeamIndex].teamID, date: stringDate) { scheduleFetched in
@@ -140,7 +161,7 @@ struct MainSimView: View {
                 })
                 .navigationDestination(isPresented: $showLineupsView, destination: {
                     // Navigate to Edit Lineups page when it's button is clicked
-                    EditLineupsView()
+                    EditLineupsView(teamIndex: $selectedTeamIndex)
                         .environmentObject(userInfo)
                         .environmentObject(simulationState)
                         .navigationBarHidden(true)
@@ -152,7 +173,7 @@ struct MainSimView: View {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
                 
-                ProgressView(LocalizedStringKey(LocalizedText.simulationSetupMessage.rawValue))
+                ProgressView(LocalizedText.simulationSetupMessage.localizedString)
                     .appTextStyle()
                     .task {
                         selectedTeamIndex = userInfo.favTeamIndex
@@ -232,7 +253,10 @@ struct MainSimView: View {
         Button {
             isInteractionDisabled = true
             
-            guard let daysToSimulate = viewModel.calendar.dateComponents([.day], from: currentDate, to: selectedDate).day else {
+            let startOfCurrentDate = viewModel.calendar.startOfDay(for: currentDate)
+            let startOfSelectedDate = viewModel.calendar.startOfDay(for: selectedDate)
+            
+            guard let daysToSimulate = viewModel.calendar.dateComponents([.day], from: startOfCurrentDate, to: startOfSelectedDate).day else {
                 isInteractionDisabled = false
                 return
             }
@@ -242,11 +266,13 @@ struct MainSimView: View {
                 return
             }
             
+            currentDate = currentDate.addingTimeInterval(1)
+            
             simulateDay(simulatedDays: 0, daysToSimulate: daysToSimulate)
         } label: {
             if isInteractionDisabled {
                 VStack {
-                    Text(LocalizedStringKey(LocalizedText.simulating.rawValue))
+                    Text(LocalizedText.simulating.localizedString)
                         .appTextStyle()
                         .font(.headline)
                         .multilineTextAlignment(.center)
@@ -259,7 +285,7 @@ struct MainSimView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 let selectedDateString = viewModel.dateFormatter.string(from: selectedDate)
-                Text(String(format: NSLocalizedString(LocalizedText.simulateTo.rawValue, comment: "")) + selectedDateString)
+                Text(String(format: LocalizedText.simulateTo.localizedString) + selectedDateString)
                     .appTextStyle()
                     .font(.headline)
                     .multilineTextAlignment(.center)
@@ -280,7 +306,7 @@ struct MainSimView: View {
                 simulationState.isNewSim = false
                 showStandingsView = true
             } label: {
-                Text(LocalizedStringKey(LocalizedText.teamStandings.rawValue))
+                Text(LocalizedText.teamStandings.localizedString)
                     .appTextStyle()
                     .font(.footnote)
                     .multilineTextAlignment(.center)
@@ -295,7 +321,7 @@ struct MainSimView: View {
                 simulationState.isNewSim = false
                 showStatsView = true
             } label: {
-                Text(LocalizedStringKey(LocalizedText.playerStats.rawValue))
+                Text(LocalizedText.playerStats.localizedString)
                     .appTextStyle()
                     .font(.footnote)
                     .multilineTextAlignment(.center)
@@ -310,7 +336,7 @@ struct MainSimView: View {
                 simulationState.isNewSim = false
                 showRostersView = true
             } label: {
-                Text(LocalizedStringKey(LocalizedText.editRosters.rawValue))
+                Text(LocalizedText.editRosters.localizedString)
                     .appTextStyle()
                     .font(.footnote)
                     .multilineTextAlignment(.center)
@@ -325,7 +351,7 @@ struct MainSimView: View {
                 simulationState.isNewSim = false
                 showLineupsView = true
             } label: {
-                Text(LocalizedStringKey(LocalizedText.editLineups.rawValue))
+                Text(LocalizedText.editLineups.localizedString)
                     .appTextStyle()
                     .font(.footnote)
                     .multilineTextAlignment(.center)
@@ -360,11 +386,5 @@ struct MainSimView: View {
                 isInteractionDisabled = false
             }
         }
-    }
-}
-
-struct MainSimView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainSimView().environmentObject(UserInfo())
     }
 }

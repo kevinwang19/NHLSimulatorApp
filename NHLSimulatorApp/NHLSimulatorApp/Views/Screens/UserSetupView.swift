@@ -27,7 +27,7 @@ struct UserSetupView: View {
                 
                 VStack {
                     // Username title
-                    Text(LocalizedStringKey(LocalizedText.username.rawValue))
+                    Text(LocalizedText.username.localizedString)
                         .appTextStyle()
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -49,7 +49,7 @@ struct UserSetupView: View {
                         .frame(maxWidth: .infinity)
                     
                     // Favorite team title
-                    Text(LocalizedStringKey(LocalizedText.favoriteTeam.rawValue))
+                    Text(LocalizedText.favoriteTeam.localizedString)
                         .appTextStyle()
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top, Spacing.spacingMedium)
@@ -91,7 +91,7 @@ struct UserSetupView: View {
                 
                 // Start button, save info to UserDefaults and save user when tapped, ensure username exists
                 if viewModel.usernameText == "" {
-                    Button(LocalizedStringKey(LocalizedText.start.rawValue)) {
+                    Button(LocalizedText.start.localizedString) {
                         viewModel.emptyUsername()
                     }
                     .appTextStyle()
@@ -108,7 +108,7 @@ struct UserSetupView: View {
                             showMainView = userGenerated
                         }
                     }, label: {
-                        Text(LocalizedStringKey(LocalizedText.start.rawValue))
+                        Text(LocalizedText.start.localizedString)
                             .appTextStyle()
                             .font(.headline)
                             .frame(maxWidth: 200, maxHeight: 75)
@@ -139,11 +139,5 @@ struct UserSetupView: View {
                     .navigationBarHidden(true)
             })
         }
-    }
-}
-
-struct UserSetupView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserSetupView().environmentObject(UserInfo())
     }
 }

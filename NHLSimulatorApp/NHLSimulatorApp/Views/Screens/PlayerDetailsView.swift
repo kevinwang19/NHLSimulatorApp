@@ -26,6 +26,7 @@ struct PlayerDetailsView: View {
                         
                     if let player = viewModel.playerDetails(playerID: selectedPlayerID) {
                         HStack {
+                            // Player info
                             playerInfoView(player: player)
                             
                             // Player headshot
@@ -37,25 +38,27 @@ struct PlayerDetailsView: View {
                         }
                         .padding(.top, Spacing.spacingExtraSmall)
                         
-                        Text("CAREER STATS")
+                        Text(LocalizedText.careerStats.localizedString)
                             .appTextStyle()
                             .font(.callout)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, Spacing.spacingSmall)
                             .padding(.leading, Spacing.spacingExtraSmall)
                         
+                        // Career stats
                         PlayerStatsGridView(skaterStats: $viewModel.skaterCareerStats, goalieStats: $viewModel.goalieCareerStats, position: player.positionCode ?? "")
                         
-                        Text("PREDICTED STATS")
+                        Text(LocalizedText.predictedStats.localizedString)
                             .appTextStyle()
                             .font(.callout)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, Spacing.spacingMedium)
                             .padding(.leading, Spacing.spacingExtraSmall)
                         
+                        // Predicted stats
                         PlayerStatsGridView(skaterStats: $viewModel.skaterPredictedStats, goalieStats: $viewModel.goaliePredictedStats, position: player.positionCode ?? "")
                     } else {
-                        Text("PLAYER DETAILS NOT FOUND")
+                        Text(LocalizedText.noPlayerDetails.localizedString)
                             .appTextStyle()
                             .font(.footnote)
                             .padding(.horizontal, Spacing.spacingExtraSmall)
@@ -72,6 +75,7 @@ struct PlayerDetailsView: View {
             .onAppear {
                 isDetailsLoaded = false
                 if let teamID = viewModel.playerDetails(playerID: selectedPlayerID)?.teamID, let position = viewModel.playerDetails(playerID: selectedPlayerID)?.positionCode {
+                    // Fetch the player's team name
                     viewModel.fetchPlayerTeam(teamID: Int(teamID)) { teamFetched in
                         if teamFetched {
                             viewModel.fetchPlayerStats(playerID: selectedPlayerID, position: position) { statsFetched in
@@ -103,7 +107,7 @@ struct PlayerDetailsView: View {
                 .padding(.bottom, 1)
                
             // Player's team, position, and sweater number
-            let teamInfo = "\(viewModel.team?.fullName ?? "") • \(NSLocalizedString(player.positionCode ?? "", comment: "")) • #\(player.sweaterNumber)"
+            let teamInfo = viewModel.team?.fullName ?? "" + Symbols.dot.rawValue + NSLocalizedString(player.positionCode ?? "", comment: "") + Symbols.dot.rawValue + Symbols.number.rawValue + "\(player.sweaterNumber)"
             Text(teamInfo)
                 .appTextStyle()
                 .font(.footnote)
@@ -111,7 +115,7 @@ struct PlayerDetailsView: View {
                 .padding(.bottom, 1)
             
             // Player's birth date and country
-            let birthInfo = "Born \(player.birthDate ?? "") • \(player.birthCountry ?? "")"
+            let birthInfo = LocalizedText.born.localizedString + " " + (player.birthDate ?? "") + Symbols.dot.rawValue + (player.birthCountry ?? "")
             Text(birthInfo)
                 .appTextStyle()
                 .font(.footnote)
@@ -121,7 +125,7 @@ struct PlayerDetailsView: View {
             // Player's height and weight
             let heightFeet = player.heightInInches / 12
             let heightInches = player.heightInInches % 12
-            let heightInfo = "Height \(heightFeet)'\(heightInches)\" • Weight \(player.weightInPounds) lb"
+            let heightInfo = LocalizedText.height.localizedString + " " + "\(heightFeet)" + Symbols.feet.rawValue + "\(heightInches)" + Symbols.inch.rawValue +  Symbols.dot.rawValue + LocalizedText.weight.localizedString + " " + "\(player.weightInPounds)" + " " + Symbols.pounds.rawValue
             Text(heightInfo)
                 .appTextStyle()
                 .font(.footnote)

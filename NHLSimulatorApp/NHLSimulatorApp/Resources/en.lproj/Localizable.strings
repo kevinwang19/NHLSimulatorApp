@@ -26,12 +26,6 @@
 "skaters" = "SKATERS";
 "goalies" = "GOALIES";
 "all" = "ALL";
-"F" = "F";
-"C" = "C";
-"L" = "LW";
-"R" = "RW";
-"D" = "D";
-"G" = "G";
 "name" = "NAME";
 "games_played" = "GP";
 "goals" = "G";
@@ -74,4 +68,13 @@
 "pacific" = "PACIFIC";
 "no_stats" = "NO STATS TO DISPLAY";
 "standings_legend" = "( W ) = WILDCARD RANK     ( P ) = PRESIDENTS RANK";
+"career_stats" = "CAREER STATS";
+"predicted_stats" = "PREDICTED STATS";
+"no_player_details" = "PLAYER DETAILS NOT FOUND";
+"born" = "Born";
+"height" = "Height";
+"weight" = "Weight";
+"line" = "LINE";
+"select_player_swap" = "SELECT A PLAYER FROM THE LIST TO SWAP";
+"swap" = "SWAP";
 

@@ -22,6 +22,11 @@ struct PlayerStatsView: View {
     @State private var selectedPositionType: PositionType = .all
     @State private var showPlayerDetailsView: Bool = false
     @State private var selectedPlayerID: Int = 0
+    private var positionPickerTypes: [PositionType] = [.all, .forwards, .centers, .leftWingers, .rightWingers, .defensemen]
+    
+    init(teamIndex: Binding<Int>) {
+        self._teamIndex = teamIndex
+    }
     
     var body: some View {
         NavigationStack {
@@ -64,7 +69,7 @@ struct PlayerStatsView: View {
                     
                     // Player stats grid view if there are stats
                     if viewModel.simSkaterStats.count == 0 {
-                        Text(LocalizedStringKey(LocalizedText.noStats.rawValue))
+                        Text(LocalizedText.noStats.localizedString)
                             .appTextStyle()
                             .font(.footnote)
                             .padding(.top, Spacing.spacingExtraLarge)
@@ -149,11 +154,12 @@ struct PlayerStatsView: View {
     @ViewBuilder
     private func positionTypePicker() -> some View {
         HStack {
-            ForEach(PositionType.allCases.filter { $0 != .goalies }) { type in
+            ForEach(positionPickerTypes) { type in
                 Button(action: {
                     selectedPositionType = type
                 }) {
-                    Text(type.localizedStringKey)
+                    let typeText = type == .all ? PositionType.all.localizedString : type.rawValue
+                    Text(typeText)
                         .frame(maxWidth: .infinity)
                         .padding(Spacing.spacingExtraSmall)
                         .font(.caption2)

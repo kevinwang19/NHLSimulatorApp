@@ -23,21 +23,21 @@ struct TeamSortableStatsGridView: View {
                             HStack {
                                 // Grid header titles and sorting paths for team standings stats
                                 HStack {
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.rank.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: (rankType == .league ? \SimulationTeamStat.leagueRank : (rankType == .conference ? \SimulationTeamStat.conferenceRank : \SimulationTeamStat.divisionRank)))
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.name.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.fullName)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.gamesPlayed.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.gamesPlayed)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.wins.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.wins)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.losses.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.losses)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.otLosses.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.otLosses)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.points.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.points)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.goalsFor.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsFor)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.goalsForPerGame.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsForPerGame)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.goalsAgainst.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsAgainst)
+                                    GridHeaderView(title: StatColumnHeader.rank.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: (rankType == .league ? \SimulationTeamStat.leagueRank : (rankType == .conference ? \SimulationTeamStat.conferenceRank : \SimulationTeamStat.divisionRank)))
+                                    GridHeaderView(title: StatColumnHeader.name.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.fullName)
+                                    GridHeaderView(title: StatColumnHeader.gamesPlayed.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.gamesPlayed)
+                                    GridHeaderView(title: StatColumnHeader.wins.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.wins)
+                                    GridHeaderView(title: StatColumnHeader.losses.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.losses)
+                                    GridHeaderView(title: StatColumnHeader.otLosses.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.otLosses)
+                                    GridHeaderView(title: StatColumnHeader.points.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.points)
+                                    GridHeaderView(title: StatColumnHeader.goalsFor.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsFor)
+                                    GridHeaderView(title: StatColumnHeader.goalsForPerGame.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsForPerGame)
+                                    GridHeaderView(title: StatColumnHeader.goalsAgainst.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsAgainst)
                                 }
                                 HStack {
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.goalsAgainstPerGame.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsAgainstPerGame)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.powerplayPctg.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.powerPlayPctg)
-                                    GridHeaderView(title: NSLocalizedString(StatColumnHeader.penaltyKillPctg.rawValue, comment: ""), sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.penaltyKillPctg)
+                                    GridHeaderView(title: StatColumnHeader.goalsAgainstPerGame.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.goalsAgainstPerGame)
+                                    GridHeaderView(title: StatColumnHeader.powerplayPctg.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.powerPlayPctg)
+                                    GridHeaderView(title: StatColumnHeader.penaltyKillPctg.localizedString, sortOrder: $sortOrder, skaterKeyPath: nil, goalieKeyPath: nil, teamKeyPath: \SimulationTeamStat.penaltyKillPctg)
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)

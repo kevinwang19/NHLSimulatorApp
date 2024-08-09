@@ -24,7 +24,7 @@ class PlayerStatsViewModel: ObservableObject {
             }
                 
             self.teams = teamData.teams
-            self.teams.append(Team(teamID: 0, fullName: NSLocalizedString(StatColumnHeader.top50.rawValue, comment: ""), abbrev: "", logo: "", conference: "", division: ""))
+            self.teams.append(Team(teamID: 0, fullName: StatColumnHeader.top50.localizedString, abbrev: "", logo: "", conference: "", division: ""))
             completion(true)
         }, onFailure: { error in
             print("Failed to fetch teams: \(error)")
@@ -75,15 +75,15 @@ class PlayerStatsViewModel: ObservableObject {
         let includedPositions: [String] = {
             switch position {
             case PositionType.all.rawValue:
-                return [PositionType.centers.rawValue, PositionType.leftWingers.rawValue, PositionType.rightWingers.rawValue, PositionType.defensemen.rawValue]
+                return [PositionType.centers.rawValue, PositionType.leftForwards.rawValue, PositionType.rightForwards.rawValue, PositionType.defensemen.rawValue]
             case PositionType.forwards.rawValue:
-                return [PositionType.centers.rawValue, PositionType.leftWingers.rawValue, PositionType.rightWingers.rawValue]
+                return [PositionType.centers.rawValue, PositionType.leftForwards.rawValue, PositionType.rightForwards.rawValue]
             case PositionType.centers.rawValue:
                 return [PositionType.centers.rawValue]
             case PositionType.leftWingers.rawValue:
-                return [PositionType.leftWingers.rawValue]
+                return [PositionType.leftForwards.rawValue]
             case PositionType.rightWingers.rawValue:
-                return [PositionType.rightWingers.rawValue]
+                return [PositionType.rightForwards.rawValue]
             case PositionType.defensemen.rawValue:
                 return [PositionType.defensemen.rawValue]
             default:

@@ -55,6 +55,19 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch a player's lineup details from Core Data
+    func fetchPlayerLineupCoreData(playerID: Int) -> CoreLineup? {
+        let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "playerID == %d", playerID)
+        do {
+            let lineups = try context.fetch(fetchRequest)
+            return lineups.first
+        } catch {
+            print("Failed to fetch player lineup: \(error)")
+            return nil
+        }
+    }
+    
     // Fetch all lineups belonging to a specific team from Core Data
     func fetchTeamLineupsCoreData(teamID: Int) -> [CoreLineup] {
         let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
@@ -64,6 +77,39 @@ extension CoreDataManager {
         } catch {
             print("Failed to fetch team lineups: \(error)")
             return []
+        }
+    }
+    
+    // Fetch all lineups belonging to a specific team from Core Data
+    func fetchTeamPositionLineupsCoreData(teamID: Int, positions: [String]) -> [CoreLineup] {
+        let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "teamID == %d AND position IN %@", teamID, positions)
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch team position lineups: \(error)")
+            return []
+        }
+    }
+    
+    // Update lineup properties from Core Data
+    func updateLineupsCoreData(playerID: Int, position: String, lineNumber: Int16, powerPlayLineNumber: Int16, penaltyKillLineNumber: Int16, otLineNumber: Int16) {
+        let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "playerID == %d", playerID)
+        do {
+            let lineups = try context.fetch(fetchRequest)
+            
+            for lineup in lineups {
+                lineup.position = position
+                lineup.lineNumber = lineNumber
+                lineup.powerPlayLineNumber = powerPlayLineNumber
+                lineup.penaltyKillLineNumber = penaltyKillLineNumber
+                lineup.otLineNumber = otLineNumber
+            }
+            
+            saveContext()
+        } catch {
+            print("Failed to update lineups: \(error)")
         }
     }
     

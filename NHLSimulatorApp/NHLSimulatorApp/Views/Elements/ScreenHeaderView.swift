@@ -19,14 +19,14 @@ struct ScreenHeaderView: View {
                     Image(systemName: Symbols.leftArrow.rawValue)
                         .labelStyle(IconOnlyLabelStyle())
                     
-                    Text(LocalizedStringKey(LocalizedText.back.rawValue))
+                    Text(LocalizedText.back.localizedString)
                 }
                 .appTextStyle()
                 .font(.footnote)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
+            Text(LocalizedText.nhlSimulator.localizedString)
                 .appTextStyle()
                 .font(.headline)
                 .padding(.top, Spacing.spacingExtraSmall)

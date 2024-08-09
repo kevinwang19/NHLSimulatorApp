@@ -18,9 +18,3 @@ struct EditRostersView: View {
         }
     }
 }
-
-struct EditRostersView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditRostersView()
-    }
-}

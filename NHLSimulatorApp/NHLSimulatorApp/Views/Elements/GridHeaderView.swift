@@ -26,36 +26,36 @@ struct GridHeaderView<KeyPathType: Comparable>: View {
             }
             .appTextStyle()
             .font(.footnote)
-            .frame(width: title == NSLocalizedString(StatColumnHeader.name.rawValue, comment: "") ? nameColumnWidth : statColumnWidth, alignment: title == NSLocalizedString(StatColumnHeader.name.rawValue, comment: "") ? .leading : .center)
+            .frame(width: title == StatColumnHeader.name.localizedString ? nameColumnWidth : statColumnWidth, alignment: title == StatColumnHeader.name.localizedString ? .leading : .center)
         }
     }
     
     // Determine whether the clicking the header will sort the stat in ascending or descending order
     private func toggleSortOrder() {
         switch title {
-        case NSLocalizedString(StatColumnHeader.name.rawValue, comment: ""):
+        case StatColumnHeader.name.localizedString:
             sortOrder = sortOrder == .nameAscending ? .nameDescending : .nameAscending
-        case NSLocalizedString(StatColumnHeader.gamesPlayed.rawValue, comment: ""):
+        case StatColumnHeader.gamesPlayed.localizedString:
             sortOrder = sortOrder == .gamesPlayedAscending ? .gamesPlayedDescending : .gamesPlayedAscending
-        case NSLocalizedString(StatColumnHeader.goals.rawValue, comment: ""):
+        case StatColumnHeader.goals.localizedString:
             sortOrder = sortOrder == .goalsAscending ? .goalsDescending : .goalsAscending
-        case NSLocalizedString(StatColumnHeader.assists.rawValue, comment: ""):
+        case StatColumnHeader.assists.localizedString:
             sortOrder = sortOrder == .assistsAscending ? .assistsDescending : .assistsAscending
-        case NSLocalizedString(StatColumnHeader.points.rawValue, comment: ""):
+        case StatColumnHeader.points.localizedString:
             sortOrder = sortOrder == .pointsAscending ? .pointsDescending : .pointsAscending
-        case NSLocalizedString(StatColumnHeader.powerPlayGoals.rawValue, comment: ""):
+        case StatColumnHeader.powerPlayGoals.localizedString:
             sortOrder = sortOrder == .powerPlayGoalsAscending ? .powerPlayGoalsDescending : .powerPlayGoalsAscending
-        case NSLocalizedString(StatColumnHeader.powerPlayPoints.rawValue, comment: ""):
+        case StatColumnHeader.powerPlayPoints.localizedString:
             sortOrder = sortOrder == .powerPlayPointsAscending ? .powerPlayPointsDescending : .powerPlayPointsAscending
-        case NSLocalizedString(StatColumnHeader.wins.rawValue, comment: ""):
+        case StatColumnHeader.wins.localizedString:
             sortOrder = sortOrder == .winsAscending ? .winsDescending : .winsAscending
-        case NSLocalizedString(StatColumnHeader.losses.rawValue, comment: ""):
+        case StatColumnHeader.losses.localizedString:
             sortOrder = sortOrder == .lossesAscending ? .lossesDescending : .lossesAscending
-        case NSLocalizedString(StatColumnHeader.otLosses.rawValue, comment: ""):
+        case StatColumnHeader.otLosses.localizedString:
             sortOrder = sortOrder == .otLossesAscending ? .otLossesDescending : .otLossesAscending
-        case NSLocalizedString(StatColumnHeader.goalsAgainstPerGame.rawValue, comment: ""):
+        case StatColumnHeader.goalsAgainstPerGame.localizedString:
             sortOrder = sortOrder == .goalsAgainstPerGameAscending ? .goalsAgainstPerGameDescending : .goalsAgainstPerGameAscending
-        case NSLocalizedString(StatColumnHeader.shutouts.rawValue, comment: ""):
+        case StatColumnHeader.shutouts.localizedString:
             sortOrder = sortOrder == .shutoutsAscending ? .shutoutsDescending : .shutoutsAscending
         default:
             sortOrder = .none
@@ -65,29 +65,29 @@ struct GridHeaderView<KeyPathType: Comparable>: View {
     // Determine whether the current stat is ascending or descending
     private func currentSortOrder() -> SortOrder {
         switch title {
-        case NSLocalizedString(StatColumnHeader.name.rawValue, comment: ""):
+        case StatColumnHeader.name.localizedString:
             return sortOrder == .nameAscending ? .nameAscending : (sortOrder == .nameDescending ? .nameDescending : .none)
-        case NSLocalizedString(StatColumnHeader.gamesPlayed.rawValue, comment: ""):
+        case StatColumnHeader.gamesPlayed.localizedString:
             return sortOrder == .gamesPlayedAscending ? .gamesPlayedAscending : (sortOrder == .gamesPlayedDescending ? .gamesPlayedDescending : .none)
-        case NSLocalizedString(StatColumnHeader.goals.rawValue, comment: ""):
+        case StatColumnHeader.goals.localizedString:
             return sortOrder == .goalsAscending ? .goalsAscending : (sortOrder == .goalsDescending ? .goalsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.assists.rawValue, comment: ""):
+        case StatColumnHeader.assists.localizedString:
             return sortOrder == .assistsAscending ? .assistsAscending : (sortOrder == .assistsDescending ? .assistsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.points.rawValue, comment: ""):
+        case StatColumnHeader.points.localizedString:
             return sortOrder == .pointsAscending ? .pointsAscending : (sortOrder == .pointsDescending ? .pointsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.powerPlayGoals.rawValue, comment: ""):
+        case StatColumnHeader.powerPlayGoals.localizedString:
             return sortOrder == .powerPlayGoalsAscending ? .powerPlayGoalsAscending : (sortOrder == .powerPlayGoalsDescending ? .powerPlayGoalsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.powerPlayPoints.rawValue, comment: ""):
+        case StatColumnHeader.powerPlayPoints.localizedString:
             return sortOrder == .powerPlayPointsAscending ? .powerPlayPointsAscending : (sortOrder == .powerPlayPointsDescending ? .powerPlayPointsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.wins.rawValue, comment: ""):
+        case StatColumnHeader.wins.localizedString:
             return sortOrder == .winsAscending ? .winsAscending : (sortOrder == .winsDescending ? .winsDescending : .none)
-        case NSLocalizedString(StatColumnHeader.losses.rawValue, comment: ""):
+        case StatColumnHeader.losses.localizedString:
             return sortOrder == .lossesAscending ? .lossesAscending : (sortOrder == .lossesDescending ? .lossesDescending : .none)
-        case NSLocalizedString(StatColumnHeader.otLosses.rawValue, comment: ""):
+        case StatColumnHeader.otLosses.localizedString:
             return sortOrder == .otLossesAscending ? .otLossesAscending : (sortOrder == .otLossesDescending ? .otLossesDescending : .none)
-        case NSLocalizedString(StatColumnHeader.goalsAgainstPerGame.rawValue, comment: ""):
+        case StatColumnHeader.goalsAgainstPerGame.localizedString:
             return sortOrder == .goalsAgainstPerGameAscending ? .goalsAgainstPerGameAscending : (sortOrder == .goalsAgainstPerGameDescending ? .goalsAgainstPerGameDescending : .none)
-        case NSLocalizedString(StatColumnHeader.shutouts.rawValue, comment: ""):
+        case StatColumnHeader.shutouts.localizedString:
             return sortOrder == .shutoutsAscending ? .shutoutsAscending : (sortOrder == .shutoutsDescending ? .shutoutsDescending : .none)
         default:
             return .none

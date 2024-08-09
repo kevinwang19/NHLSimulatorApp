@@ -34,6 +34,11 @@ enum Symbols: String {
     case atSymbol = "@"
     case dashSymbol = "-"
     case colonSymbol = ":"
+    case dot = " • "
+    case number = "#"
+    case feet = "'"
+    case inch = "\""
+    case pounds = "lbs"
     case win = "W"
     case loss = "L"
     case versus = "vs"
@@ -42,6 +47,7 @@ enum Symbols: String {
     case calendarPlaceholder = "00"
     case leftArrow = "chevron.left"
     case rightArrow = "chevron.right"
+    case leftRightArrow = "arrow.left.and.right"
 }
 
 enum SortOrder {
@@ -119,6 +125,10 @@ enum StatColumnHeader: String {
     case goalsAgainstAvg = "goals_against_avg"
     case savePctg = "save_pctg"
     case shotsAgainst = "shots_against"
+    
+    var localizedString: String {
+        NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 enum PlayerType: String, CaseIterable, Identifiable {
@@ -136,15 +146,19 @@ enum PositionType: String, CaseIterable, Identifiable {
     case all
     case forwards = "F"
     case centers = "C"
-    case leftWingers = "L"
-    case rightWingers = "R"
+    case leftForwards = "L"
+    case leftWingers = "LW"
+    case rightForwards = "R"
+    case rightWingers = "RW"
     case defensemen = "D"
+    case leftDefensemen = "LD"
+    case rightDefensemen = "RD"
     case goalies = "G"
     
     var id: String { self.rawValue }
     
-    var localizedStringKey: LocalizedStringKey {
-        LocalizedStringKey(self.rawValue)
+    var localizedString: String {
+        NSLocalizedString(self.rawValue, comment: "")
     }
 }
 
@@ -190,6 +204,15 @@ enum WestDivisionType: String, CaseIterable, Identifiable {
     }
 }
 
+enum LineupType: String, CaseIterable, Identifiable {
+    case evenStrength = "ES"
+    case powerplay = "PP"
+    case penaltyKill = "PK"
+    case overtime = "OT"
+    
+    var id: String { self.rawValue }
+}
+
 enum LocalizedText: String {
     case nhlSimulator = "nhl_simulator"
     case newSim = "new_sim"
@@ -207,7 +230,20 @@ enum LocalizedText: String {
     case playerStats = "player_stats"
     case editRosters = "edit_rosters"
     case editLineups = "edit_lineups"
-    case back = "back"
+    case back
     case noStats = "no_stats"
     case standingsLegend = "standings_legend"
+    case careerStats = "career_stats"
+    case predictedStats = "predicted_stats"
+    case noPlayerDetails = "no_player_details"
+    case born
+    case height
+    case weight
+    case line
+    case selectPlayerSwap = "select_player_swap"
+    case swap
+    
+    var localizedString: String {
+        NSLocalizedString(self.rawValue, comment: "")
+    }
 }

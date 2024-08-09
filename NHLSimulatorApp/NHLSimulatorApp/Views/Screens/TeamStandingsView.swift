@@ -39,7 +39,7 @@ struct TeamStandingsView: View {
                     
                     // Team stats grid view if there are stats
                     if viewModel.simTeamStats.count == 0 {
-                        Text(LocalizedStringKey(LocalizedText.noStats.rawValue))
+                        Text(LocalizedText.noStats.localizedString)
                             .appTextStyle()
                             .font(.footnote)
                             .padding(.top, Spacing.spacingExtraLarge)
@@ -48,7 +48,7 @@ struct TeamStandingsView: View {
                     }
                     
                     // Stats legend
-                    Text(LocalizedStringKey(LocalizedText.standingsLegend.rawValue))
+                    Text(LocalizedText.standingsLegend.localizedString)
                         .appTextStyle()
                         .font(.footnote)
                         .padding(.top, Spacing.spacingExtraLarge)

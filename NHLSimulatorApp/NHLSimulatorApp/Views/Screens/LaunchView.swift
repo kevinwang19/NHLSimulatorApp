@@ -20,7 +20,7 @@ struct LaunchView: View {
                 Image(Icon.nhlLogo)
                 
                 // Title
-                Text(LocalizedStringKey(LocalizedText.nhlSimulator.rawValue))
+                Text(LocalizedText.nhlSimulator.localizedString)
                     .appTextStyle()
                     .font(.largeTitle)
                     .padding(.bottom, Spacing.spacingMedium)
@@ -34,7 +34,7 @@ struct LaunchView: View {
                         showMainView = true
                     }
                 }, label: {
-                    Text(LocalizedStringKey(LocalizedText.newSim.rawValue))
+                    Text(LocalizedText.newSim.localizedString)
                         .appTextStyle()
                         .font(.headline)
                         .frame(width: 200, height: 75)
@@ -48,7 +48,7 @@ struct LaunchView: View {
                         simulationState.isNewSim = false
                         showMainView = true
                     }, label: {
-                        Text(LocalizedStringKey(LocalizedText.lastSim.rawValue))
+                        Text(LocalizedText.lastSim.localizedString)
                             .appTextStyle()
                             .font(.headline)
                             .frame(maxWidth: 200, maxHeight: 75)
@@ -80,11 +80,5 @@ struct LaunchView: View {
                 UserDefaultsManager.removeDefaults(key: UserDefaultName.favTeamIndex.rawValue)*/
             }
         }
-    }
-}
-
-struct LaunchView_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchView()
     }
 }
