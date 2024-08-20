@@ -78,7 +78,7 @@ struct EditRostersView: View {
                         .zIndex(1)
                             
                         // List of selected team players
-                        playersGridView(players: $viewModel.players, teamIndex: selectedTeamIndex, showDropdown: $showDropdown, scrollOffset: $grid1ScrollOffset, isAtTop: $grid1IsAtTop, isAtBottom: $grid1IsAtBottom)
+                        playersGridView()
                             .padding(.bottom, Spacing.spacingExtraSmall)
                             .zIndex(0)
                     }
@@ -115,8 +115,7 @@ struct EditRostersView: View {
                         .zIndex(1)
                             
                         // List of other team players
-                        playersGridView(players: $viewModel.otherPlayers, teamIndex: otherTeamIndex, showDropdown: $showOtherDropdown, scrollOffset: $grid2ScrollOffset, isAtTop: $grid2IsAtTop, isAtBottom: $grid2IsAtBottom)
-                            .padding(.bottom, Spacing.spacingExtraSmall)
+                        otherPlayersGridView()
                             .zIndex(0)
                     }
                 } else {
@@ -239,6 +238,12 @@ struct EditRostersView: View {
                     }
                 }
             })
+            .onChange(of: showDropdown) { newShowDropdown in
+                showOtherDropdown = newShowDropdown ? false : showOtherDropdown
+            }
+            .onChange(of: showOtherDropdown) { newShowOtherDropdown in
+                showDropdown = newShowOtherDropdown ? false : showDropdown
+            }
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
                 // Navigate to Main Sim page when back button is clicked
                 MainSimView()
@@ -249,18 +254,18 @@ struct EditRostersView: View {
         }
     }
     
-    // View of the roster lists
+    // View of the selected team roster lists
     @ViewBuilder
-    private func playersGridView(players: Binding<[CorePlayer]>, teamIndex: Int, showDropdown: Binding<Bool>, scrollOffset: Binding<CGFloat>, isAtTop: Binding<Bool>, isAtBottom: Binding<Bool>) -> some View {
+    private func playersGridView() -> some View {
         VStack {
             ZStack {
-                let scrollViewHeight: CGFloat = players.count > maxPlayersDisplayed ? (blockHeight * CGFloat(maxPlayersDisplayed)) : (blockHeight * CGFloat(players.count))
+                let scrollViewHeight: CGFloat = viewModel.players.count > maxPlayersDisplayed ? (blockHeight * CGFloat(maxPlayersDisplayed)) : (blockHeight * CGFloat(viewModel.players.count))
                 
                 ScrollView(.vertical) {
                     LazyVStack(spacing: 1) {
                         // Rows of players
-                        ForEach(players, id: \.self) { player in
-                            playerRowView(player: player.wrappedValue, teamIndex: teamIndex)
+                        ForEach(viewModel.players, id: \.self) { player in
+                            playerRowView(player: player, teamIndex: teamIndex)
                         }
                     }
                     .background(GeometryReader { geometry in
@@ -269,30 +274,85 @@ struct EditRostersView: View {
                     })
                     .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
                         // Detect position of the scrolling for displaying the gradients
-                        scrollOffset.wrappedValue = value
-                        isAtTop.wrappedValue = (scrollOffset.wrappedValue >= 0)
-                        isAtBottom.wrappedValue = (scrollOffset.wrappedValue <= ((CGFloat(players.count - maxPlayersDisplayed) * blockHeight) * -1))
+                        grid1ScrollOffset = value
+                        grid1IsAtTop = (grid1ScrollOffset >= 0)
+                        grid1IsAtBottom = (grid1ScrollOffset <= ((CGFloat(viewModel.players.count - maxPlayersDisplayed) * blockHeight) * -1))
                     }
                     .overlay(
-                        Color.white.opacity(showDropdown.wrappedValue ? 0.15 : 0.0)
+                        Color.white.opacity(showDropdown ? 0.15 : 0.0)
                             .cornerRadius(10)
                     )
                 }
                 .coordinateSpace(name: ElementLabel.scroll.rawValue)
-                .scrollDisabled(players.count <= maxPlayersDisplayed)
+                .scrollDisabled(viewModel.players.count <= maxPlayersDisplayed)
                 .frame(height: scrollViewHeight)
                 .appButtonStyle()
                 
                 // Gradient for more scrollable players
-                if players.count > maxPlayersDisplayed && !showDropdown.wrappedValue {
+                if viewModel.players.count > maxPlayersDisplayed && !showDropdown {
                     VStack {
-                        if !isAtTop.wrappedValue {
+                        if !grid1IsAtTop {
                             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.7), Color.clear]), startPoint: .top, endPoint: .bottom)
                                 .frame(height: blockHeight)
                                 .cornerRadius(10)
                         }
                         Spacer()
-                        if !isAtBottom.wrappedValue {
+                        if !grid1IsAtBottom {
+                            LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
+                                .frame(height: blockHeight)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+            }
+            .frame(maxHeight: blockHeight * CGFloat(maxPlayersDisplayed))
+        }
+    }
+    
+    // View of the selected other team roster lists
+    @ViewBuilder
+    private func otherPlayersGridView() -> some View {
+        VStack {
+            ZStack {
+                let scrollViewHeight: CGFloat = viewModel.otherPlayers.count > maxPlayersDisplayed ? (blockHeight * CGFloat(maxPlayersDisplayed)) : (blockHeight * CGFloat(viewModel.otherPlayers.count))
+                
+                ScrollView(.vertical) {
+                    LazyVStack(spacing: 1) {
+                        // Rows of players
+                        ForEach(viewModel.otherPlayers, id: \.self) { player in
+                            playerRowView(player: player, teamIndex: teamIndex)
+                        }
+                    }
+                    .background(GeometryReader { geometry in
+                        Color.clear
+                            .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named(ElementLabel.scroll.rawValue)).minY)
+                    })
+                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                        // Detect position of the scrolling for displaying the gradients
+                        grid2ScrollOffset = value
+                        grid2IsAtTop = (grid2ScrollOffset >= 0)
+                        grid2IsAtBottom = (grid2ScrollOffset <= ((CGFloat(viewModel.otherPlayers.count - maxPlayersDisplayed) * blockHeight) * -1))
+                    }
+                    .overlay(
+                        Color.white.opacity(showOtherDropdown ? 0.15 : 0.0)
+                            .cornerRadius(10)
+                    )
+                }
+                .coordinateSpace(name: ElementLabel.scroll.rawValue)
+                .scrollDisabled(viewModel.otherPlayers.count <= maxPlayersDisplayed)
+                .frame(height: scrollViewHeight)
+                .appButtonStyle()
+                
+                // Gradient for more scrollable players
+                if viewModel.otherPlayers.count > maxPlayersDisplayed && !showOtherDropdown {
+                    VStack {
+                        if !grid2IsAtTop {
+                            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.7), Color.clear]), startPoint: .top, endPoint: .bottom)
+                                .frame(height: blockHeight)
+                                .cornerRadius(10)
+                        }
+                        Spacer()
+                        if !grid2IsAtBottom {
                             LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
                                 .frame(height: blockHeight)
                                 .cornerRadius(10)

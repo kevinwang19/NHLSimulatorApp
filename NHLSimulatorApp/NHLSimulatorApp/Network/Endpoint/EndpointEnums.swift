@@ -51,6 +51,7 @@ public enum NetworkEndpoint: EndpointInfo {
     case playoffTeamSimulatedStats
     case allPlayoffTeamsSimulatedStats
     case conferencePlayoffTeamsSimulatedStats
+    case playoffTreeStats
     
     public var route: String {
         switch self {
@@ -140,6 +141,8 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulation_playoff_team_stats/simulation_all_playoff_stats"
         case .conferencePlayoffTeamsSimulatedStats:
             return "simulation_playoff_team_stats/simulation_conference_playoff_stats"
+        case .playoffTreeStats:
+            return "simulation_playoff_team_stats/simulation_playoff_tree"
         }
     }
 }

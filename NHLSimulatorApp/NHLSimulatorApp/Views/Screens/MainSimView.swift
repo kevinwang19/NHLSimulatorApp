@@ -138,9 +138,9 @@ struct MainSimView: View {
                 }
                 .onChange(of: currentDate) { newCurrentDate in
                     // Fetch the last game of the regular season
-                    viewModel.fetchLastGame(season: userInfo.season) { _ in
+                    viewModel.fetchLastGame(season: userInfo.season) { gameFetched in
                         // If the current day is 1 day after the last game of the regular season, create round 1 playoff matchups
-                        if !userInfo.isPlayoffs,
+                        if gameFetched, !userInfo.isPlayoffs,
                            let lastGameDate = viewModel.dateFormatter.date(from: viewModel.lastGameDate),
                            let lastGameFollowingDate = viewModel.calendar.date(byAdding: .day, value: 1, to: lastGameDate),
                            viewModel.calendar.startOfDay(for: newCurrentDate) == viewModel.calendar.startOfDay(for: lastGameFollowingDate) {
@@ -223,17 +223,16 @@ struct MainSimView: View {
                             }
                         }
                         
-                        if !userInfo.seasonComplete {
-                            // Fetch the last game of the playoffs
-                            viewModel.fetchRound4LastGame(simulationID: userInfo.simulationID) { gameFetched in
-                                // If the current day is 1 day after the last game of the finals, update season as finished
-                                if gameFetched, let lastSeasonGameDate = viewModel.dateFormatter.date(from: viewModel.lastRound4GameDate),
-                                   viewModel.calendar.startOfDay(for: newCurrentDate) == viewModel.calendar.startOfDay(for: lastSeasonGameDate) {
+                        // Fetch the last game of the playoffs
+                        viewModel.fetchRound4LastGame(simulationID: userInfo.simulationID) { gameFetched in
+                            // If the current day is 1 day after the last game of the finals, update season as finished
+                            if gameFetched, !userInfo.seasonComplete,
+                                let lastSeasonGameDate = viewModel.dateFormatter.date(from: viewModel.lastRound4GameDate),
+                                viewModel.calendar.startOfDay(for: newCurrentDate) == viewModel.calendar.startOfDay(for: lastSeasonGameDate) {
                                     
-                                    userInfo.seasonComplete = true
-                                    viewModel.finishSimulation(simulationID: userInfo.simulationID) { _ in }
-                                    selectedDate = selectedDate.addingTimeInterval(1)
-                                }
+                                userInfo.seasonComplete = true
+                                viewModel.finishSimulation(simulationID: userInfo.simulationID) { _ in }
+                                selectedDate = selectedDate.addingTimeInterval(1)
                             }
                         }
                         
@@ -381,7 +380,7 @@ struct MainSimView: View {
     private func playoffWinnerView() -> some View {
         if isMatchupLoaded {
             HStack {
-                teamBlockView(teamTitle: viewModel.winnerTeamName, teamLogo: viewModel.winnerTeamLogo, teamRecord: "STANLEY CUP WINNER")
+                teamBlockView(teamTitle: viewModel.winnerTeamName, teamLogo: viewModel.winnerTeamLogo, teamRecord: LocalizedText.winner.localizedString)
                     .padding(.leading, Spacing.spacingExtraSmall)
             }
         } else {

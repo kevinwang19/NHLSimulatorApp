@@ -18,6 +18,7 @@ struct PlayerStatsView: View {
     @State private var isDisabled: Bool = false
     @State private var returnToMainSimView: Bool = false
     @State private var isStatsLoaded: Bool = false
+    @State private var selectedGameType: GameType = .regular
     @State private var selectedPlayerType: PlayerType = .skaters
     @State private var selectedPositionType: PositionType = .all
     @State private var showPlayerDetailsView: Bool = false
@@ -58,6 +59,13 @@ struct PlayerStatsView: View {
                 }
                 .zIndex(1)
                     
+                // Regular season or playoffs picker
+                if userInfo.isPlayoffs {
+                    gameTypePicker()
+                        .padding(.top, Spacing.spacingSmall)
+                }
+                    
+                // Skater or goalie picker
                 playerTypePicker()
                     .padding(.top, Spacing.spacingSmall)
                     
@@ -68,14 +76,17 @@ struct PlayerStatsView: View {
                 }
                     
                 // Player stats grid view if there are stats
-                if viewModel.simSkaterStats.count == 0 {
+                if (selectedGameType == .regular && selectedPlayerType == .skaters && viewModel.simSkaterStats.count == 0) ||
+                    (selectedGameType == .regular && selectedPlayerType == .goalies && viewModel.simGoalieStats.count == 0) ||
+                    (selectedGameType == .playoffs && selectedPlayerType == .skaters && viewModel.simSkaterPlayoffStats.count == 0) ||
+                    (selectedGameType == .playoffs && selectedPlayerType == .goalies && viewModel.simGoaliePlayoffStats.count == 0) {
                     Text(LocalizedText.noStats.localizedString)
                         .appTextStyle()
                         .font(.footnote)
                         .padding(.top, Spacing.spacingExtraLarge)
                 } else {
                     if isStatsLoaded {
-                            PlayerSortableStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType, showPlayerDetailsView: $showPlayerDetailsView, selectedPlayerID: $selectedPlayerID)
+                        PlayerSortableStatsGridView(viewModel: viewModel, selectedGameType: $selectedGameType, selectedPlayerType: $selectedPlayerType, showPlayerDetailsView: $showPlayerDetailsView, selectedPlayerID: $selectedPlayerID)
                     } else {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
@@ -91,21 +102,33 @@ struct PlayerStatsView: View {
             .onAppear {
                 // Set the initial team
                 selectedTeamIndex = teamIndex
+                
+                if userInfo.isPlayoffs {
+                    selectedGameType = .playoffs
+                }
             }
             .onChange(of: selectedTeamIndex) { newIndex in
                 isStatsLoaded = false
                 viewModel.simSkaterStats = []
                 viewModel.simGoalieStats = []
+                viewModel.simSkaterPlayoffStats = []
+                viewModel.simGoaliePlayoffStats = []
                 selectedPositionType = .all
                 
                 // Fetch the teams
                 viewModel.fetchTeams() { teamsFetched in
-                    // Fetch the player stats of the selected team
                     if teamsFetched, viewModel.teams.indices.contains(newIndex) {
                         teamIndex = newIndex
                         
-                        viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
-                            isStatsLoaded = statsFetched
+                        // Fetch the player regular season or playoffs stats of the selected team
+                        if selectedGameType == .playoffs {
+                            viewModel.fetchPlayerSimPlayoffsStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
+                                isStatsLoaded = statsFetched
+                            }
+                        } else {
+                            viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
+                                isStatsLoaded = statsFetched
+                            }
                         }
                     }
                 }
@@ -113,9 +136,36 @@ struct PlayerStatsView: View {
             .onChange(of: selectedPositionType) { newPosition in
                 isStatsLoaded = false
                 
-                // Fetch the player stats of the filtered position
-                viewModel.fetchSkaterPositionSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue) { statsFetched in
-                    isStatsLoaded = statsFetched
+                // Fetch the player regular season or playoffs stats of the filtered position
+                if selectedGameType == .playoffs {
+                    viewModel.fetchSkaterPositionSimPlayoffStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue) { statsFetched in
+                        isStatsLoaded = statsFetched
+                    }
+                } else {
+                    viewModel.fetchSkaterPositionSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue) { statsFetched in
+                        isStatsLoaded = statsFetched
+                    }
+                }
+            }
+            .onChange(of: selectedGameType) { newGameType in
+                isStatsLoaded = false
+                
+                // Fetch the teams
+                viewModel.fetchTeams() { teamsFetched in
+                    if teamsFetched, viewModel.teams.indices.contains(selectedTeamIndex) {
+                        teamIndex = selectedTeamIndex
+                        
+                        // Fetch the player regular season or playoffs stats of the selected team
+                        if newGameType == .playoffs {
+                            viewModel.fetchPlayerSimPlayoffsStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
+                                isStatsLoaded = statsFetched
+                            }
+                        } else {
+                            viewModel.fetchPlayerSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[teamIndex].teamID) { statsFetched in
+                                isStatsLoaded = statsFetched
+                            }
+                        }
+                    }
                 }
             }
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
@@ -132,6 +182,27 @@ struct PlayerStatsView: View {
                     .environmentObject(simulationState)
                     .navigationBarHidden(true)
             })
+        }
+    }
+    
+    // View of the picker of regular season or playoffs stats
+    @ViewBuilder
+    private func gameTypePicker() -> some View {
+        HStack {
+            ForEach(GameType.allCases) { type in
+                Button(action: {
+                    selectedGameType = type
+                }) {
+                    Text(type.localizedStringKey)
+                        .frame(maxWidth: .infinity)
+                        .padding(Spacing.spacingExtraSmall)
+                        .font(.footnote)
+                        .background(selectedGameType == type ? Color.white : Color.black)
+                        .foregroundColor(selectedGameType == type ? Color.black : Color.white)
+                        .appTextStyle()
+                        .appButtonStyle()
+                }
+            }
         }
     }
     

@@ -136,6 +136,17 @@ enum StatColumnHeader: String {
     }
 }
 
+enum GameType: String, CaseIterable, Identifiable {
+    case regular
+    case playoffs
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
 enum PlayerType: String, CaseIterable, Identifiable {
     case skaters
     case goalies
@@ -218,6 +229,17 @@ enum LineupType: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
 }
 
+enum PlayoffDisplayType: String, CaseIterable, Identifiable {
+    case teamStats = "team_stats"
+    case playoffTree = "playoff_tree"
+    
+    var id: String { self.rawValue }
+    
+    var localizedStringKey: LocalizedStringKey {
+        LocalizedStringKey(self.rawValue)
+    }
+}
+
 enum LocalizedText: String {
     case nhlSimulator = "nhl_simulator"
     case newSim = "new_sim"
@@ -251,6 +273,7 @@ enum LocalizedText: String {
     case clearSelections = "clear_selections"
     case performSwitch = "perform_switch"
     case creatingPlayoffs = "creating_playoffs"
+    case winner
     
     var localizedString: String {
         NSLocalizedString(self.rawValue, comment: "")

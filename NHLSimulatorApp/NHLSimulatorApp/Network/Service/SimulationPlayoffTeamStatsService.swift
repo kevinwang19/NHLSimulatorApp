@@ -12,6 +12,7 @@ public protocol SimulationPlayoffTeamStatsService {
     func getSimPlayoffTeamStats(simulationID: Int, teamID: Int) -> Single<SimulationPlayoffTeamStat>
     func getSimAllPlayoffTeamStats(simulationID: Int) -> Single<SimulationPlayoffTeamStatsData>
     func getSimConferencePlayoffTeamStats(simulationID: Int, conference: [String]) -> Single<SimulationPlayoffTeamStatsData>
+    func getSimPlayoffTreeStats(simulationID: Int, conference: String) -> Single<SimulationPlayoffTeamStatsData>
 }
 
 extension NetworkManager: SimulationPlayoffTeamStatsService {
@@ -30,6 +31,12 @@ extension NetworkManager: SimulationPlayoffTeamStatsService {
     public func getSimConferencePlayoffTeamStats(simulationID: Int, conference: [String]) -> Single<SimulationPlayoffTeamStatsData> {
         let parameter: ParameterType = .object(["simulationID": simulationID, "conference": conference])
         let endpoint = Endpoint(method: .get, info: NetworkEndpoint.conferencePlayoffTeamsSimulatedStats, parameters: parameter, resultType: SimulationPlayoffTeamStatsData.self)
+        return networkTask(endpoint: endpoint)
+    }
+    
+    public func getSimPlayoffTreeStats(simulationID: Int, conference: String) -> Single<SimulationPlayoffTeamStatsData> {
+        let parameter: ParameterType = .object(["simulationID": simulationID, "conference": conference])
+        let endpoint = Endpoint(method: .get, info: NetworkEndpoint.playoffTreeStats, parameters: parameter, resultType: SimulationPlayoffTeamStatsData.self)
         return networkTask(endpoint: endpoint)
     }
 }

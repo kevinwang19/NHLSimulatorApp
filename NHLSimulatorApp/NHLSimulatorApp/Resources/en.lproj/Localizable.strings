@@ -81,4 +81,8 @@
 "clear_selections" = "CLEAR SELECTIONS";
 "perform_switch" = "PERFORM SWITCH";
 "creating_playoffs" = "CREATING PLAYOFFS";
-
+"regular" = "REGULAR SEASON";
+"playoffs" = "PLAYOFFS";
+"winner" = "STANLEY CUP WINNER";
+"team_stats" = "TEAM STATS";
+"playoff_tree" = "PLAYOFF TREE";

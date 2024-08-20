@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		431B81CDF2FE5435A3B307F6 /* Pods_NHLSimulatorApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E22CBCBB5260D4F63C09B8A /* Pods_NHLSimulatorApp.framework */; };
+		4813FCE52C74E67700971041 /* PlayoffTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4813FCE42C74E67700971041 /* PlayoffTreeView.swift */; };
 		481537522C40B0D0002A0FBF /* SDWebImageSVGCoder in Frameworks */ = {isa = PBXBuildFile; productRef = 481537512C40B0D0002A0FBF /* SDWebImageSVGCoder */; };
 		481537552C40B0F0002A0FBF /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 481537542C40B0F0002A0FBF /* SDWebImageSwiftUI */; };
 		481537572C4603AC002A0FBF /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537562C4603AC002A0FBF /* Enums.swift */; };
@@ -107,6 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4813FCE42C74E67700971041 /* PlayoffTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayoffTreeView.swift; sourceTree = "<group>"; };
 		481537562C4603AC002A0FBF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4815375B2C46070C002A0FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		481537622C4710E9002A0FBF /* MainSimViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSimViewModel.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				481537872C618B2F002A0FBF /* PlayerSortableStatsGridView.swift */,
 				481537892C62C17C002A0FBF /* TeamSortableStatsGridView.swift */,
 				481537932C643D20002A0FBF /* PlayerStatsGridView.swift */,
+				4813FCE42C74E67700971041 /* PlayoffTreeView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				4815377A2C6169D0002A0FBF /* PlayerStatsView.swift in Sources */,
 				481537842C616A9E002A0FBF /* EditRostersViewModel.swift in Sources */,
 				48DCF3712C3799E30079AB67 /* GoalieStatsData.swift in Sources */,
+				4813FCE52C74E67700971041 /* PlayoffTreeView.swift in Sources */,
 				48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */,
 				481537AA2C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift in Sources */,
 				48DCAC1E2C3E2AD5000CEBB3 /* MainSimView.swift in Sources */,

@@ -11,6 +11,7 @@ import SwiftUI
 
 class TeamStandingsViewModel: ObservableObject {
     @Published var simTeamStats: [SimulationTeamStat] = []
+    @Published var simTeamPlayoffStats: [SimulationPlayoffTeamStat] = []
     private let disposeBag = DisposeBag()
     
     // Fetch league team simulation stats
@@ -104,6 +105,76 @@ class TeamStandingsViewModel: ObservableObject {
             completion(true)
         }, onFailure: { error in
             print("Failed to fetch team simulation stats: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    // Fetch league team simulation playoff stats
+    func fetchAllTeamSimPlayoffStats(simulationID: Int, completion: @escaping (Bool) -> Void) {
+        NetworkManager.shared.getSimAllPlayoffTeamStats(simulationID: simulationID).subscribe(onSuccess: { [weak self] simulationTeamPlayoffStats in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            self.simTeamPlayoffStats = simulationTeamPlayoffStats.playoffTeamStats
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to fetch team simulation playoff stats: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    // Fetch conference team simulation playoff stats
+    func fetchConferenceTeamSimPlayoffStats(simulationID: Int, conference: String, completion: @escaping (Bool) -> Void) {
+        let includedConferences: [String] = {
+            switch conference {
+            case ConferenceType.all.rawValue:
+                return [
+                    ConferenceType.eastern.rawValue,
+                    ConferenceType.western.rawValue
+                ]
+            case ConferenceType.eastern.rawValue:
+                return [ConferenceType.eastern.rawValue]
+            case ConferenceType.western.rawValue:
+                return [ConferenceType.western.rawValue]
+            default:
+                return [
+                    ConferenceType.eastern.rawValue,
+                    ConferenceType.western.rawValue
+                ]
+            }
+        }()
+        
+        NetworkManager.shared.getSimConferencePlayoffTeamStats(simulationID: simulationID, conference: includedConferences).subscribe(onSuccess: { [weak self] simulationTeamPlayoffStats in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            self.simTeamPlayoffStats = simulationTeamPlayoffStats.playoffTeamStats
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to fetch team simulation playoff stats: \(error)")
+            completion(false)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    // Fetch conference playoff tree stats
+    func fetchPlayoffTreeStats(simulationID: Int, conference: String, completion: @escaping (Bool) -> Void) {
+        NetworkManager.shared.getSimPlayoffTreeStats(simulationID: simulationID, conference: conference).subscribe(onSuccess: { [weak self] simulationTeamPlayoffStats in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            self.simTeamPlayoffStats = simulationTeamPlayoffStats.playoffTeamStats
+            completion(true)
+        }, onFailure: { error in
+            print("Failed to fetch team simulation playoff stats: \(error)")
             completion(false)
         })
         .disposed(by: disposeBag)
