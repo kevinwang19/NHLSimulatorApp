@@ -821,8 +821,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1072,8 +1072,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "312"
-            endingLineNumber = "312"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1244,8 +1244,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "430"
-            endingLineNumber = "430"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
             landmarkName = "simulateButton()"
             landmarkType = "7">
             <Locations>
@@ -1292,8 +1292,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "571"
-            endingLineNumber = "571"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
             landmarkName = "simulateDay(simulatedDays:daysToSimulate:)"
             landmarkType = "7">
             <Locations>
@@ -1755,8 +1755,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1803,8 +1803,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1819,8 +1819,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1867,8 +1867,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2153,8 +2153,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2201,8 +2201,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/EditRostersView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2630,8 +2630,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2772,8 +2772,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
             landmarkName = "playoffMatchupView(playoffMatchupGame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2836,8 +2836,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

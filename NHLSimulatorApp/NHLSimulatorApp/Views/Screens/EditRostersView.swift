@@ -13,6 +13,7 @@ struct EditRostersView: View {
     @EnvironmentObject var simulationState: SimulationState
     @ObservedObject var viewModel: EditRostersViewModel = EditRostersViewModel()
     @Binding var teamIndex: Int
+    @Binding var pastDeadline: Bool
     @State private var selectedTeamIndex: Int = -1
     @State private var otherTeamIndex: Int = -1
     @State private var showDropdown: Bool = false
@@ -34,8 +35,9 @@ struct EditRostersView: View {
     private var blockHeight: CGFloat = 45
     private var buttonWidth: CGFloat = 160
     
-    init(teamIndex: Binding<Int>) {
+    init(teamIndex: Binding<Int>, pastDeadline: Binding<Bool>) {
         self._teamIndex = teamIndex
+        self._pastDeadline = pastDeadline
     }
     
     var body: some View {
@@ -44,136 +46,147 @@ struct EditRostersView: View {
                 // Title and back button
                 ScreenHeaderView(returnToPreviousView: $returnToMainSimView, backButtonDisabled: $isDisabled)
                 
-                // Instruction text
-                Text(LocalizedText.selectTeamChange.localizedString)
-                    .appTextStyle()
-                    .font(.footnote)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, Spacing.spacingExtraSmall)
+                if pastDeadline {
+                    Text(LocalizedText.pastDeadline.localizedString)
+                        .appTextStyle()
+                        .font(.callout)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, Spacing.spacingLarge)
                     
-                if isRosterLoaded {
-                    VStack {
-                        HStack {
-                            // Drop down menu of all teams
-                            TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, maxTeamsDisplayed: 5, isDisabled: $isDisabled)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                            // Selected team logo
-                            if viewModel.teams.indices.contains(selectedTeamIndex) {
-                                let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
-                                
-                                WebImage(url: url)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 40)
-                                    .padding(.trailing, Spacing.spacingSmall)
-                            } else {
-                                Rectangle()
-                                    .fill(.clear)
-                                    .scaledToFit()
-                                    .frame(height: 40)
-                                    .padding(.trailing, Spacing.spacingSmall)
-                            }
-                        }
-                        .zIndex(1)
-                            
-                        // List of selected team players
-                        playersGridView()
-                            .padding(.bottom, Spacing.spacingExtraSmall)
-                            .zIndex(0)
-                    }
+                    Spacer()
                 } else {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                        
-                if isOtherRosterLoaded {
-                    VStack {
-                        HStack {
-                            // Drop down menu of all teams other than the selectedTeam
-                            TeamDropDownMenuView(selectedTeamIndex: $otherTeamIndex, showDropdown: $showOtherDropdown, teams: viewModel.otherTeams, maxTeamsDisplayed: 5, isDisabled: $isDisabled)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                    // Instruction text
+                    Text(LocalizedText.selectTeamChange.localizedString)
+                        .appTextStyle()
+                        .font(.footnote)
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, Spacing.spacingExtraSmall)
+                    
+                    if isRosterLoaded {
+                        VStack {
+                            HStack {
+                                // Drop down menu of all teams
+                                TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, maxTeamsDisplayed: 5, isDisabled: $isDisabled)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                            // Other team logo
-                            if viewModel.otherTeams.indices.contains(otherTeamIndex) {
-                                let url = URL(string: viewModel.otherTeams[otherTeamIndex].logo)
-                                
-                                WebImage(url: url)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 40)
-                                    .padding(.trailing, Spacing.spacingSmall)
-                            } else {
-                                Rectangle()
-                                    .fill(.clear)
-                                    .scaledToFit()
-                                    .frame(height: 40)
-                                    .padding(.trailing, Spacing.spacingSmall)
+                                // Selected team logo
+                                if viewModel.teams.indices.contains(selectedTeamIndex) {
+                                    let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
+                                    
+                                    WebImage(url: url)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 40)
+                                        .padding(.trailing, Spacing.spacingSmall)
+                                } else {
+                                    Rectangle()
+                                        .fill(.clear)
+                                        .scaledToFit()
+                                        .frame(height: 40)
+                                        .padding(.trailing, Spacing.spacingSmall)
+                                }
                             }
-                        }
-                        .zIndex(1)
+                            .zIndex(1)
                             
-                        // List of other team players
-                        otherPlayersGridView()
-                            .zIndex(0)
+                            // List of selected team players
+                            playersGridView()
+                                .padding(.bottom, Spacing.spacingExtraSmall)
+                                .zIndex(0)
+                        }
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                } else {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                
-                Spacer()
                     
-                // Success or error message
-                Text(viewModel.switchMessage)
-                    .appTextStyle()
-                    .font(.caption)
-                    .frame(maxWidth: .infinity)
-                    
-                HStack {
-                    // Clear selections button
-                    Button {
-                        viewModel.switchMessage = ""
-                        selectedPlayerIDs = []
-                        selectedOtherPlayerIDs = []
-                    } label: {
-                        Text(LocalizedText.clearSelections.localizedString)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(Spacing.spacingExtraSmall)
-                            .frame(width: buttonWidth, alignment: .center)
+                    if isOtherRosterLoaded {
+                        VStack {
+                            HStack {
+                                // Drop down menu of all teams other than the selectedTeam
+                                TeamDropDownMenuView(selectedTeamIndex: $otherTeamIndex, showDropdown: $showOtherDropdown, teams: viewModel.otherTeams, maxTeamsDisplayed: 5, isDisabled: $isDisabled)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                // Other team logo
+                                if viewModel.otherTeams.indices.contains(otherTeamIndex) {
+                                    let url = URL(string: viewModel.otherTeams[otherTeamIndex].logo)
+                                    
+                                    WebImage(url: url)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 40)
+                                        .padding(.trailing, Spacing.spacingSmall)
+                                } else {
+                                    Rectangle()
+                                        .fill(.clear)
+                                        .scaledToFit()
+                                        .frame(height: 40)
+                                        .padding(.trailing, Spacing.spacingSmall)
+                                }
+                            }
+                            .zIndex(1)
+                            
+                            // List of other team players
+                            otherPlayersGridView()
+                                .zIndex(0)
+                        }
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .appButtonStyle()
-                        
+                    
                     Spacer()
                     
-                    // Switch players roster
-                    Button {
-                        viewModel.switchMessage = ""
-                            
-                        // Update other team index after removing the selected team index team
-                        let updatedOtherTeamIndex = otherTeamIndex >= selectedTeamIndex ? otherTeamIndex + 1 : otherTeamIndex
-                            
-                        if viewModel.teams.indices.contains(selectedTeamIndex), viewModel.teams.indices.contains(updatedOtherTeamIndex) {
-                            // Update lineups and rosters data
-                            viewModel.updateRosters(teamID: viewModel.teams[selectedTeamIndex].teamID, playerIDs: selectedPlayerIDs, otherTeamID: viewModel.teams[updatedOtherTeamIndex].teamID, otherPlayerIDs: selectedOtherPlayerIDs) { _ in
-                                isSwitchTapped.toggle()
-                                selectedPlayerIDs = []
-                                selectedOtherPlayerIDs = []
-                            }
+                    // Success or error message
+                    Text(viewModel.switchMessage)
+                        .appTextStyle()
+                        .font(.caption)
+                        .frame(maxWidth: .infinity)
+                    
+                    HStack {
+                        // Clear selections button
+                        Button {
+                            viewModel.switchMessage = ""
+                            selectedPlayerIDs = []
+                            selectedOtherPlayerIDs = []
+                        } label: {
+                            Text(LocalizedText.clearSelections.localizedString)
+                                .appTextStyle()
+                                .font(.footnote)
+                                .padding(Spacing.spacingExtraSmall)
+                                .frame(width: buttonWidth, alignment: .center)
                         }
-                    } label: {
-                        Text(LocalizedText.performSwitch.localizedString)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(Spacing.spacingExtraSmall)
-                            .frame(width: buttonWidth, alignment: .center)
+                        .appButtonStyle()
+                        
+                        Spacer()
+                        
+                        // Switch players roster
+                        Button {
+                            viewModel.switchMessage = ""
+                            
+                            // Update other team index after removing the selected team index team
+                            let updatedOtherTeamIndex = otherTeamIndex >= selectedTeamIndex ? otherTeamIndex + 1 : otherTeamIndex
+                            
+                            if viewModel.teams.indices.contains(selectedTeamIndex), viewModel.teams.indices.contains(updatedOtherTeamIndex) {
+                                // Update lineups and rosters data
+                                viewModel.updateRosters(teamID: viewModel.teams[selectedTeamIndex].teamID, playerIDs: selectedPlayerIDs, otherTeamID: viewModel.teams[updatedOtherTeamIndex].teamID, otherPlayerIDs: selectedOtherPlayerIDs) { _ in
+                                    isSwitchTapped.toggle()
+                                    selectedPlayerIDs = []
+                                    selectedOtherPlayerIDs = []
+                                }
+                            }
+                        } label: {
+                            Text(LocalizedText.performSwitch.localizedString)
+                                .appTextStyle()
+                                .font(.footnote)
+                                .padding(Spacing.spacingExtraSmall)
+                                .frame(width: buttonWidth, alignment: .center)
+                        }
+                        .appButtonStyle()
                     }
-                    .appButtonStyle()
+                    .padding(.bottom, Spacing.spacingExtraSmall)
                 }
-                .padding(.bottom, Spacing.spacingExtraSmall)
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

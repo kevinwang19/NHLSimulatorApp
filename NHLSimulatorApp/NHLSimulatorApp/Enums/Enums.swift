@@ -274,6 +274,7 @@ enum LocalizedText: String {
     case performSwitch = "perform_switch"
     case creatingPlayoffs = "creating_playoffs"
     case winner
+    case pastDeadline = "past_deadline"
     
     var localizedString: String {
         NSLocalizedString(self.rawValue, comment: "")

@@ -228,7 +228,8 @@ struct MainSimView: View {
                             // If the current day is 1 day after the last game of the finals, update season as finished
                             if gameFetched, !userInfo.seasonComplete,
                                 let lastSeasonGameDate = viewModel.dateFormatter.date(from: viewModel.lastRound4GameDate),
-                                viewModel.calendar.startOfDay(for: newCurrentDate) == viewModel.calendar.startOfDay(for: lastSeasonGameDate) {
+                                let lastSeasonGameFollowingDate = viewModel.calendar.date(byAdding: .day, value: 1, to: lastSeasonGameDate),
+                                viewModel.calendar.startOfDay(for: newCurrentDate) == viewModel.calendar.startOfDay(for: lastSeasonGameFollowingDate) {
                                     
                                 userInfo.seasonComplete = true
                                 viewModel.finishSimulation(simulationID: userInfo.simulationID) { _ in }
@@ -285,7 +286,7 @@ struct MainSimView: View {
                 })
                 .navigationDestination(isPresented: $showRostersView, destination: {
                     // Navigate to Edit Rosters page when it's button is clicked
-                    EditRostersView(teamIndex: $selectedTeamIndex)
+                    EditRostersView(teamIndex: $selectedTeamIndex, pastDeadline: $userInfo.isPlayoffs)
                         .environmentObject(userInfo)
                         .environmentObject(simulationState)
                         .navigationBarHidden(true)
