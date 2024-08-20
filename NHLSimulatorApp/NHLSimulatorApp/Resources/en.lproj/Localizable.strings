@@ -77,4 +77,8 @@
 "line" = "LINE";
 "select_player_swap" = "SELECT A PLAYER FROM THE LIST TO SWAP";
 "swap" = "SWAP";
+"select_team_change" = "SELECT PLAYERS TO CHANGE TEAMS";
+"clear_selections" = "CLEAR SELECTIONS";
+"perform_switch" = "PERFORM SWITCH";
+"creating_playoffs" = "CREATING PLAYOFFS";
 

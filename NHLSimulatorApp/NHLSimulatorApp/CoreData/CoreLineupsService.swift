@@ -68,6 +68,19 @@ extension CoreDataManager {
         }
     }
     
+    // Fetch certain player lineup details from Core Data
+    func fetchCertainPlayerLineupCoreData(playerIDs: [Int64]) -> [CoreLineup] {
+        let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "playerID IN %@", playerIDs)
+        do {
+            let lineups = try context.fetch(fetchRequest)
+            return lineups
+        } catch {
+            print("Failed to fetch lineups: \(error)")
+            return []
+        }
+    }
+    
     // Fetch all lineups belonging to a specific team from Core Data
     func fetchTeamLineupsCoreData(teamID: Int) -> [CoreLineup] {
         let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
@@ -93,13 +106,14 @@ extension CoreDataManager {
     }
     
     // Update lineup properties from Core Data
-    func updateLineupsCoreData(playerID: Int, position: String, lineNumber: Int16, powerPlayLineNumber: Int16, penaltyKillLineNumber: Int16, otLineNumber: Int16) {
+    func updateLineupsCoreData(playerID: Int, teamID: Int64, position: String, lineNumber: Int16, powerPlayLineNumber: Int16, penaltyKillLineNumber: Int16, otLineNumber: Int16) {
         let fetchRequest: NSFetchRequest<CoreLineup> = CoreLineup.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "playerID == %d", playerID)
         do {
             let lineups = try context.fetch(fetchRequest)
             
             for lineup in lineups {
+                lineup.teamID = teamID
                 lineup.position = position
                 lineup.lineNumber = lineNumber
                 lineup.powerPlayLineNumber = powerPlayLineNumber

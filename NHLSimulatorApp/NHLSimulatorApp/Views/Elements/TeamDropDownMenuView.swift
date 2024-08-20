@@ -14,10 +14,10 @@ struct TeamDropDownMenuView: View {
     @State private var isAtTop: Bool = true
     @State private var isAtBottom: Bool = false
     var teams: [Team]
+    var maxTeamsDisplayed: Int
     @Binding var isDisabled: Bool
     private let menuWidth: CGFloat = 250
     private let buttonHeight: CGFloat = 50
-    private let maxTeamsDisplayed: Int = 9
 
     var body: some View {
         VStack {

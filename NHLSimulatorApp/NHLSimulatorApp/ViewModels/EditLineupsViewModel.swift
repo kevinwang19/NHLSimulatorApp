@@ -82,7 +82,7 @@ class EditLineupsViewModel: ObservableObject {
     }
     
     // Sort the special teams lineup to place defensemen at the back
-    func sortedSpecialTeamsLineups(lineupPlayers: [CoreLineup]) -> [CoreLineup] {
+    private func sortedSpecialTeamsLineups(lineupPlayers: [CoreLineup]) -> [CoreLineup] {
         let reorderedLineupPlayers = lineupPlayers.sorted { player1, player2 in
             let isPlayer1Defense = player1.position == PositionType.leftDefensemen.rawValue || player1.position == PositionType.rightDefensemen.rawValue
             let isPlayer2Defense = player2.position == PositionType.leftDefensemen.rawValue || player2.position == PositionType.rightDefensemen.rawValue

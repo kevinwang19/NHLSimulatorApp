@@ -10,6 +10,7 @@ import Foundation
 public enum NetworkEndpoint: EndpointInfo {
     case teamDaySchedule
     case teamMonthSchedules
+    case lastSchedule
     case teams
     case team
     case players
@@ -23,10 +24,8 @@ public enum NetworkEndpoint: EndpointInfo {
     case simulate
     case finishSimulation
     case userRecentSimulation
-    case simulationIndividualSkaterStats
     case simulationTeamSkaterStats
     case simulationTeamPositionSkaterStats
-    case simulationIndividualGoalieStats
     case simulationTeamGoalieStats
     case simulationTeamStats
     case teamSimulatedStats
@@ -34,6 +33,24 @@ public enum NetworkEndpoint: EndpointInfo {
     case conferenceTeamsSimulatedStats
     case divisionTeamsSimulatedStats
     case teamSimulatedGameStats
+    case createRound1PlayoffSchedules
+    case lastRound1PlayoffSchedule
+    case createRound2PlayoffSchedules
+    case lastRound2PlayoffSchedule
+    case createRound3PlayoffSchedules
+    case lastRound3PlayoffSchedule
+    case createRound4PlayoffSchedules
+    case lastRound4PlayoffSchedule
+    case deleteExtraPlayoffSchedules
+    case teamDayPlayoffSchedule
+    case teamMonthPlayoffSchedules
+    case teamSimulatedPlayoffGameStats
+    case simulationTeamSkaterPlayoffStats
+    case simulationTeamPositionSkaterPlayoffStats
+    case simulationTeamGoaliePlayoffStats
+    case playoffTeamSimulatedStats
+    case allPlayoffTeamsSimulatedStats
+    case conferencePlayoffTeamsSimulatedStats
     
     public var route: String {
         switch self {
@@ -41,6 +58,8 @@ public enum NetworkEndpoint: EndpointInfo {
             return "schedules/team_date_schedule"
         case .teamMonthSchedules:
             return "schedules/team_month_schedules"
+        case .lastSchedule:
+            return "schedules/last_schedule"
         case .teams:
             return "teams"
         case .team:
@@ -67,14 +86,10 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulations/finish"
         case .userRecentSimulation:
             return "simulations/user_simulation"
-        case .simulationIndividualSkaterStats:
-            return "simulation_skater_stats/simulation_individual_stat"
         case .simulationTeamSkaterStats:
             return "simulation_skater_stats/simulation_team_stats"
         case .simulationTeamPositionSkaterStats:
             return "simulation_skater_stats/simulation_team_position_stats"
-        case .simulationIndividualGoalieStats:
-            return "simulation_goalie_stats/simulation_individual_stat"
         case .simulationTeamGoalieStats:
             return "simulation_goalie_stats/simulation_team_stats"
         case .simulationTeamStats:
@@ -89,6 +104,42 @@ public enum NetworkEndpoint: EndpointInfo {
             return "simulation_team_stats/simulation_division_stats"
         case .teamSimulatedGameStats:
             return "simulation_game_stats/team_simulated_game_stats"
+        case .createRound1PlayoffSchedules:
+            return "playoff_schedules/create_round_1_playoff_schedules"
+        case .lastRound1PlayoffSchedule:
+            return "playoff_schedules/last_round_1_playoff_schedule"
+        case .createRound2PlayoffSchedules:
+            return "playoff_schedules/create_round_2_playoff_schedules"
+        case .lastRound2PlayoffSchedule:
+            return "playoff_schedules/last_round_2_playoff_schedule"
+        case .createRound3PlayoffSchedules:
+            return "playoff_schedules/create_round_3_playoff_schedules"
+        case .lastRound3PlayoffSchedule:
+            return "playoff_schedules/last_round_3_playoff_schedule"
+        case .createRound4PlayoffSchedules:
+            return "playoff_schedules/create_round_4_playoff_schedules"
+        case .lastRound4PlayoffSchedule:
+            return "playoff_schedules/last_round_4_playoff_schedule"
+        case .deleteExtraPlayoffSchedules:
+            return "playoff_schedules/delete_extra_playoff_schedules"
+        case .teamDayPlayoffSchedule:
+            return "playoff_schedules/team_date_playoff_schedule"
+        case .teamMonthPlayoffSchedules:
+            return "playoff_schedules/team_month_playoff_schedules"
+        case .teamSimulatedPlayoffGameStats:
+            return "playoff_schedules/team_simulated_playoff_game_stats"
+        case .simulationTeamSkaterPlayoffStats:
+            return "simulation_playoff_skater_stats/simulation_team_playoff_stats"
+        case .simulationTeamPositionSkaterPlayoffStats:
+            return "simulation_playoff_skater_stats/simulation_team_position_playoff_stats"
+        case .simulationTeamGoaliePlayoffStats:
+            return "simulation_playoff_goalie_stats/simulation_team_playoff_stats"
+        case .playoffTeamSimulatedStats:
+            return "simulation_playoff_team_stats/playoff_team_simulated_stats"
+        case .allPlayoffTeamsSimulatedStats:
+            return "simulation_playoff_team_stats/simulation_all_playoff_stats"
+        case .conferencePlayoffTeamsSimulatedStats:
+            return "simulation_playoff_team_stats/simulation_conference_playoff_stats"
         }
     }
 }

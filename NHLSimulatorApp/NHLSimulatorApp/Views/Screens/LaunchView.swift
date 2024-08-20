@@ -78,6 +78,7 @@ struct LaunchView: View {
                 /*UserDefaultsManager.removeDefaults(key: UserDefaultName.userID.rawValue)
                 UserDefaultsManager.removeDefaults(key: UserDefaultName.isFirstLaunch.rawValue)
                 UserDefaultsManager.removeDefaults(key: UserDefaultName.favTeamIndex.rawValue)*/
+                //UserDefaultsManager.removeDefaults(key: UserDefaultName.isPlayoffs.rawValue)
             }
         }
     }

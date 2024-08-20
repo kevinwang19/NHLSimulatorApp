@@ -16,12 +16,13 @@ struct UserSetupView: View {
     @State private var selectedTeamIndex: Int = 0
     @State private var showMainView: Bool = false
     @State private var returnToLaunchView: Bool = false
+    @State private var backButtonDisabled: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
                 // Title and back button
-                ScreenHeaderView(returnToPreviousView: $returnToLaunchView)
+                ScreenHeaderView(returnToPreviousView: $returnToLaunchView, backButtonDisabled: $backButtonDisabled)
                 
                 Spacer()
                 
@@ -70,9 +71,12 @@ struct UserSetupView: View {
                         .appButtonStyle()
                         .frame(width: 200, height: 100)
                         
+                        Spacer()
+                        
                         // Favorite team logo
                         if viewModel.teams.indices.contains(selectedTeamIndex) {
                             let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
+                            
                             WebImage(url: url)
                                 .resizable()
                                 .scaledToFit()
@@ -119,6 +123,7 @@ struct UserSetupView: View {
                 
                 Spacer()
             }
+            .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .appBackgroundStyle()
             .onAppear {

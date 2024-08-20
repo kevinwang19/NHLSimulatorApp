@@ -12,6 +12,7 @@ struct TeamStandingsView: View {
     @EnvironmentObject var simulationState: SimulationState
     @ObservedObject var viewModel: TeamStandingsViewModel = TeamStandingsViewModel()
     @State private var returnToMainSimView: Bool = false
+    @State private var backButtonDisabled: Bool = false
     @State private var isStatsLoaded: Bool = false
     @State private var selectedConference: ConferenceType = .all
     @State private var selectedEastDivision: EastDivisionType = .all
@@ -21,43 +22,44 @@ struct TeamStandingsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if isStatsLoaded {
-                    // Title and back button
-                    ScreenHeaderView(returnToPreviousView: $returnToMainSimView)
+               // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToMainSimView, backButtonDisabled: $backButtonDisabled)
                     
-                    conferencePicker()
+                conferencePicker()
+                    .padding(.top, Spacing.spacingSmall)
+                    
+                // Show division pickers if a conference is picked
+                if selectedConference == .eastern {
+                    eastDivisionPicker()
                         .padding(.top, Spacing.spacingSmall)
+                } else if selectedConference == .western {
+                    westDivisionPicker()
+                        .padding(.top, Spacing.spacingSmall)
+                }
                     
-                    // Show division pickers if a conference is picked
-                    if selectedConference == .eastern {
-                        eastDivisionPicker()
-                            .padding(.top, Spacing.spacingSmall)
-                    } else if selectedConference == .western {
-                        westDivisionPicker()
-                            .padding(.top, Spacing.spacingSmall)
-                    }
-                    
-                    // Team stats grid view if there are stats
-                    if viewModel.simTeamStats.count == 0 {
-                        Text(LocalizedText.noStats.localizedString)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(.top, Spacing.spacingExtraLarge)
-                    } else {
-                        TeamSortableStatsGridView(viewModel: viewModel, rankType: $rankType)
-                    }
-                    
-                    // Stats legend
-                    Text(LocalizedText.standingsLegend.localizedString)
+                // Team stats grid view if there are stats
+                if viewModel.simTeamStats.count == 0 {
+                    Text(LocalizedText.noStats.localizedString)
                         .appTextStyle()
                         .font(.footnote)
                         .padding(.top, Spacing.spacingExtraLarge)
-                    
-                    Spacer()
                 } else {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                    if isStatsLoaded {
+                        TeamSortableStatsGridView(viewModel: viewModel, rankType: $rankType)
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
                 }
+                    
+                // Stats legend
+                Text(LocalizedText.standingsLegend.localizedString)
+                    .appTextStyle()
+                    .font(.footnote)
+                    .padding(.top, Spacing.spacingExtraLarge)
+                    
+                Spacer()
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -71,7 +73,9 @@ struct TeamStandingsView: View {
                 }
             }
             .onChange(of: selectedConference) { newConference in
+                isStatsLoaded = false
                 rankType = newConference == .all ? .league : .conference
+                
                 if newConference == .eastern {
                     selectedEastDivision = .all
                 } else {
@@ -79,19 +83,27 @@ struct TeamStandingsView: View {
                 }
                 
                 // Fetch team stats from the specific conference when the conference is selected
-                viewModel.fetchConferenceTeamSimStats(simulationID: userInfo.simulationID, conference: newConference.rawValue)
+                viewModel.fetchConferenceTeamSimStats(simulationID: userInfo.simulationID, conference: newConference.rawValue) { statsFetched in
+                    isStatsLoaded = statsFetched
+                }
             }
             .onChange(of: selectedEastDivision) { newDivision in
+                isStatsLoaded = false
                 rankType = newDivision == .all ? .conference : .division
                 
                 // Fetch team stats from the specific east division when the division is selected
-                viewModel.fetchDivisionTeamSimStats(simulationID: userInfo.simulationID, conference: ConferenceType.eastern.rawValue, division: newDivision.rawValue)
+                viewModel.fetchDivisionTeamSimStats(simulationID: userInfo.simulationID, conference: ConferenceType.eastern.rawValue, division: newDivision.rawValue) { statsFetched in
+                    isStatsLoaded = statsFetched
+                }
             }
             .onChange(of: selectedWestDivision) { newDivision in
+                isStatsLoaded = false
                 rankType = newDivision == .all ? .conference : .division
                 
                 // Fetch team stats from the specific west division when the division is selected
-                viewModel.fetchDivisionTeamSimStats(simulationID: userInfo.simulationID, conference: ConferenceType.western.rawValue, division: newDivision.rawValue)
+                viewModel.fetchDivisionTeamSimStats(simulationID: userInfo.simulationID, conference: ConferenceType.western.rawValue, division: newDivision.rawValue) { statsFetched in
+                    isStatsLoaded = statsFetched
+                }
             }
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
                 // Navigate to Main Sim page when back button is clicked

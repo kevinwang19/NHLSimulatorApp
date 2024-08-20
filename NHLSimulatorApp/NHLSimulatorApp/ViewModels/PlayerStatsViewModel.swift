@@ -68,7 +68,7 @@ class PlayerStatsViewModel: ObservableObject {
     }
     
     // Fetch skater simulation stats for a selected position
-    func fetchSkaterPositionSimStats(simulationID: Int, teamID: Int, position: String) -> Void {
+    func fetchSkaterPositionSimStats(simulationID: Int, teamID: Int, position: String, completion: @escaping (Bool) -> Void) {
         let players = CoreDataManager.shared.fetchTeamPlayersCoreData(teamID: teamID)
         let skaterIDs = players.filter { $0.positionCode != "G" }.map { Int($0.playerID) }
         
@@ -93,12 +93,15 @@ class PlayerStatsViewModel: ObservableObject {
                 
         NetworkManager.shared.getSimTeamPositionSkaterStats(simulationID: simulationID, playerIDs: skaterIDs, teamID: teamID, position: includedPositions).subscribe(onSuccess: { [weak self] simulationSkaterStats in
             guard let self = self else {
+                completion(false)
                 return
             }
                 
             self.simSkaterStats = simulationSkaterStats.skaterStats
+            completion(true)
         }, onFailure: { error in
             print("Failed to fetch skater simulation stats: \(error)")
+            completion(false)
         })
         .disposed(by: disposeBag)
     }

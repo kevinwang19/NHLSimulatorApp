@@ -78,12 +78,14 @@ class PlayerLineupSwapViewModel: ObservableObject {
             return
         }
         
+        let playerTeamID = player.teamID
         var playerPosition: String = ""
         var playerLineNumber: Int16 = 0
         var playerPowerPlayNumber: Int16 = 0
         var playerPenaltyKillNumber: Int16 = 0
         var playerOTNumber: Int16 = 0
         
+        let swapPlayerTeamID = swapPlayer.teamID
         var swapPlayerPosition: String = ""
         var swapPlayerLineNumber: Int16 = 0
         var swapPlayerPowerPlayNumber: Int16 = 0
@@ -155,8 +157,8 @@ class PlayerLineupSwapViewModel: ObservableObject {
             }
         }
         
-        CoreDataManager.shared.updateLineupsCoreData(playerID: playerID, position: playerPosition, lineNumber: playerLineNumber, powerPlayLineNumber: playerPowerPlayNumber, penaltyKillLineNumber: playerPenaltyKillNumber, otLineNumber: playerOTNumber)
-        CoreDataManager.shared.updateLineupsCoreData(playerID: swapPlayerID, position: swapPlayerPosition, lineNumber: swapPlayerLineNumber, powerPlayLineNumber: swapPlayerPowerPlayNumber, penaltyKillLineNumber: swapPlayerPenaltyKillNumber, otLineNumber: swapPlayerOTNumber)
+        CoreDataManager.shared.updateLineupsCoreData(playerID: playerID, teamID: playerTeamID, position: playerPosition, lineNumber: playerLineNumber, powerPlayLineNumber: playerPowerPlayNumber, penaltyKillLineNumber: playerPenaltyKillNumber, otLineNumber: playerOTNumber)
+        CoreDataManager.shared.updateLineupsCoreData(playerID: swapPlayerID, teamID: swapPlayerTeamID, position: swapPlayerPosition, lineNumber: swapPlayerLineNumber, powerPlayLineNumber: swapPlayerPowerPlayNumber, penaltyKillLineNumber: swapPlayerPenaltyKillNumber, otLineNumber: swapPlayerOTNumber)
         
         completion(true)
     }

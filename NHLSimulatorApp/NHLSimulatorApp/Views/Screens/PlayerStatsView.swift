@@ -13,7 +13,7 @@ struct PlayerStatsView: View {
     @EnvironmentObject var simulationState: SimulationState
     @ObservedObject var viewModel: PlayerStatsViewModel = PlayerStatsViewModel()
     @Binding var teamIndex: Int
-    @State private var selectedTeamIndex: Int = 0
+    @State private var selectedTeamIndex: Int = -1
     @State private var showDropdown: Bool = false
     @State private var isDisabled: Bool = false
     @State private var returnToMainSimView: Bool = false
@@ -31,57 +31,59 @@ struct PlayerStatsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if isStatsLoaded {
-                    // Title and back button
-                    ScreenHeaderView(returnToPreviousView: $returnToMainSimView)
+                // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToMainSimView, backButtonDisabled: $isDisabled)
                     
-                    HStack {
-                        // Drop down menu of all teams
-                        TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, isDisabled: $isDisabled)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                HStack {
+                    // Drop down menu of all teams
+                    TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, maxTeamsDisplayed: 8, isDisabled: $isDisabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        // Selected team logo
-                        if viewModel.teams.indices.contains(selectedTeamIndex) {
-                            let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
-                            WebImage(url: url)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 50)
-                                .padding(.trailing, Spacing.spacingSmall)
-                        } else {
-                            Rectangle()
-                                .fill(.clear)
-                                .scaledToFit()
-                                .frame(height: 50)
-                                .padding(.trailing, Spacing.spacingSmall)
-                        }
-                    }
-                    .zIndex(1)
-                    
-                    playerTypePicker()
-                        .padding(.top, Spacing.spacingSmall)
-                    
-                    // Skater position picker
-                    if selectedPlayerType == .skaters {
-                        positionTypePicker()
-                            .padding(.top, Spacing.spacingSmall)
-                    }
-                    
-                    // Player stats grid view if there are stats
-                    if viewModel.simSkaterStats.count == 0 {
-                        Text(LocalizedText.noStats.localizedString)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(.top, Spacing.spacingExtraLarge)
+                    // Selected team logo
+                    if viewModel.teams.indices.contains(selectedTeamIndex) {
+                        let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
+                        
+                        WebImage(url: url)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .padding(.trailing, Spacing.spacingSmall)
                     } else {
-                        PlayerSortableStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType, showPlayerDetailsView: $showPlayerDetailsView, selectedPlayerID: $selectedPlayerID)
+                        Rectangle()
+                            .fill(.clear)
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .padding(.trailing, Spacing.spacingSmall)
                     }
-                    
-                    Spacer()
-                } else {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
                 }
+                .zIndex(1)
+                    
+                playerTypePicker()
+                    .padding(.top, Spacing.spacingSmall)
+                    
+                // Skater position picker
+                if selectedPlayerType == .skaters {
+                        positionTypePicker()
+                        .padding(.top, Spacing.spacingSmall)
+                }
+                    
+                // Player stats grid view if there are stats
+                if viewModel.simSkaterStats.count == 0 {
+                    Text(LocalizedText.noStats.localizedString)
+                        .appTextStyle()
+                        .font(.footnote)
+                        .padding(.top, Spacing.spacingExtraLarge)
+                } else {
+                    if isStatsLoaded {
+                            PlayerSortableStatsGridView(viewModel: viewModel, selectedPlayerType: $selectedPlayerType, showPlayerDetailsView: $showPlayerDetailsView, selectedPlayerID: $selectedPlayerID)
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                }
+                    
+                Spacer()
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -109,8 +111,12 @@ struct PlayerStatsView: View {
                 }
             }
             .onChange(of: selectedPositionType) { newPosition in
+                isStatsLoaded = false
+                
                 // Fetch the player stats of the filtered position
-                viewModel.fetchSkaterPositionSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue)
+                viewModel.fetchSkaterPositionSimStats(simulationID: userInfo.simulationID, teamID: viewModel.teams[selectedTeamIndex].teamID, position: newPosition.rawValue) { statsFetched in
+                    isStatsLoaded = statsFetched
+                }
             }
             .navigationDestination(isPresented: $returnToMainSimView, destination: {
                 // Navigate to Main Sim page when back button is clicked

@@ -20,6 +20,11 @@ enum UserDefaultName: String {
     case favTeamIndex
     case simulationID
     case season
+    case isPlayoffs
+    case playoffRound1Complete
+    case playoffRound2Complete
+    case playoffRound3Complete
+    case seasonComplete
 }
 
 enum ElementLabel: String {
@@ -242,6 +247,10 @@ enum LocalizedText: String {
     case line
     case selectPlayerSwap = "select_player_swap"
     case swap
+    case selectTeamChange = "select_team_change"
+    case clearSelections = "clear_selections"
+    case performSwitch = "perform_switch"
+    case creatingPlayoffs = "creating_playoffs"
     
     var localizedString: String {
         NSLocalizedString(self.rawValue, comment: "")

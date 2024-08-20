@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ScreenHeaderView: View {
     @Binding var returnToPreviousView: Bool
+    @Binding var backButtonDisabled: Bool
     
     var body: some View {
         ZStack {
             Button {
-                returnToPreviousView = true
+                if !backButtonDisabled {
+                    returnToPreviousView = true
+                }
             } label: {
                 HStack {
                     Image(systemName: Symbols.leftArrow.rawValue)

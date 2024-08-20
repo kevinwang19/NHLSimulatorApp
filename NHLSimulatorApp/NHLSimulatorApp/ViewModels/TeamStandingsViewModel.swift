@@ -31,7 +31,7 @@ class TeamStandingsViewModel: ObservableObject {
     }
     
     // Fetch conference team simulation stats
-    func fetchConferenceTeamSimStats(simulationID: Int, conference: String) -> Void {
+    func fetchConferenceTeamSimStats(simulationID: Int, conference: String, completion: @escaping (Bool) -> Void) {
         let includedConferences: [String] = {
             switch conference {
             case ConferenceType.all.rawValue:
@@ -53,18 +53,21 @@ class TeamStandingsViewModel: ObservableObject {
         
         NetworkManager.shared.getSimConferenceTeamStats(simulationID: simulationID, conference: includedConferences).subscribe(onSuccess: { [weak self] simulationTeamStats in
             guard let self = self else {
+                completion(false)
                 return
             }
             
             self.simTeamStats = simulationTeamStats.teamStats
+            completion(true)
         }, onFailure: { error in
             print("Failed to fetch team simulation stats: \(error)")
+            completion(false)
         })
         .disposed(by: disposeBag)
     }
     
     // Fetch division team simulation stats
-    func fetchDivisionTeamSimStats(simulationID: Int, conference: String, division: String) -> Void {
+    func fetchDivisionTeamSimStats(simulationID: Int, conference: String, division: String, completion: @escaping (Bool) -> Void) {
         let includedDivisions: [String] = {
             if conference == ConferenceType.eastern.rawValue {
                 switch division {
@@ -93,12 +96,15 @@ class TeamStandingsViewModel: ObservableObject {
         
         NetworkManager.shared.getSimDivisionTeamStats(simulationID: simulationID, division: includedDivisions).subscribe(onSuccess: { [weak self] simulationTeamStats in
             guard let self = self else {
+                completion(false)
                 return
             }
             
             self.simTeamStats = simulationTeamStats.teamStats
+            completion(true)
         }, onFailure: { error in
             print("Failed to fetch team simulation stats: \(error)")
+            completion(false)
         })
         .disposed(by: disposeBag)
     }

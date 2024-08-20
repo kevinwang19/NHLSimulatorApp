@@ -18,8 +18,13 @@ struct PlayerLineupSwapView: View {
     @Binding var playerLineNumber: Int
     @Binding var lineupType: LineupType
     @State private var returnToEditLineupsView: Bool = false
+    @State private var backButtonDisabled: Bool = false
     @State private var isPlayersLoaded: Bool = false
     @State private var swapPlayerID: Int = 0
+    @State private var scrollOffset: CGFloat = 0
+    @State private var isAtTop: Bool = true
+    @State private var isAtBottom: Bool = false
+    private let maxPlayersDisplayed: Int = 10
     private var blockWidth: CGFloat = 100
     private var blockHeight: CGFloat = 40
     
@@ -35,71 +40,77 @@ struct PlayerLineupSwapView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToEditLineupsView, backButtonDisabled: $backButtonDisabled)
+                
                 if isPlayersLoaded {
-                    // Title and back button
-                    ScreenHeaderView(returnToPreviousView: $returnToEditLineupsView)
-                    
-                    Text(LocalizedText.selectPlayerSwap.localizedString)
-                        .appTextStyle()
-                        .font(.callout)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, Spacing.spacingSmall)
-                    
-                    HStack {
-                        VStack {
-                            // Lineup type of the selected player
-                            let lineHeader = lineupType == .evenStrength ? playerPosition + "\(playerLineNumber)" : lineupType.rawValue + "\(playerLineNumber)"
-                            Text(lineHeader)
-                                .appTextStyle()
-                                .font(.callout)
-                                .frame(width: blockWidth, alignment: .center)
-                                .padding(.horizontal, Spacing.spacingSmall)
-                            
-                            // Name of the selected player
-                            Text(playerName.uppercased())
-                                .appTextStyle()
-                                .font(.footnote)
-                                .frame(width: blockWidth, height: blockHeight, alignment: .center)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.6)
-                                .padding(.horizontal, Spacing.spacingSmall)
-                                .appButtonStyle()
-                        }
-                        
-                        VStack {
-                            Text(" ")
-                            
-                            Image(systemName: Symbols.leftRightArrow.rawValue)
-                                .appTextStyle()
-                                .font(.title3)
-                        }
-                        
-                        // Grid view of players for swapping
-                        playersGridView()
-
-                    }
-                    .padding(.top, Spacing.spacingMedium)
-                    
-                    // Swap button to perform the swap and return to previous view
-                    Button {
-                        // Swap the two player lineups
-                        viewModel.swapLineup(lineupType: lineupType, playerID: playerID, swapPlayerID: swapPlayerID) { lineupSwapped in
-                            returnToEditLineupsView = lineupSwapped
-                        }
-                    } label: {
-                        Text(LocalizedText.swap.localizedString)
+                    VStack {
+                        // Instruction text
+                        Text(LocalizedText.selectPlayerSwap.localizedString)
                             .appTextStyle()
-                            .font(.headline)
-                            .frame(maxWidth: 200, maxHeight: 75)
-                            .appButtonStyle()
+                            .font(.callout)
+                            .frame(height: blockHeight, alignment: .center)
+                            .padding(.vertical, Spacing.spacingSmall)
+                            
+                        HStack {
+                            VStack {
+                                // Lineup type of the selected player
+                                let lineHeader = lineupType == .evenStrength ? playerPosition + "\(playerLineNumber)" : lineupType.rawValue + "\(playerLineNumber)"
+                                
+                                Text(lineHeader)
+                                    .appTextStyle()
+                                    .font(.callout)
+                                    .frame(width: blockWidth, alignment: .center)
+                                    .padding(.horizontal, Spacing.spacingSmall)
+                                    
+                                // Name of the selected player
+                                Text(playerName.uppercased())
+                                    .appTextStyle()
+                                    .font(.footnote)
+                                    .frame(width: blockWidth, height: blockHeight, alignment: .center)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                                    .padding(.horizontal, Spacing.spacingSmall)
+                                    .appButtonStyle()
+                            }
+                                
+                            VStack {
+                                Text(" ")
+                                    
+                                Image(systemName: Symbols.leftRightArrow.rawValue)
+                                    .appTextStyle()
+                                    .font(.title3)
+                            }
+                                
+                            VStack {
+                                Text(" ")
+                                    
+                                // Grid view of players for swapping
+                                playersGridView()
+                            }
+                        }
                     }
-                    .padding(.vertical, Spacing.spacingMedium)
-                    
-                    Spacer()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+                    
+                // Swap button to perform the swap and return to previous view
+                Button {
+                    // Swap the two player lineups
+                    viewModel.swapLineup(lineupType: lineupType, playerID: playerID, swapPlayerID: swapPlayerID) { lineupSwapped in
+                        returnToEditLineupsView = lineupSwapped
+                    }
+                } label: {
+                    Text(LocalizedText.swap.localizedString)
+                        .appTextStyle()
+                        .font(.headline)
+                        .frame(maxWidth: 200, maxHeight: 75)
+                        .appButtonStyle()
+                }
+                .padding(.bottom, Spacing.spacingLarge)
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -125,33 +136,72 @@ struct PlayerLineupSwapView: View {
         }
     }
     
+    // View of the roster list
     @ViewBuilder
     private func playersGridView() -> some View {
         VStack {
-            ScrollView(.vertical) {
-                LazyVStack {
-                    // Rows of players
-                    ForEach(viewModel.lineupPlayers, id: \.self) { player in
-                        let name = viewModel.playerName(playerID: Int(player.playerID))
-                        
-                        if playerName != name {
-                            Button {
-                                swapPlayerID = Int(player.playerID)
-                            } label: {
-                                Text(name)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+            ZStack {
+                let numSwappablePlayers = viewModel.lineupPlayers.count - 1
+                let scrollViewHeight: CGFloat = numSwappablePlayers > maxPlayersDisplayed ? (blockHeight * CGFloat(maxPlayersDisplayed)) : (blockHeight * CGFloat(numSwappablePlayers))
+                
+                ScrollView(.vertical) {
+                    LazyVStack(spacing: 0) {
+                        // Rows of players
+                        ForEach(viewModel.lineupPlayers, id: \.self) { player in
+                            let name = viewModel.playerName(playerID: Int(player.playerID))
+                            
+                            if playerName != name {
+                                Button {
+                                    swapPlayerID = Int(player.playerID)
+                                } label: {
+                                    Text(name)
+                                        .foregroundColor(player.playerID == Int64(swapPlayerID) ? Color.black : Color.white)
+                                        .appTextStyle()
+                                        .font(.footnote)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.6)
+                                        .padding(.all, Spacing.spacingExtraSmall)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .frame(height: blockHeight)
+                                .background(player.playerID == Int64(swapPlayerID) ? Color.white.cornerRadius(10) : Color.black.cornerRadius(10))
                             }
-                            .foregroundColor(player.playerID == Int64(swapPlayerID) ? Color.black : Color.white)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(.all, Spacing.spacingExtraSmall)
-                            .background(player.playerID == Int64(swapPlayerID) ? Color.white.cornerRadius(10) : Color.black.cornerRadius(10))
+                        }
+                    }
+                    .background(GeometryReader { geometry in
+                        Color.clear
+                            .preference(key: ScrollOffsetPreferenceKey.self, value: geometry.frame(in: .named(ElementLabel.scroll.rawValue)).minY)
+                    })
+                    .onPreferenceChange(ScrollOffsetPreferenceKey.self) { value in
+                        // Detect position of the scrolling for displaying the gradients
+                        scrollOffset = value
+                        isAtTop = (scrollOffset >= 0)
+                        isAtBottom = (scrollOffset <= ((CGFloat(numSwappablePlayers - maxPlayersDisplayed) * blockHeight) * -1))
+                    }
+                }
+                .coordinateSpace(name: ElementLabel.scroll.rawValue)
+                .scrollDisabled(numSwappablePlayers <= maxPlayersDisplayed)
+                .frame(height: scrollViewHeight)
+                .appButtonStyle()
+                
+                // Gradient for more scrollable players
+                if numSwappablePlayers > maxPlayersDisplayed {
+                    VStack {
+                        if !isAtTop {
+                            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.7), Color.clear]), startPoint: .top, endPoint: .bottom)
+                                .frame(height: blockHeight)
+                                .cornerRadius(10)
+                        }
+                        Spacer()
+                        if !isAtBottom {
+                            LinearGradient(gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
+                                .frame(height: blockHeight)
+                                .cornerRadius(10)
                         }
                     }
                 }
-                .padding(Spacing.spacingExtraSmall)
             }
-            .appButtonStyle()
+            .frame(maxHeight: blockHeight * CGFloat(maxPlayersDisplayed))
         }
     }
 }

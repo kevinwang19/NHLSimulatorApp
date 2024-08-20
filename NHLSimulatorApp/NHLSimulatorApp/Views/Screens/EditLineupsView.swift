@@ -13,7 +13,7 @@ struct EditLineupsView: View {
     @EnvironmentObject var simulationState: SimulationState
     @ObservedObject var viewModel: EditLineupsViewModel = EditLineupsViewModel()
     @Binding var teamIndex: Int
-    @State private var selectedTeamIndex: Int = 0
+    @State private var selectedTeamIndex: Int = -1
     @State private var showDropdown: Bool = false
     @State private var isDisabled: Bool = false
     @State private var showPlayerLineupSwapView: Bool = false
@@ -27,9 +27,7 @@ struct EditLineupsView: View {
     @State private var playerName: String = ""
     @State private var playerPosition: String = ""
     @State private var playerLineNumber: Int = 0
-    private var numForwardLines: Int = 4
-    private var numDefenseLines: Int = 3
-    private var numGoalies: Int = 2
+    private var numEvenStrengthLines: [Int] = [4, 3, 2]
     private var numSpecialTeamsLines: Int = 2
     private var blockWidth: CGFloat = 80
     private var blockHeight: CGFloat = 40
@@ -41,60 +39,61 @@ struct EditLineupsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if isLineupLoaded {
-                    // Title and back button
-                    ScreenHeaderView(returnToPreviousView: $returnToMainSimView)
+                // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToMainSimView, backButtonDisabled: $isDisabled)
                     
-                    HStack {
-                        // Drop down menu of all teams
-                        TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, isDisabled: $isDisabled)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                HStack {
+                    // Drop down menu of all teams
+                    TeamDropDownMenuView(selectedTeamIndex: $selectedTeamIndex, showDropdown: $showDropdown, teams: viewModel.teams, maxTeamsDisplayed: 6, isDisabled: $isDisabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        // Selected team logo
-                        if viewModel.teams.indices.contains(selectedTeamIndex) {
-                            let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
-                            WebImage(url: url)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 50)
-                                .padding(.trailing, Spacing.spacingSmall)
-                        } else {
-                            Rectangle()
-                                .fill(.clear)
-                                .scaledToFit()
-                                .frame(height: 50)
-                                .padding(.trailing, Spacing.spacingSmall)
-                        }
+                    // Selected team logo
+                    if viewModel.teams.indices.contains(selectedTeamIndex) {
+                        let url = URL(string: viewModel.teams[selectedTeamIndex].logo)
+                        
+                        WebImage(url: url)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .padding(.trailing, Spacing.spacingSmall)
+                    } else {
+                        Rectangle()
+                            .fill(.clear)
+                            .scaledToFit()
+                            .frame(height: 50)
+                            .padding(.trailing, Spacing.spacingSmall)
                     }
-                    .zIndex(1)
+                }
+                .zIndex(1)
                     
-                    // Picker between powerplay, penalty kill, or overtime lineup
-                    lineupTypePicker()
-                        .padding(.top, Spacing.spacingExtraSmall)
-                    
+                // Picker between powerplay, penalty kill, or overtime lineup
+                lineupTypePicker()
+                    .padding(.top, Spacing.spacingExtraSmall)
+                
+                if isLineupLoaded {
                     if selectedLineupType == .evenStrength {
                         VStack {
                             // Forward lineups
-                            evenStrengthLineups(numLines: numForwardLines, positions: forwardPositions)
+                            evenStrengthLineups(numLines: numEvenStrengthLines[0], positions: forwardPositions)
                             
                             // Defense lineups
-                            evenStrengthLineups(numLines: numDefenseLines, positions: defensePositions)
+                            evenStrengthLineups(numLines: numEvenStrengthLines[1], positions: defensePositions)
                             
                             // Goalie lineups
-                            evenStrengthLineups(numLines: numGoalies, positions: goaliePositions)
+                            evenStrengthLineups(numLines: numEvenStrengthLines[2], positions: goaliePositions)
                         }
                         .padding(.top, Spacing.spacingExtraSmall)
                     } else {
                         // Powerplay, penalty kill, or overtime lineups
                         specialTeamsLineups(lineupType: selectedLineupType)
                     }
-                        
-                    
-                    Spacer()
                 } else {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
+                    
+                Spacer()
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -96,6 +96,23 @@ extension CoreDataManager {
         }
     }
     
+    // Update player properties from Core Data
+    func updatePlayerCoreData(playerID: Int64, teamID: Int) {
+        let fetchRequest: NSFetchRequest<CorePlayer> = CorePlayer.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "playerID == %d", playerID)
+        do {
+            let players = try context.fetch(fetchRequest)
+            
+            for player in players {
+                player.teamID = Int64(teamID)
+            }
+            
+            saveContext()
+        } catch {
+            print("Failed to update player: \(error)")
+        }
+    }
+    
     // Reset all players in Core Data
     func resetPlayersCoreData() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: AppInfo.corePlayer.rawValue)

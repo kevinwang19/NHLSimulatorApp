@@ -55,6 +55,18 @@ struct CalendarView: View {
         .onChange(of: selectedDate) { newSelectedDate in
             let newSelectedMonth = viewModel.calendar.component(.month, from: newSelectedDate)
             let stringCurrentDate = viewModel.dateFormatter.string(from: currentDate)
+            
+            if userInfo.isPlayoffs {
+                // Fetch the new monthly playoff matchups on change of the date
+                viewModel.fetchTeamMonthPlayoffSchedule(simulationID: userInfo.simulationID, teamID: teamID, month: newSelectedMonth) { playoffScheduledFetched in
+                    if playoffScheduledFetched {
+                        // Fetch the scores of simulated playoff games
+                        viewModel.fetchTeamPlayoffMatchupScores(simulationID: userInfo.simulationID, currentDate: stringCurrentDate, teamID: teamID) { _ in
+                        }
+                    }
+                }
+            }
+            
             // Fetch the new monthly matchups on change of the date
             viewModel.fetchTeamMonthSchedule(teamID: teamID, season: season, month: newSelectedMonth) { scheduledFetched in
                 if scheduledFetched {
@@ -65,12 +77,18 @@ struct CalendarView: View {
                 }
             }
         }
-        .onChange(of: teamID) { newTeamID in
+        .onChange(of: teamID) { _ in
             // Trigger date change and schedule refresh when the selected team changes
             isCalendarLoaded = false
             selectedDate = selectedDate.addingTimeInterval(1)
         }
+        .onChange(of: viewModel.playoffScheduleGames.count) { _ in
+            selectedDate = selectedDate.addingTimeInterval(1)
+        }
         .onChange(of: viewModel.simScores.count) { _ in
+            selectedDate = selectedDate.addingTimeInterval(1)
+        }
+        .onChange(of: viewModel.playoffSimScores.count) { _ in
             selectedDate = selectedDate.addingTimeInterval(1)
         }
     }

@@ -35,6 +35,14 @@
 		481537942C643D20002A0FBF /* PlayerStatsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537932C643D20002A0FBF /* PlayerStatsGridView.swift */; };
 		481537982C65A059002A0FBF /* PlayerLineupSwapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537972C65A059002A0FBF /* PlayerLineupSwapView.swift */; };
 		4815379C2C65BAA2002A0FBF /* PlayerLineupSwapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815379B2C65BAA2002A0FBF /* PlayerLineupSwapViewModel.swift */; };
+		4815379E2C6D09EA002A0FBF /* PlayoffScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815379D2C6D09EA002A0FBF /* PlayoffScheduleData.swift */; };
+		481537A02C6D0A0A002A0FBF /* SimulationPlayoffSkaterStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815379F2C6D0A0A002A0FBF /* SimulationPlayoffSkaterStatsData.swift */; };
+		481537A22C6D0A1E002A0FBF /* SimulationPlayoffGoalieStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537A12C6D0A1E002A0FBF /* SimulationPlayoffGoalieStatsData.swift */; };
+		481537A42C6D0A2E002A0FBF /* SimulationPlayoffTeamStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537A32C6D0A2E002A0FBF /* SimulationPlayoffTeamStatsData.swift */; };
+		481537A62C6D127F002A0FBF /* PlayoffSchedulesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537A52C6D127F002A0FBF /* PlayoffSchedulesService.swift */; };
+		481537A82C6D1293002A0FBF /* SimulationPlayoffSkaterStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537A72C6D1293002A0FBF /* SimulationPlayoffSkaterStatsService.swift */; };
+		481537AA2C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537A92C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift */; };
+		481537AC2C6D12AE002A0FBF /* SimulationPlayoffTeamStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481537AB2C6D12AE002A0FBF /* SimulationPlayoffTeamStatsService.swift */; };
 		48DCAC0A2C3CF27A000CEBB3 /* SimulationTeamStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC092C3CF27A000CEBB3 /* SimulationTeamStatsData.swift */; };
 		48DCAC0C2C3CF28B000CEBB3 /* SimulationGameStatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC0B2C3CF28B000CEBB3 /* SimulationGameStatsData.swift */; };
 		48DCAC0E2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DCAC0D2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift */; };
@@ -127,6 +135,14 @@
 		481537932C643D20002A0FBF /* PlayerStatsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsGridView.swift; sourceTree = "<group>"; };
 		481537972C65A059002A0FBF /* PlayerLineupSwapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLineupSwapView.swift; sourceTree = "<group>"; };
 		4815379B2C65BAA2002A0FBF /* PlayerLineupSwapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLineupSwapViewModel.swift; sourceTree = "<group>"; };
+		4815379D2C6D09EA002A0FBF /* PlayoffScheduleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayoffScheduleData.swift; sourceTree = "<group>"; };
+		4815379F2C6D0A0A002A0FBF /* SimulationPlayoffSkaterStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffSkaterStatsData.swift; sourceTree = "<group>"; };
+		481537A12C6D0A1E002A0FBF /* SimulationPlayoffGoalieStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffGoalieStatsData.swift; sourceTree = "<group>"; };
+		481537A32C6D0A2E002A0FBF /* SimulationPlayoffTeamStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffTeamStatsData.swift; sourceTree = "<group>"; };
+		481537A52C6D127F002A0FBF /* PlayoffSchedulesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayoffSchedulesService.swift; sourceTree = "<group>"; };
+		481537A72C6D1293002A0FBF /* SimulationPlayoffSkaterStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffSkaterStatsService.swift; sourceTree = "<group>"; };
+		481537A92C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffGoalieStatsService.swift; sourceTree = "<group>"; };
+		481537AB2C6D12AE002A0FBF /* SimulationPlayoffTeamStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationPlayoffTeamStatsService.swift; sourceTree = "<group>"; };
 		48DCAC092C3CF27A000CEBB3 /* SimulationTeamStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTeamStatsData.swift; sourceTree = "<group>"; };
 		48DCAC0B2C3CF28B000CEBB3 /* SimulationGameStatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationGameStatsData.swift; sourceTree = "<group>"; };
 		48DCAC0D2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationTeamStatsService.swift; sourceTree = "<group>"; };
@@ -326,6 +342,10 @@
 				48DCF37E2C3854090079AB67 /* SimulationGoalieStatsData.swift */,
 				48DCAC092C3CF27A000CEBB3 /* SimulationTeamStatsData.swift */,
 				48DCAC0B2C3CF28B000CEBB3 /* SimulationGameStatsData.swift */,
+				4815379D2C6D09EA002A0FBF /* PlayoffScheduleData.swift */,
+				4815379F2C6D0A0A002A0FBF /* SimulationPlayoffSkaterStatsData.swift */,
+				481537A12C6D0A1E002A0FBF /* SimulationPlayoffGoalieStatsData.swift */,
+				481537A32C6D0A2E002A0FBF /* SimulationPlayoffTeamStatsData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,6 +382,10 @@
 				48DCF3822C38566E0079AB67 /* SimulationGoalieStatsService.swift */,
 				48DCAC0D2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift */,
 				48DCAC0F2C3CF2AC000CEBB3 /* SimulationGameStatsService.swift */,
+				481537A52C6D127F002A0FBF /* PlayoffSchedulesService.swift */,
+				481537A72C6D1293002A0FBF /* SimulationPlayoffSkaterStatsService.swift */,
+				481537A92C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift */,
+				481537AB2C6D12AE002A0FBF /* SimulationPlayoffTeamStatsService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -652,10 +676,12 @@
 				481537842C616A9E002A0FBF /* EditRostersViewModel.swift in Sources */,
 				48DCF3712C3799E30079AB67 /* GoalieStatsData.swift in Sources */,
 				48DCF3512C373EAD0079AB67 /* EndpointEnums.swift in Sources */,
+				481537AA2C6D12A0002A0FBF /* SimulationPlayoffGoalieStatsService.swift in Sources */,
 				48DCAC1E2C3E2AD5000CEBB3 /* MainSimView.swift in Sources */,
 				48DCF3812C3856610079AB67 /* SimulationSkaterStatsService.swift in Sources */,
 				48DCF35D2C378E840079AB67 /* ScheduleData.swift in Sources */,
 				48DCAC0C2C3CF28B000CEBB3 /* SimulationGameStatsData.swift in Sources */,
+				481537AC2C6D12AE002A0FBF /* SimulationPlayoffTeamStatsService.swift in Sources */,
 				481537902C64077D002A0FBF /* PlayerDetailsViewModel.swift in Sources */,
 				4815378E2C633F47002A0FBF /* PlayerDetailsView.swift in Sources */,
 				48DCF34F2C373E5F0079AB67 /* SimulationsService.swift in Sources */,
@@ -667,6 +693,8 @@
 				48DCAC102C3CF2AC000CEBB3 /* SimulationGameStatsService.swift in Sources */,
 				48DCF35B2C3787E40079AB67 /* UserData.swift in Sources */,
 				48DCAC0A2C3CF27A000CEBB3 /* SimulationTeamStatsData.swift in Sources */,
+				481537A82C6D1293002A0FBF /* SimulationPlayoffSkaterStatsService.swift in Sources */,
+				481537A42C6D0A2E002A0FBF /* SimulationPlayoffTeamStatsData.swift in Sources */,
 				48DCAC172C3DFC16000CEBB3 /* CoreDataManager.swift in Sources */,
 				48DCF37B2C384A0A0079AB67 /* LineupsService.swift in Sources */,
 				48DCAC0E2C3CF2A1000CEBB3 /* SimulationTeamStatsService.swift in Sources */,
@@ -674,17 +702,21 @@
 				48DCF37F2C3854090079AB67 /* SimulationGoalieStatsData.swift in Sources */,
 				481537762C6088BB002A0FBF /* CorePlayerLineupService.swift in Sources */,
 				4815376F2C56BA80002A0FBF /* SimulationState.swift in Sources */,
+				481537A22C6D0A1E002A0FBF /* SimulationPlayoffGoalieStatsData.swift in Sources */,
 				481537572C4603AC002A0FBF /* Enums.swift in Sources */,
 				48DCF37D2C3853FA0079AB67 /* SimulationSkaterStatsData.swift in Sources */,
 				481537862C616AA8002A0FBF /* EditLineupsViewModel.swift in Sources */,
 				48DCF3482C36230E0079AB67 /* NetworkManager.swift in Sources */,
 				48DCF3792C3849600079AB67 /* LineupData.swift in Sources */,
 				48DCAC152C3DFBA1000CEBB3 /* NHLSimulatorAppModel.xcdatamodeld in Sources */,
+				481537A02C6D0A0A002A0FBF /* SimulationPlayoffSkaterStatsData.swift in Sources */,
 				4815378C2C62C1C2002A0FBF /* GridHeaderView.swift in Sources */,
 				48DCF3672C3791C30079AB67 /* SkaterStatsData.swift in Sources */,
 				48DCF36D2C3791FF0079AB67 /* SkaterStatsService.swift in Sources */,
+				4815379E2C6D09EA002A0FBF /* PlayoffScheduleData.swift in Sources */,
 				48DCF3652C3791AC0079AB67 /* PlayerData.swift in Sources */,
 				481537802C616A83002A0FBF /* TeamStandingsViewModel.swift in Sources */,
+				481537A62C6D127F002A0FBF /* PlayoffSchedulesService.swift in Sources */,
 				48DCF36B2C3791F20079AB67 /* PlayersService.swift in Sources */,
 				48DCF35F2C378E930079AB67 /* SchedulesService.swift in Sources */,
 				481537942C643D20002A0FBF /* PlayerStatsGridView.swift in Sources */,

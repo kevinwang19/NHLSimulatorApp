@@ -15,58 +15,54 @@ struct PlayerDetailsView: View {
     @Binding var selectedPlayerID: Int
     @Binding var teamIndex: Int
     @State private var returnToPlayerStatsView: Bool = false
+    @State private var backButtonDisabled: Bool = false
     @State private var isDetailsLoaded: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
-                if isDetailsLoaded {
-                    // Title and back button
-                    ScreenHeaderView(returnToPreviousView: $returnToPlayerStatsView)
+                // Title and back button
+                ScreenHeaderView(returnToPreviousView: $returnToPlayerStatsView, backButtonDisabled: $backButtonDisabled)
                         
-                    if let player = viewModel.playerDetails(playerID: selectedPlayerID) {
-                        HStack {
-                            // Player info
-                            playerInfoView(player: player)
+                if isDetailsLoaded, let player = viewModel.playerDetails(playerID: selectedPlayerID) {
+                    HStack {
+                        // Player info
+                        playerInfoView(player: player)
                             
-                            // Player headshot
-                            WebImage(url: URL(string: player.headshot ?? ""))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 100)
-                                .padding(.trailing, Spacing.spacingSmall)
-                        }
-                        .padding(.top, Spacing.spacingExtraSmall)
-                        
-                        Text(LocalizedText.careerStats.localizedString)
-                            .appTextStyle()
-                            .font(.callout)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, Spacing.spacingSmall)
-                            .padding(.leading, Spacing.spacingExtraSmall)
-                        
-                        // Career stats
-                        PlayerStatsGridView(skaterStats: $viewModel.skaterCareerStats, goalieStats: $viewModel.goalieCareerStats, position: player.positionCode ?? "")
-                        
-                        Text(LocalizedText.predictedStats.localizedString)
-                            .appTextStyle()
-                            .font(.callout)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.top, Spacing.spacingMedium)
-                            .padding(.leading, Spacing.spacingExtraSmall)
-                        
-                        // Predicted stats
-                        PlayerStatsGridView(skaterStats: $viewModel.skaterPredictedStats, goalieStats: $viewModel.goaliePredictedStats, position: player.positionCode ?? "")
-                    } else {
-                        Text(LocalizedText.noPlayerDetails.localizedString)
-                            .appTextStyle()
-                            .font(.footnote)
-                            .padding(.horizontal, Spacing.spacingExtraSmall)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        // Player headshot
+                        WebImage(url: URL(string: player.headshot ?? ""))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 100)
+                            .padding(.trailing, Spacing.spacingSmall)
                     }
+                    .padding(.top, Spacing.spacingExtraSmall)
+                        
+                    Text(LocalizedText.careerStats.localizedString)
+                        .appTextStyle()
+                        .font(.callout)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, Spacing.spacingSmall)
+                        .padding(.leading, Spacing.spacingExtraSmall)
+                        
+                    // Career stats
+                    PlayerStatsGridView(skaterStats: $viewModel.skaterCareerStats, goalieStats: $viewModel.goalieCareerStats, position: player.positionCode ?? "")
+                    
+                    Text(LocalizedText.predictedStats.localizedString)
+                        .appTextStyle()
+                        .font(.callout)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, Spacing.spacingMedium)
+                        .padding(.leading, Spacing.spacingExtraSmall)
+                        
+                    // Predicted stats
+                    PlayerStatsGridView(skaterStats: $viewModel.skaterPredictedStats, goalieStats: $viewModel.goaliePredictedStats, position: player.positionCode ?? "")
                 } else {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                    Text(LocalizedText.noPlayerDetails.localizedString)
+                        .appTextStyle()
+                        .font(.footnote)
+                        .padding(.horizontal, Spacing.spacingExtraSmall)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .padding(.horizontal, Spacing.spacingExtraSmall)
