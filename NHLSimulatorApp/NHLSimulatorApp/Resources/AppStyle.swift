@@ -34,7 +34,7 @@ struct BackgroundStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
             .background(
-                Color.black
+                Color.gray
                     .opacity(0.7)
                     .ignoresSafeArea()
             )

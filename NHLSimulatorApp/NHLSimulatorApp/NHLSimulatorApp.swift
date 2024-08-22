@@ -7,9 +7,12 @@
 
 import SwiftUI
 import SDWebImageSVGCoder
+import UIKit
 
 @main
 struct NHLSimulatorApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     init() {
         setUpDependencies()
     }
@@ -19,6 +22,14 @@ struct NHLSimulatorApp: App {
             NavigationStack {
                 LaunchView()
                     .navigationBarHidden(true)
+                    .onAppear {
+                        // Lock orientation when the view appears
+                        let scenes = UIApplication.shared.connectedScenes
+                        if let windowScene = scenes.first as? UIWindowScene {
+                            let geometryPreferences = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: .portrait)
+                            windowScene.requestGeometryUpdate(geometryPreferences)
+                        }
+                    }
             }
         }
     }
@@ -27,5 +38,13 @@ struct NHLSimulatorApp: App {
 private extension NHLSimulatorApp {
     func setUpDependencies() {
         SDImageCodersManager.shared.addCoder(SDImageSVGCoder.shared)
+    }
+}
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+        
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return .portrait
     }
 }

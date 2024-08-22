@@ -12,6 +12,7 @@ enum AppInfo: String {
     case appModel = "NHLSimulatorAppModel"
     case corePlayer = "CorePlayer"
     case coreLineup = "CoreLineup"
+    case orientation
 }
 
 enum UserDefaultName: String {

@@ -21,7 +21,7 @@ public struct Constants {
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private let baseURL = "http://localhost:3000"
+    private let baseURL = "http://192.168.2.16:3000"
     
     private let session: Session = {
         let configuration = URLSessionConfiguration.default
