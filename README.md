@@ -1,5 +1,7 @@
 # NHLSimulatorApp
 iOS NHL Season Simulator App Frontend
 
-https://github.com/user-attachments/assets/dc612f19-076e-498a-96cb-cca8cbd48bf5
+Uploading Simulator Screen Recording - iPhone 11 - 2024-08-22 at 15.41.12.mp4…
+
+
 
