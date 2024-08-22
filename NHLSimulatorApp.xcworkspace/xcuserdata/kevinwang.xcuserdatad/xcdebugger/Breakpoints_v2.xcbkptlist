@@ -226,50 +226,6 @@
             endingLineNumber = "47"
             landmarkName = "fetchTeamMonthSchedule(teamID:season:month:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "33579C28-4135-4A44-B64A-4CE8DE03F245 - c14287639dd75c5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (NHLSimulatorApp.ScheduleData) -&gt; () in NHLSimulatorApp.CalendarViewModel.fetchTeamMonthSchedule(teamID: Swift.Int, season: Swift.Int, month: Swift.Int) -&gt; ()"
-                  moduleName = "NHLSimulatorApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/CalendarViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34">
-               </Location>
-               <Location
-                  uuid = "33579C28-4135-4A44-B64A-4CE8DE03F245 - 9346a10f3c799d34"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (NHLSimulatorApp.ScheduleData) -&gt; () in NHLSimulatorApp.CalendarViewModel.fetchTeamMonthSchedule(teamID: Swift.Int, season: Swift.Int, month: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "NHLSimulatorApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/CalendarViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37">
-               </Location>
-               <Location
-                  uuid = "33579C28-4135-4A44-B64A-4CE8DE03F245 - 9346a10f3c799f82"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (NHLSimulatorApp.ScheduleData) -&gt; () in NHLSimulatorApp.CalendarViewModel.fetchTeamMonthSchedule(teamID: Swift.Int, season: Swift.Int, month: Swift.Int, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "NHLSimulatorApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kevinwang/Documents/Projects/NHLSimulatorApp/NHLSimulatorApp/NHLSimulatorApp/ViewModels/CalendarViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -890,8 +846,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -906,8 +862,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -922,8 +878,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "updatePlayerAndLineupData(playerID:newTeamID:position:lineNumber:ppLineNumber:pkLineNumber:otLineNumber:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1486,6 +1442,86 @@
             endingLineNumber = "172"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEADDD86-5981-4976-BBAB-0C032CF1A07C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D0EFB36-3B30-45A9-8FAB-4D9253623305"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "860323DF-2B66-496F-BF0A-E8A6343AE9D1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1653C717-7C90-402F-A61B-118141C53BB0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5C552F12-2733-4E96-82D2-475E17EAA1ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NHLSimulatorApp/NHLSimulatorApp/ViewModels/EditRostersViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "updateRosters(teamID:playerIDs:otherTeamID:otherPlayerIDs:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

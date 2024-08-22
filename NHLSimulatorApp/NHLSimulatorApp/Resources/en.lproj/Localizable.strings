@@ -87,3 +87,9 @@
 "team_stats" = "TEAM STATS";
 "playoff_tree" = "PLAYOFF TREE";
 "past_deadline" = "TRADE DEADLINE HAS PASSED: UNABLE TO MOVE PLAYERS";
+"no_swap_error" = "ERROR: NO PLAYERS SELECTED";
+"min_skaters_1_error" = "ERROR: TEAM 1 WOULD HAVE LESS THAN 18 SKATERS";
+"min_goalies_1_error" = "ERROR: TEAM 1 WOULD HAVE LESS THAN 2 GOALIES";
+"min_skaters_2_error" = "ERROR: TEAM 2 WOULD HAVE LESS THAN 18 SKATERS";
+"min_goalies_2_error" = "ERROR: TEAM 2 WOULD HAVE LESS THAN 2 GOALIES";
+"swap_success" = "SUCCESS: PLAYERS SWITCHED";

@@ -276,6 +276,12 @@ enum LocalizedText: String {
     case creatingPlayoffs = "creating_playoffs"
     case winner
     case pastDeadline = "past_deadline"
+    case noSwapError = "no_swap_error"
+    case minSkaters1SwapError = "min_skaters_1_error"
+    case minGoalies1SwapError = "min_goalies_1_error"
+    case minSkaters2SwapError = "min_skaters_2_error"
+    case minGoalies2SwapError = "min_goalies_2_error"
+    case swapSuccess = "swap_success"
     
     var localizedString: String {
         NSLocalizedString(self.rawValue, comment: "")

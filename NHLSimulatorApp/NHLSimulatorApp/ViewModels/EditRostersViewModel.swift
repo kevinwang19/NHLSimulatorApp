@@ -66,7 +66,7 @@ class EditRostersViewModel: ObservableObject {
         
         // Early exit if no players selected
         guard !playerIDs.isEmpty || !otherPlayerIDs.isEmpty else {
-            switchMessage = "ERROR: NO PLAYERS SELECTED"
+            switchMessage = LocalizedText.noSwapError.localizedString
             completion(true)
             return
         }
@@ -106,123 +106,163 @@ class EditRostersViewModel: ObservableObject {
             $0.position == PositionType.centers.rawValue ||
             $0.position == PositionType.leftWingers.rawValue ||
             $0.position == PositionType.rightWingers.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         let sortedDefenseLineups = playerLineups.filter {
             $0.position == PositionType.leftDefensemen.rawValue ||
             $0.position == PositionType.rightDefensemen.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         let sortedGoalieLineups = playerLineups.filter {
             $0.position == PositionType.goalies.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         
         let sortedOtherForwardLineups = otherPlayerLineups.filter {
             $0.position == PositionType.centers.rawValue ||
             $0.position == PositionType.leftWingers.rawValue ||
             $0.position == PositionType.rightWingers.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         let sortedOtherDefenseLineups = otherPlayerLineups.filter {
             $0.position == PositionType.leftDefensemen.rawValue ||
             $0.position == PositionType.rightDefensemen.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         let sortedOtherGoalieLineups = otherPlayerLineups.filter {
             $0.position == PositionType.goalies.rawValue
-        }.sorted { $0.lineNumber > $1.lineNumber }
+        }.sorted { $0.lineNumber < $1.lineNumber }
         
         // Validation checks
         guard skaterLineups.count - (sortedForwardLineups.count + sortedDefenseLineups.count) + (sortedOtherForwardLineups.count + sortedOtherDefenseLineups.count) >= minSkaters else {
-            switchMessage = "ERROR: TEAM 1 WOULD HAVE LESS THAN 18 SKATERS"
+            switchMessage = LocalizedText.minSkaters1SwapError.localizedString
             completion(true)
             return
         }
         
         guard goalieLineups.count - sortedGoalieLineups.count + sortedOtherGoalieLineups.count >= minGoalies else {
-            switchMessage = "ERROR: TEAM 1 WOULD HAVE LESS THAN 2 GOALIES"
+            switchMessage = LocalizedText.minGoalies1SwapError.localizedString
             completion(true)
             return
         }
         
         guard otherSkaterLineups.count - (sortedOtherForwardLineups.count + sortedOtherDefenseLineups.count) + (sortedForwardLineups.count + sortedDefenseLineups.count) >= minSkaters else {
-            switchMessage = "ERROR: TEAM 2 WOULD HAVE LESS THAN 18 SKATERS"
+            switchMessage = LocalizedText.minSkaters2SwapError.localizedString
             completion(true)
             return
         }
         
         guard otherGoalieLineups.count - sortedOtherGoalieLineups.count + sortedGoalieLineups.count >= minGoalies else {
-            switchMessage = "ERROR: TEAM 2 WOULD HAVE LESS THAN 2 GOALIES"
+            switchMessage = LocalizedText.minGoalies2SwapError.localizedString
             completion(true)
             return
         }
         
         // Process all forward roster updates
         for (index, forward) in sortedForwardLineups.enumerated() {
+            let forwardPosition = forward.position ?? ""
+            let forwardLineNumber = forward.lineNumber
+            let forwardPPLineNumber = forward.powerPlayLineNumber
+            let forwardPKLineNumber = forward.penaltyKillLineNumber
+            let forwardOTLineNumber = forward.otLineNumber
+            
             if index < sortedOtherForwardLineups.count {
                 let otherForward = sortedOtherForwardLineups[index]
-                updatePlayerAndLineupData(playerID: forward.playerID, newTeamID: otherTeamID, position: otherForward.position ?? "", lineNumber: otherForward.lineNumber, ppLineNumber: otherForward.powerPlayLineNumber, pkLineNumber: otherForward.penaltyKillLineNumber, otLineNumber: otherForward.otLineNumber)
-                updatePlayerAndLineupData(playerID: otherForward.playerID, newTeamID: teamID, position: forward.position ?? "", lineNumber: forward.lineNumber, ppLineNumber: forward.powerPlayLineNumber, pkLineNumber: forward.penaltyKillLineNumber, otLineNumber: forward.otLineNumber)
+                let otherForwardPosition = otherForward.position ?? ""
+                let otherForwardLineNumber = otherForward.lineNumber
+                let otherForwardPPLineNumber = otherForward.powerPlayLineNumber
+                let otherForwardPKLineNumber = otherForward.penaltyKillLineNumber
+                let otherForwardOTLineNumber = otherForward.otLineNumber
+                
+                updatePlayerAndLineupData(playerID: forward.playerID, newTeamID: otherTeamID, position: otherForwardPosition, lineNumber: otherForwardLineNumber, ppLineNumber: otherForwardPPLineNumber, pkLineNumber: otherForwardPKLineNumber, otLineNumber: otherForwardOTLineNumber)
+                updatePlayerAndLineupData(playerID: otherForward.playerID, newTeamID: teamID, position: forwardPosition, lineNumber: forwardLineNumber, ppLineNumber: forwardPPLineNumber, pkLineNumber: forwardPKLineNumber, otLineNumber: forwardOTLineNumber)
             } else {
                 if forward.lineNumber != 0 {
                     if let scratchedFoward = forwardLineups.first(where: { $0.lineNumber == 0 }) {
-                        updatePlayerAndLineupData(playerID: scratchedFoward.playerID, newTeamID: teamID, position: forward.position ?? "", lineNumber: forward.lineNumber, ppLineNumber: forward.powerPlayLineNumber, pkLineNumber: forward.penaltyKillLineNumber, otLineNumber: forward.otLineNumber)
+                        updatePlayerAndLineupData(playerID: scratchedFoward.playerID, newTeamID: teamID, position: forwardPosition, lineNumber: forwardLineNumber, ppLineNumber: forwardPPLineNumber, pkLineNumber: forwardPKLineNumber, otLineNumber: forwardOTLineNumber)
                     } else if let scratchedDefenseman = defenseLineups.first(where: { $0.lineNumber == 0 }) {
-                        updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: teamID, position: forward.position ?? "", lineNumber: forward.lineNumber, ppLineNumber: forward.powerPlayLineNumber, pkLineNumber: forward.penaltyKillLineNumber, otLineNumber: forward.otLineNumber)
+                        updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: teamID, position: forwardPosition, lineNumber: forwardLineNumber, ppLineNumber: forwardPPLineNumber, pkLineNumber: forwardPKLineNumber, otLineNumber: forwardOTLineNumber)
                     }
                 }
-                updatePlayerAndLineupData(playerID: forward.playerID, newTeamID: otherTeamID, position: forward.position ?? "", lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                updatePlayerAndLineupData(playerID: forward.playerID, newTeamID: otherTeamID, position: forwardPosition, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
             }
         }
         
         // Process all remaining forward roster updates
         for (index, otherForward) in sortedOtherForwardLineups.enumerated() where index >= sortedForwardLineups.count {
+            let otherForwardPosition = otherForward.position ?? ""
+            let otherForwardLineNumber = otherForward.lineNumber
+            let otherForwardPPLineNumber = otherForward.powerPlayLineNumber
+            let otherForwardPKLineNumber = otherForward.penaltyKillLineNumber
+            let otherForwardOTLineNumber = otherForward.otLineNumber
+            
             if otherForward.lineNumber != 0 {
                 if let scratchedForward = otherForwardLineups.first(where: { $0.lineNumber == 0 }) {
-                    updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: otherTeamID, position: otherForward.position ?? "", lineNumber: otherForward.lineNumber, ppLineNumber: otherForward.powerPlayLineNumber, pkLineNumber: otherForward.penaltyKillLineNumber, otLineNumber: otherForward.otLineNumber)
+                    updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: otherTeamID, position: otherForwardPosition, lineNumber: otherForwardLineNumber, ppLineNumber: otherForwardPPLineNumber, pkLineNumber: otherForwardPKLineNumber, otLineNumber: otherForwardOTLineNumber)
                 } else if let scratchedDefenseman = otherDefenseLineups.first(where: { $0.lineNumber == 0 }) {
-                    updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: otherTeamID, position: otherForward.position ?? "", lineNumber: otherForward.lineNumber, ppLineNumber: otherForward.powerPlayLineNumber, pkLineNumber: otherForward.penaltyKillLineNumber, otLineNumber: otherForward.otLineNumber)
+                    updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: otherTeamID, position: otherForwardPosition, lineNumber: otherForwardLineNumber, ppLineNumber: otherForwardPPLineNumber, pkLineNumber: otherForwardPKLineNumber, otLineNumber: otherForwardOTLineNumber)
                 }
             }
-            updatePlayerAndLineupData(playerID: otherForward.playerID, newTeamID: teamID, position: otherForward.position ?? "", lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+            updatePlayerAndLineupData(playerID: otherForward.playerID, newTeamID: teamID, position: otherForwardPosition, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
         }
         
         // Process all defense roster updates
         for (index, defenseman) in sortedDefenseLineups.enumerated() {
+            let defensemanPosition = defenseman.position ?? ""
+            let defensemanLineNumber = defenseman.lineNumber
+            let defensemanPPLineNumber = defenseman.powerPlayLineNumber
+            let defensemanPKLineNumber = defenseman.penaltyKillLineNumber
+            let defensemanOTLineNumber = defenseman.otLineNumber
+            
             if index < sortedOtherDefenseLineups.count {
                 let otherDefenseman = sortedOtherDefenseLineups[index]
-                updatePlayerAndLineupData(playerID: defenseman.playerID, newTeamID: otherTeamID, position: otherDefenseman.position ?? "", lineNumber: otherDefenseman.lineNumber, ppLineNumber: otherDefenseman.powerPlayLineNumber, pkLineNumber: otherDefenseman.penaltyKillLineNumber, otLineNumber: otherDefenseman.otLineNumber)
-                updatePlayerAndLineupData(playerID: otherDefenseman.playerID, newTeamID: teamID, position: defenseman.position ?? "", lineNumber: defenseman.lineNumber, ppLineNumber: defenseman.powerPlayLineNumber, pkLineNumber: defenseman.penaltyKillLineNumber, otLineNumber: defenseman.otLineNumber)
+                let otherDefensemanPosition = otherDefenseman.position ?? ""
+                let otherDefensemanLineNumber = otherDefenseman.lineNumber
+                let otherDefensemanPPLineNumber = otherDefenseman.powerPlayLineNumber
+                let otherDefensemanPKLineNumber = otherDefenseman.penaltyKillLineNumber
+                let otherDefensemanOTLineNumber = otherDefenseman.otLineNumber
+                
+                updatePlayerAndLineupData(playerID: defenseman.playerID, newTeamID: otherTeamID, position: otherDefensemanPosition, lineNumber: otherDefensemanLineNumber, ppLineNumber: otherDefensemanPPLineNumber, pkLineNumber: otherDefensemanPKLineNumber, otLineNumber: otherDefensemanOTLineNumber)
+                updatePlayerAndLineupData(playerID: otherDefenseman.playerID, newTeamID: teamID, position: defensemanPosition, lineNumber: defensemanLineNumber, ppLineNumber: defensemanPPLineNumber, pkLineNumber: defensemanPKLineNumber, otLineNumber: defensemanOTLineNumber)
             } else {
                 if defenseman.lineNumber != 0 {
                     if let scratchedDefenseman = defenseLineups.first(where: { $0.lineNumber == 0 }) {
-                        updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: teamID, position: defenseman.position ?? "", lineNumber: defenseman.lineNumber, ppLineNumber: defenseman.powerPlayLineNumber, pkLineNumber: defenseman.penaltyKillLineNumber, otLineNumber: defenseman.otLineNumber)
+                        updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: teamID, position: defensemanPosition, lineNumber: defensemanLineNumber, ppLineNumber: defensemanPPLineNumber, pkLineNumber: defensemanPKLineNumber, otLineNumber: defensemanOTLineNumber)
                     } else if let scratchedForward = forwardLineups.first(where: { $0.lineNumber == 0 }) {
-                        updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: teamID, position: defenseman.position ?? "", lineNumber: defenseman.lineNumber, ppLineNumber: defenseman.powerPlayLineNumber, pkLineNumber: defenseman.penaltyKillLineNumber, otLineNumber: defenseman.otLineNumber)
+                        updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: teamID, position: defensemanPosition, lineNumber: defensemanLineNumber, ppLineNumber: defensemanPPLineNumber, pkLineNumber: defensemanPKLineNumber, otLineNumber: defensemanOTLineNumber)
                     }
                 }
-                updatePlayerAndLineupData(playerID: defenseman.playerID, newTeamID: otherTeamID, position: defenseman.position ?? "", lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                updatePlayerAndLineupData(playerID: defenseman.playerID, newTeamID: otherTeamID, position: defensemanPosition, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
             }
         }
         
         // Process all remaining defense roster updates
         for (index, otherDefenseman) in sortedOtherDefenseLineups.enumerated() where index >= sortedDefenseLineups.count {
+            let otherDefensemanPosition = otherDefenseman.position ?? ""
+            let otherDefensemanLineNumber = otherDefenseman.lineNumber
+            let otherDefensemanPPLineNumber = otherDefenseman.powerPlayLineNumber
+            let otherDefensemanPKLineNumber = otherDefenseman.penaltyKillLineNumber
+            let otherDefensemanOTLineNumber = otherDefenseman.otLineNumber
+            
             if otherDefenseman.lineNumber != 0 {
                 if let scratchedDefenseman = otherDefenseLineups.first(where: { $0.lineNumber == 0 }) {
-                    updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: otherTeamID, position: otherDefenseman.position ?? "", lineNumber: otherDefenseman.lineNumber, ppLineNumber: otherDefenseman.powerPlayLineNumber, pkLineNumber: otherDefenseman.penaltyKillLineNumber, otLineNumber: otherDefenseman.otLineNumber)
+                    updatePlayerAndLineupData(playerID: scratchedDefenseman.playerID, newTeamID: otherTeamID, position: otherDefensemanPosition, lineNumber: otherDefensemanLineNumber, ppLineNumber: otherDefensemanPPLineNumber, pkLineNumber: otherDefensemanPKLineNumber, otLineNumber: otherDefensemanOTLineNumber)
                 } else if let scratchedForward = otherForwardLineups.first(where: { $0.lineNumber == 0 }) {
-                    updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: otherTeamID, position: otherDefenseman.position ?? "", lineNumber: otherDefenseman.lineNumber, ppLineNumber: otherDefenseman.powerPlayLineNumber, pkLineNumber: otherDefenseman.penaltyKillLineNumber, otLineNumber: otherDefenseman.otLineNumber)
+                    updatePlayerAndLineupData(playerID: scratchedForward.playerID, newTeamID: otherTeamID, position: otherDefensemanPosition, lineNumber: otherDefensemanLineNumber, ppLineNumber: otherDefensemanPPLineNumber, pkLineNumber: otherDefensemanPKLineNumber, otLineNumber: otherDefensemanOTLineNumber)
                 }
             }
-            updatePlayerAndLineupData(playerID: otherDefenseman.playerID, newTeamID: teamID, position: otherDefenseman.position ?? "", lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+            updatePlayerAndLineupData(playerID: otherDefenseman.playerID, newTeamID: teamID, position: otherDefensemanPosition, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
         }
         
         // Process all goalies roster updates
         for (index, goalie) in sortedGoalieLineups.enumerated() {
+            let goalieLineNumber = goalie.lineNumber
+            
             if index < sortedOtherGoalieLineups.count {
                 let otherGoalie = sortedOtherGoalieLineups[index]
-                updatePlayerAndLineupData(playerID: goalie.playerID, newTeamID: otherTeamID, position: PositionType.goalies.rawValue, lineNumber: otherGoalie.lineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
-                updatePlayerAndLineupData(playerID: otherGoalie.playerID, newTeamID: teamID, position: PositionType.goalies.rawValue, lineNumber: goalie.lineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                let otherGoalieLineNumber = otherGoalie.lineNumber
+                
+                updatePlayerAndLineupData(playerID: goalie.playerID, newTeamID: otherTeamID, position: PositionType.goalies.rawValue, lineNumber: otherGoalieLineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                updatePlayerAndLineupData(playerID: otherGoalie.playerID, newTeamID: teamID, position: PositionType.goalies.rawValue, lineNumber: goalieLineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
             } else {
                 if goalie.lineNumber != 0 {
                     if let scratchedGoalie = goalieLineups.first(where: { $0.lineNumber == 0 }) {
-                        updatePlayerAndLineupData(playerID: scratchedGoalie.playerID, newTeamID: teamID, position: PositionType.goalies.rawValue, lineNumber: goalie.lineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                        updatePlayerAndLineupData(playerID: scratchedGoalie.playerID, newTeamID: teamID, position: PositionType.goalies.rawValue, lineNumber: goalieLineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
                     }
                 }
                 updatePlayerAndLineupData(playerID: goalie.playerID, newTeamID: otherTeamID, position: PositionType.goalies.rawValue, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
@@ -231,15 +271,17 @@ class EditRostersViewModel: ObservableObject {
         
         // Process all remaining goalies roster updates
         for (index, otherGoalie) in sortedOtherGoalieLineups.enumerated() where index >= sortedGoalieLineups.count {
+            let otherGoalieLineNumber = otherGoalie.lineNumber
+            
             if otherGoalie.lineNumber != 0 {
                 if let scratchedGoalie = otherGoalieLineups.first(where: { $0.lineNumber == 0 }) {
-                    updatePlayerAndLineupData(playerID: scratchedGoalie.playerID, newTeamID: otherTeamID, position: PositionType.goalies.rawValue, lineNumber: otherGoalie.lineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
+                    updatePlayerAndLineupData(playerID: scratchedGoalie.playerID, newTeamID: otherTeamID, position: PositionType.goalies.rawValue, lineNumber: otherGoalieLineNumber, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
                 }
             }
             updatePlayerAndLineupData(playerID: otherGoalie.playerID, newTeamID: teamID, position: PositionType.goalies.rawValue, lineNumber: 0, ppLineNumber: 0, pkLineNumber: 0, otLineNumber: 0)
         }
         
-        switchMessage = "SUCCESS: PLAYERS SWITCHED"
+        switchMessage = LocalizedText.swapSuccess.localizedString
         completion(true)
     }
     

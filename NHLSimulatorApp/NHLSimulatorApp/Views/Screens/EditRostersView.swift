@@ -278,7 +278,7 @@ struct EditRostersView: View {
                     LazyVStack(spacing: 1) {
                         // Rows of players
                         ForEach(viewModel.players, id: \.self) { player in
-                            playerRowView(player: player, teamIndex: teamIndex)
+                            playerRowView(player: player)
                         }
                     }
                     .background(GeometryReader { geometry in
@@ -333,7 +333,7 @@ struct EditRostersView: View {
                     LazyVStack(spacing: 1) {
                         // Rows of players
                         ForEach(viewModel.otherPlayers, id: \.self) { player in
-                            playerRowView(player: player, teamIndex: teamIndex)
+                            otherPlayerRowView(player: player)
                         }
                     }
                     .background(GeometryReader { geometry in
@@ -379,18 +379,33 @@ struct EditRostersView: View {
     
     // View of the each player block in the list
     @ViewBuilder
-    private func playerRowView(player: CorePlayer, teamIndex: Int) -> some View {
+    private func playerRowView(player: CorePlayer) -> some View {
         let fullName = (player.firstName ?? "") + " " + (player.lastName ?? "")
         
         Button {
-            if teamIndex == selectedTeamIndex {
-                selectedPlayerIDs.append(player.playerID)
-            } else {
-                selectedOtherPlayerIDs.append(player.playerID)
-            }
+            selectedPlayerIDs.append(player.playerID)
         } label: {
             Text(fullName.uppercased())
-                .foregroundColor((selectedPlayerIDs.contains(player.playerID) || selectedOtherPlayerIDs.contains(player.playerID)) ? Color.black : Color.white)
+                .foregroundColor(selectedPlayerIDs.contains(player.playerID) ? Color.black : Color.white)
+                .appTextStyle()
+                .font(.footnote)
+                .padding(.all, Spacing.spacingSmall)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: blockHeight)
+        .background((selectedPlayerIDs.contains(player.playerID) || selectedOtherPlayerIDs.contains(player.playerID)) ? Color.white.cornerRadius(10) : Color.black.cornerRadius(10))
+    }
+    
+    // View of the each other player block in the list
+    @ViewBuilder
+    private func otherPlayerRowView(player: CorePlayer) -> some View {
+        let fullName = (player.firstName ?? "") + " " + (player.lastName ?? "")
+        
+        Button {
+            selectedOtherPlayerIDs.append(player.playerID)
+        } label: {
+            Text(fullName.uppercased())
+                .foregroundColor(selectedOtherPlayerIDs.contains(player.playerID) ? Color.black : Color.white)
                 .appTextStyle()
                 .font(.footnote)
                 .padding(.all, Spacing.spacingSmall)
