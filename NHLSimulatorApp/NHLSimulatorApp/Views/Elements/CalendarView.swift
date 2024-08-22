@@ -116,7 +116,7 @@ struct CalendarView: View {
                             Text(scoreText)
                                 .foregroundColor(String(scoreText.first ?? " ") == Symbols.win.rawValue ? Color.green.opacity(0.8) : Color.red.opacity(0.8))
                                 .appTextStyle()
-                                .font(.caption2)
+                                .font(.system(size: 10))
                                 .frame(alignment: .center)
                                 .padding(.bottom, 0.1)
                         } else {
@@ -132,7 +132,7 @@ struct CalendarView: View {
                             Text(opponentText)
                                 .foregroundColor(viewModel.calendar.isDate(date, inSameDayAs: currentDate) ? Color.black : Color.white)
                                 .appTextStyle()
-                                .font(.caption2)
+                                .font(.system(size: 10))
                                 .frame(alignment: .center)
                                 .padding(.top, 0.1)
                         } else {

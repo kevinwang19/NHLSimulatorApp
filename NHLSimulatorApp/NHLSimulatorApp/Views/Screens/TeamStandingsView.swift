@@ -73,7 +73,7 @@ struct TeamStandingsView: View {
                     // Stats legend
                     Text(LocalizedText.standingsLegend.localizedString)
                         .appTextStyle()
-                        .font(.footnote)
+                        .font(.caption)
                         .padding(.top, Spacing.spacingExtraLarge)
                 }
                 

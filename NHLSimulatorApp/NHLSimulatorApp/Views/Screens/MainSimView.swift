@@ -302,9 +302,6 @@ struct MainSimView: View {
         } else {
             // Show loading screen while the simulation is being created or loaded, set the team picker as the user's selected team
             VStack {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                
                 ProgressView(LocalizedText.simulationSetupMessage.localizedString)
                     .appTextStyle()
                     .task {
@@ -492,7 +489,7 @@ struct MainSimView: View {
             } label: {
                 Text(LocalizedText.teamStandings.localizedString)
                     .appTextStyle()
-                    .font(.footnote)
+                    .font(.caption2)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
@@ -509,7 +506,7 @@ struct MainSimView: View {
             } label: {
                 Text(LocalizedText.playerStats.localizedString)
                     .appTextStyle()
-                    .font(.footnote)
+                    .font(.caption2)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
@@ -526,7 +523,7 @@ struct MainSimView: View {
             } label: {
                 Text(LocalizedText.editRosters.localizedString)
                     .appTextStyle()
-                    .font(.footnote)
+                    .font(.caption2)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)
@@ -543,7 +540,7 @@ struct MainSimView: View {
             } label: {
                 Text(LocalizedText.editLineups.localizedString)
                     .appTextStyle()
-                    .font(.footnote)
+                    .font(.caption2)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity)

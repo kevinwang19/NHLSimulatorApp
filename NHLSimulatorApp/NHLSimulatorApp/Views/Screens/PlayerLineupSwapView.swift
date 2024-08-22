@@ -48,7 +48,7 @@ struct PlayerLineupSwapView: View {
                         // Instruction text
                         Text(LocalizedText.selectPlayerSwap.localizedString)
                             .appTextStyle()
-                            .font(.callout)
+                            .font(.footnote)
                             .frame(height: blockHeight, alignment: .center)
                             .padding(.vertical, Spacing.spacingSmall)
                             

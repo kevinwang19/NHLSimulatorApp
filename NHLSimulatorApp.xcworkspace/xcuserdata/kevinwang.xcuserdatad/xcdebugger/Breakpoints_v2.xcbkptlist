@@ -410,8 +410,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -490,8 +490,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -538,8 +538,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "simulateButton()"
             landmarkType = "7">
          </BreakpointContent>
@@ -554,8 +554,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "572"
-            endingLineNumber = "572"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
             landmarkName = "simulateDay(simulatedDays:daysToSimulate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1242,8 +1242,8 @@
             filePath = "NHLSimulatorApp/NHLSimulatorApp/Views/Screens/MainSimView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "playoffMatchupView(playoffMatchupGame:)"
             landmarkType = "7">
          </BreakpointContent>
