@@ -168,7 +168,7 @@ struct EditLineupsView: View {
         } label: {
             Text(name?.uppercased() ?? "")
                 .appTextStyle()
-                .font(.caption)
+                .font(.system(size: 11))
                 .frame(width: blockWidth, height: blockHeight, alignment: .center)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)

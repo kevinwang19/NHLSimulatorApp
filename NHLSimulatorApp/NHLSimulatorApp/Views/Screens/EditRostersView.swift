@@ -153,7 +153,7 @@ struct EditRostersView: View {
                         } label: {
                             Text(LocalizedText.clearSelections.localizedString)
                                 .appTextStyle()
-                                .font(.footnote)
+                                .font(.caption)
                                 .padding(Spacing.spacingExtraSmall)
                                 .frame(width: buttonWidth, alignment: .center)
                         }
@@ -179,7 +179,7 @@ struct EditRostersView: View {
                         } label: {
                             Text(LocalizedText.performSwitch.localizedString)
                                 .appTextStyle()
-                                .font(.footnote)
+                                .font(.caption)
                                 .padding(Spacing.spacingExtraSmall)
                                 .frame(width: buttonWidth, alignment: .center)
                         }
